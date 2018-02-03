@@ -2,12 +2,13 @@ Django instalacija koplet na RPI s static IP 89.212.90.184
 =========================================================
 
 
-Za štart
+OSNOVNO
 ^^^^^^^^^^
-::
+
+za štart::
 	Slovenskaa tipkovnica na serverju ........loadkeys si
 	SSH server .......sudo apt install openssh-server
-	Miška ............sudo apt-get install gpm
+	Miška ............sudo apt-get install gp
 	Vim...............sudo apt-get install vim
 	Git ..............sudo apt-get install git
 
@@ -15,7 +16,7 @@ Za štart
 
 Python3, Pip in Virtualenv
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Prvi :ref:`aktivnosti in faznost` korak je instalacija Pythona3 in Pip in virtualnega okolja
+Prvi  korak je instalacija Pythona3 in Pip in virtualnega okolja
 V ubuntu16.04 je python3 že instaliran sicer pa download iz https://www.python.org/downloads/python3.6.3 .Iz download direktorija Python-3.6.3 izvršimo ukaze
 ::
 	./configure
