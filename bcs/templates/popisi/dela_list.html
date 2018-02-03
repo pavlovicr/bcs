@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Dela Seznam</h1>
+
+    {% if object_list %}
+    <ul>
+
+      {% for dela in object_list %}
+      <li>
+        <a href="{{ dela.get_absolute_url }}">{{ dela.opis}}</a> {{dela.id}}
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>Tukaj nič novega.</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <p><strong><a href="{% url 'dela-list' %}"> Dela list </a></strong></p>
+
+  <h1>Dela: {{ object.opis }}</h1>
+
+  <p><strong>ID:</strong>{{ object.id }}</p>
+  <p><strong>OPIS:</strong> {{ dela.opis }}</p>
+  <p><strong>ID:</strong> {{ dela.vrsta_del }}</p>
+
+
+  <h2> Seznam postavk </h2>
+
+  {% for postavka in dela.postavka_set.all %}
+
+  <li>
+  <!-- <a href="{{ postavka.get_absolute_url }}">{{ postavka.opis}}</a>  tudi to deluje-->
+      <a href="{% url 'postavka-detail' postavka.pk %}">{{ postavka.opis}}</a>
+  </li>
+
+  {% endfor %}
+
+{% endblock %}

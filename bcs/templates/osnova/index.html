@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<h1>POPISI</h1>
+
+{% load static %}
+<img src="{% static 'images/fantje.jpg' %}" alt="Slika" style="width:730px;height:300px;"/>
+
+  <p><em> " Delaj to, v kar verjameš, in verjemi v to, kar počneš. Vse drugo je tratenje energije in časa " </em></p>
+
+<h2>Knjižnica specifikacij za popise del</h2>
+
+  <p>Statistika, obdelani elementi : </p>
+  <ul>
+    <li><strong><a href="{% url 'postavka-list' %}"> Postavke: </a></strong> {{ stej_postavke }}</li>
+  <!--  <li><strong><a href="{% url 'specifikacija-list' %}"> Specifikacije: </a></strong> {{ stej_specifikacije }}</li> -->
+  <!--  <li><strong><a href="{% url 'klasifikacijaspecifikacije-list' %}"> Klasifikacija Specifikacije: </a></strong> {{ stej_klasifikacijaspecifikacije }}</li>-->
+    <li><strong><a href="/popisi/dela/"> Dela: </a></strong> {{ stej_dela }}</li>
+<li><strong><a href="/popisi/vrsta_del/"> Vrsta Del: </a></strong> {{ stej_vrstadel }}</li>
+<!-- <li><strong><a href="/specifikacije/dokumentacija/"> Dokumentacija: </a></strong> {{ stej_dokumentacija }}</li> -->
+<li><strong><a href="/popisi/dela/"> Dela: </a></strong> {{ stej_dela }}</li>
+<li><strong><a href="/popisi/dela/"> Dela: </a></strong> {{ stej_dela }}</li>
+
+  </ul>
+
+{% endblock %}

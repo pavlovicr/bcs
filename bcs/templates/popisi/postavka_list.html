@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Postavke Seznam</h1>
+
+    {% if object_list %}
+    <ul>
+
+      {% for postavka in object_list %}
+      <li>
+        <a href="{{ postavka.get_absolute_url }}">{{ postavka.koda }}</a> ({{postavka.opis}})
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>Tukaj nič novega.</p>
+    {% endif %}
+{% endblock %}
