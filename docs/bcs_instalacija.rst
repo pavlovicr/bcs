@@ -5,7 +5,8 @@ Django instalacija koplet na RPI s static IP 89.212.90.184
 OSNOVNO
 ^^^^^^^^^^
 
-za štart::
+za štart
+::
 	Slovenskaa tipkovnica na serverju ........loadkeys si
 	SSH server .......sudo apt install openssh-server
 	Miška ............sudo apt-get install gp
