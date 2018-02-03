@@ -56,6 +56,9 @@ LOCAL_APPS = [
     # custom users app
     'bcs.users.apps.UsersConfig',
     # Your stuff: custom apps go here
+    'popisi',
+    'podrobnosti',
+    'osnova',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -99,7 +102,7 @@ EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.s
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
 ADMINS = [
-    ("""Daniel Roy Greenfeld""", 'you@example.com'),
+    ("""Rados Pavlovic""", 'rados.pavlovic@euroinvest.si'),
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
