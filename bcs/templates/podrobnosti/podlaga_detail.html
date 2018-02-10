@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h4>Področje predmeta podlage :</h4>
+  <li>
+    <!-- namesto podrocje sem uporabil get_podrocje_display. To je django funkcija za prikaz choices -->
+    {{ podlaga.predmet.get_podrocje.display }}
+  </li>
+
+
+  <h1>PODLAGA PODROBNOSTI:</h1>
+    <li>
+      <h2>{{ object.opis }}</h2>
+   </li>
+  <!-- lahko uporabimo object.opis -->
+
+<h6>Komentar : {{ object.komentar }}</h6>
+
+<h6>Slika : </h6>
+{{object.slika.all}}
+{% for slika in podlaga.slika.all %}
+  <a href="{{ MEDIA_URL }}{{ slika.image }}"> {{ slika.opis }}</a>
+{% endfor %}
+
+{% for dokumentacija in podlaga.dokumentacija.all %}
+
+<h4>Dokumentacija za podlago:</h4>
+  <li>
+    {{ dokumentacija.opis}}
+  </li>
+{% endfor %}
+
+<h4>Predmet Podlage :</h4>
+  <li>
+    <p>{{ podlaga.predmet.opis }}</p>
+  </li>
+
+
+{% for merilo in podlaga.merilo_set.all %}
+<!-- lahko uporabimo object.podrobnost_set.all -->
+<h4>Merilo podlage:</h4>
+
+    <li>
+        {{ merilo.opis }}
+
+        <h4>Podrobnost:</h4>
+
+        <li>
+          {% for podrobnost in merilo.podrobnost_set.all %}
+              {{ podrobnost.opis }}
+          {% endfor %}
+        </li>
+
+    </li>
+{% endfor %}
+
+
+{% endblock %}

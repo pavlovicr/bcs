@@ -8,8 +8,12 @@
     <ul>
 
       {% for postavka in object_list %}
+      <!-- lahko uporabimo postavka_list -->
       <li>
-        <a href="{{ postavka.get_absolute_url }}">{{ postavka.koda }}</a> ({{postavka.opis}})
+        <!-- <a href="{{ postavka.get_absolute_url }}">{{ postavka.opis }}</a> {{postavka.id}} lahko uporabimo tudi to-->
+        <a href="{% url 'postavka-detail' postavka.pk %}">{{ postavka.opis }}</a> {{postavka.id}}
+        <!-- <a href="/popisi/postavka/{{ postavka.id }}">{{ postavka.opis }}</a> {{postavka.id}} tudi to deluje -->
+
       </li>
       {% endfor %}
 

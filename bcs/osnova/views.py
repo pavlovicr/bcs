@@ -10,7 +10,7 @@ from popisi.models import VrstaDel,Dela,Postavka
 
 def index(request):
 
-    stej_postavke = Postavka.objects.all().count()
+    stej_postavka = Postavka.objects.all().count()
 #    stej_specifikacije = Specifikacija.objects.all().count()
     stej_dela = Dela.objects.all().count()
 #    stej_klasifikacijaspecifikacije = KlasifikacijaSpecifikacije.objects.all().count()
@@ -18,5 +18,5 @@ def index(request):
 #    stej_dokumentacija = Dokumentacija.objects.all().count()
 
     return render(request,'osnova/index.html',
-     context={'stej_postavke':stej_postavke,'stej_dela':stej_dela,'stej_vrstadel':stej_vrstadel,},
+     context={'stej_postavka':stej_postavka,'stej_dela':stej_dela,'stej_vrstadel':stej_vrstadel,},
      )

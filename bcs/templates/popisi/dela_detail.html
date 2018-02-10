@@ -2,16 +2,20 @@
 
 {% block content %}
 
+<!-- povezava na DELA LIST prek URL z naslovom "dela-list" -->
   <p><strong><a href="{% url 'dela-list' %}"> Dela list </a></strong></p>
 
+<!-- Detajli. Lahko uporabimo dela.opis ali pa kar object.opis -->
   <h1>Dela: {{ object.opis }}</h1>
 
   <p><strong>ID:</strong>{{ object.id }}</p>
-  <p><strong>OPIS:</strong> {{ dela.opis }}</p>
-  <p><strong>ID:</strong> {{ dela.vrsta_del }}</p>
-
+  <p><strong>Vrsta del:</strong> {{ dela.vrsta_del }}</p>
 
   <h2> Seznam postavk </h2>
+
+  <!-- seznam postavk, ki pripadajo posameznemu Dela.
+  Tuji kljuc je v classu Postavka in se uporabi dela.postavka_set.all.
+  V primeru, da je tuji kljuc v Dela, uporabimo dela.postavka.all -->
 
   {% for postavka in dela.postavka_set.all %}
 

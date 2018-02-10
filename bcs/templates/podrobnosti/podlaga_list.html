@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Strokovne podlage - Seznam</h1>
+
+
+    <!-- ukaz za grupiranje  -->
+    {% regroup object_list by predmet.opis as abrakadabra %}
+
+  <!-- for zanka za grupiranje -->
+    {% for miha in abrakadabra %}
+    <!-- grupiranje naslova. V tem primeru zvrsti -->
+    <li>
+         <b>{{ miha.grouper }}</b><br>
+
+      <!-- grupiramo vsebine. V tem primeru dokumentacijo-->
+      {% for podlaga in miha.list %}
+      <ul>
+          <li>
+            <!-- <a href="{{ podlaga.get_absolute_url }}">{{ podlaga.opis }}</a> lahko uporabimo tudi to-->
+            <a href="{% url 'podlaga-detail' podlaga.pk %}">{{ podlaga.opis }}</a>
+            {% for slika in podlaga.slika.all %}
+            <a href="{{ MEDIA_URL }}{{ slika.image }}">  - slika</a>
+            {% endfor %}
+            <!-- <a href="/podrobnosti/podlaga/{{ podlaga.id }}">{{ podlaga.opis }}</a> tudi to deluje -->
+
+            <ul>
+              <li>
+                {% for merilo in podlaga.merilo_set.all %}
+                <a href="{% url 'merilo-detail' merilo.pk %}">{{ merilo.opis }}</a>
+                    <ul>
+                      <li>
+                        {% for podrobnost in merilo.podrobnost_set.all %}
+                        <a href="{% url 'podrobnost-detail' podrobnost.pk %}">{{ podrobnost.opis }}</a>
+                        {% endfor %}
+                      </li>
+                    </ul>
+                {% endfor %}
+              </li>
+            </ul>
+          </li>
+      </ul>
+
+      {% endfor %}
+      {% endfor %}
+
+    </li>
+
+{% endblock %}

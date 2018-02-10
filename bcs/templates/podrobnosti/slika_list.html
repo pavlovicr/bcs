@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1></h1>
+
+    {% if slika_list %}
+    <ul>
+
+      {% for slika in slika_list %}
+      <!-- lahko uporabimo slika_list -->
+      <li>
+        <!-- <a href="{{ slika.get_absolute_url }}">{{ slika.opis }}</a> lahko uporabimo tudi to-->
+        <a href="{% url 'slika-detail' slika.pk %}">{{ slika.opis }}</a><a href="{{ MEDIA_URL }}{{ slika.image }}"> : slika </a>
+        <!-- <a href="/podrobnosti/slika/{{ slika.id }}">{{ slika.opis }}</a> tudi to deluje -->
+
+
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>Tukaj nič novega.</p>
+    {% endif %}
+{% endblock %}

@@ -2,12 +2,13 @@
 
 {% block content %}
     <h1>Dela Seznam</h1>
-
+<!--Lahko uporabimo dela_list ali pa kar object_list -->
     {% if object_list %}
     <ul>
-
+<!--Lahko uporabimo dela_list.opis ali pa kar object_list.opis -->
       {% for dela in object_list %}
       <li>
+        <!-- get_absolute_url je funkcija v modelsih, ki pozene URL detail -->
         <a href="{{ dela.get_absolute_url }}">{{ dela.opis}}</a> {{dela.id}}
       </li>
       {% endfor %}

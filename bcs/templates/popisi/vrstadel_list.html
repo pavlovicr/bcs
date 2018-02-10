@@ -4,11 +4,16 @@
     <h1>Vrsta del Seznam</h1>
 
     {% if object_list %}
+    <!-- lahko tudi vrstadel_list -->
     <ul>
 
       {% for vrsta_del in object_list %}
+      <!-- lahko tudi abrakadabra in vrstadel_list -->
       <li>
         <a href="{{ vrsta_del.get_absolute_url }}">{{ vrsta_del.opis }}</a> {{vrsta_del.id}}
+        <!-- <a href="{% url 'vrstadel-detail' vrsta_del.pk %}">{{ vrsta_del.opis }}</a> {{vrsta_del.id}}
+        <a href="/popisi/vrsta_dela/{{vrsta_del.pk}}">{{ vrsta_del.opis }}</a> {{vrsta_del.id}} lahko uporabimo tudi ti dve obliki-->
+
       </li>
       {% endfor %}
 

@@ -63,5 +63,8 @@ INSTALLED_APPS += ['django_extensions', ]
 # ------------------------------------------------------------------------------
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
+
+ALLOWED_HOSTS = ['*']
+
 # Your local stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------

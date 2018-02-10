@@ -29,4 +29,4 @@ class PostavkaList(ListView):
 
 
 class PostavkaDetail(DetailView):
-model = Postavka
+    model = Postavka

@@ -7,7 +7,7 @@ OSNOVNO
 
 za štart
 ::
-	Slovenskaa tipkovnica na serverju ........loadkeys si
+	Sl.tipkovnica ....sudo dpkg-reconfigure keyboard-configuration
 	SSH server .......sudo apt install openssh-server
 	Miška ............sudo apt-get install gp
 	Vim...............sudo apt-get install vim

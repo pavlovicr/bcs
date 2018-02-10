@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>: {{ object.opis }}</h2>
+  <!-- lahko uporabimo dokumentacija.opis -->
+
+<!-- namesto zvrst sem uporabil get_zvrst_display. To je django funkcija za prikaz choices -->
+<h4>: {{ object.get_zvrst_display }}</h4>
+<h6>: {{ object.komentar }}</h6>
+
+
+{% endblock %}

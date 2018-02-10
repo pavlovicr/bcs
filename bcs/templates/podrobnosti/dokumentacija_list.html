@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Dokumentacija Seznam</h1>
+
+
+
+    <ul>
+
+      <!-- ukaz za grupiranje. namesto zvrst uporabim get_zvrst_display zaradi choices -->
+      {% regroup object_list by get_zvrst_display as abrakadabra %}
+
+      <!-- for zanka za grupiranje -->
+        {% for miha in abrakadabra %}
+        <!-- grupiranje naslova. V tem primeru zvrsti -->
+        <b>{{ miha.grouper }}</b><br>
+
+      <!-- grupiramo vsebine. nje. V tem primeru dokumentacijo-->
+      {% for dokumentacija in miha.list %}
+
+      <!-- od tu naprej vse po starem -->
+      <li>
+        <!-- <a href="{{ dokumentacija.get_absolute_url }}">{{ dokumentacija.opis }}</a> {{dokumentacija.id}} lahko uporabimo tudi to-->
+        <a href="{% url 'dokumentacija-detail' dokumentacija.pk %}">{{ dokumentacija.opis }}</a>
+        <!-- <a href="/podrobnosti/dokumentacija/{{ dokumentacija.id }}">{{ dokumentacija.opis }}</a> {{dokumentacija.id}} tudi to deluje -->
+
+      </li>
+      {% endfor %}<br>
+
+      {% endfor %}
+    </ul>
+    
+{% endblock %}

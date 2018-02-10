@@ -3,17 +3,21 @@
 {% block content %}
 
   <p><strong><a href="{% url 'vrstadel-list' %}"> Vrsta Del List </a></strong></p>
+  <!-- <p><strong><a href="/popisi/vrsta_del/"> Vrsta Del List </a></strong></p> lahko tudi tako -->
 
   <h1>Opis: {{ object.opis }}</h1>
+  <!-- ali pa vrstadel.opis -->
 
-  <p><strong>Opis:</strong>{{ object.opis }}</p>
-  <p><strong>Skupina del:</strong>{{ object.skupina_del }}</p>
+<!-- namesto skupina_del sem uporabil get_skupina_del_display. To je django funkcija za prikaz choices -->
+  <p><strong>Skupina del:</strong>{{ object.get_skupina_del_display }}</p>
 
 
   {% for dela in object.dela_set.all %}
+  <!-- lahko vrstadel.dela_set.all -->
   <li>
-<!-- <a href="{{ postavka.get_absolute_url }}">{{ postavka.opis}}</a>  tudi to deluje-->
-    <a href="{% url 'dela-detail' dela.pk %}">{{ dela.opis}}</a>
+    <a href="{{ dela.get_absolute_url }}">{{ dela.opis}}</a>
+    <!-- <a href="{% url 'dela-detail' dela.pk %}">{{ dela.opis}}</a> eno ali drugo -->
+    <!-- <a href="/popisi/dela/{{dela.id}}">{{ dela.opis}}</a> ali celo tretje -->
 
   </li>
   {% endfor %}

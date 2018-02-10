@@ -17,7 +17,7 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
 
     # Your stuff: custom urls includes go here
-    url(r'^specifikacije/', include('specifikacije.urls')),
+    url(r'^podrobnosti/', include('podrobnosti.urls')),
     url(r'^popisi/', include('popisi.urls')),
     url(r'^osnova/', include('osnova.urls')),
 
