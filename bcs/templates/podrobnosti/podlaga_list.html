@@ -16,14 +16,19 @@
 
       <!-- grupiramo vsebine. V tem primeru dokumentacijo-->
       {% for podlaga in miha.list %}
+
+      <p>{% for a in podlaga.dokumentacija.all %}{{a.opis}},{{a.naslov}} {% endfor %}</p>
+
+
       <ul>
           <li>
             <!-- <a href="{{ podlaga.get_absolute_url }}">{{ podlaga.opis }}</a> lahko uporabimo tudi to-->
             <a href="{% url 'podlaga-detail' podlaga.pk %}">{{ podlaga.opis }}</a>
             {% for slika in podlaga.slika.all %}
-            <a href="{{ MEDIA_URL }}{{ slika.image }}">  - slika</a>
+            <a href="{{ MEDIA_URL }}{{ slika.image }}">{{slika.opis}}</a>
+
             {% endfor %}
-            <!-- <a href="/podrobnosti/podlaga/{{ podlaga.id }}">{{ podlaga.opis }}</a> tudi to deluje -->
+
 
             <ul>
               <li>
@@ -32,7 +37,7 @@
                     <ul>
                       <li>
                         {% for podrobnost in merilo.podrobnost_set.all %}
-                        <a href="{% url 'podrobnost-detail' podrobnost.pk %}">{{ podrobnost.opis }}</a>
+                        <a href="{% url 'podrobnost-detail' podrobnost.pk %}"><p>{{ podrobnost.opis }}</p></a>
                         {% endfor %}
                       </li>
                     </ul>

@@ -2,23 +2,30 @@
 
 {% block content %}
 
-    <h1></h1>
+    <h1>SEZNAM MERIL</h1>
 
-    {% if object_list %}
     <ul>
 
-      {% for merilo in object_list %}
-      <!-- lahko uporabimo merilo_list -->
-      <li>
-        <!-- <a href="{{ merilo.get_absolute_url }}">{{ merilo.opis }}</a> lahko uporabimo tudi to-->
-        <a href="{% url 'merilo-detail' merilo.pk %}">{{ merilo.opis }}</a>
-        <!-- <a href="/popisi/postavka/{{ postavka.id }}">{{ postavka.opis }}</a> tudi to deluje -->
+      {% regroup object_list by merilo_osnova as pikapoka %}
+      {% for tone in pikapoka %}
+      <b>{{ tone.grouper }}</b><br>
+      <ul>
+      {% regroup tone.list by merilo_skupina1 as pikapoka %}
+      {% for tone in pikapoka %}
+      <b>{{ tone.grouper }}</b><br>
+      </ul>
 
+      {% for merilo in tone.list %}
+      <ul><ul>
+      <li>
+        <a href="{% url 'merilo-detail' merilo.pk %}">{{ merilo.opis }}</a>
+      </ul></ul>
       </li>
       {% endfor %}
+      {% endfor %}
 
+
+      {% endfor %}
     </ul>
-    {% else %}
-      <p>Tukaj nič novega.</p>
-    {% endif %}
+
 {% endblock %}

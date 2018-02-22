@@ -84,6 +84,7 @@ class Podlaga(Osnova):
 
 
 class MeriloOsnova(Osnova):
+    dela = models.ForeignKey('popisi.Dela',blank=True, null=True)
 
     def __str__(self):
         return self.opis
@@ -122,8 +123,11 @@ class Merilo(Osnova):
 
 
 class Podrobnost(Osnova):
-    merilo = models.ManyToManyField(Merilo)
+    merilo =  models.ForeignKey('Merilo', on_delete=models.SET_NULL, null=True)
     komentar = models.TextField(blank=True)
+
+    #class Meta:
+    #    ordering = ['stevilka']
 
     def __str__(self):
         return self.opis

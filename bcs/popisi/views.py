@@ -5,7 +5,7 @@ from django.views.generic import ListView
 from django.shortcuts import get_object_or_404
 
 #bcs
-from popisi.models import VrstaDel,Dela,Postavka
+from popisi.models import VrstaDel,Dela,Postavka,PopisnaPostavka,Podrobnost
 
 
 class VrstaDelList(ListView):
@@ -30,3 +30,11 @@ class PostavkaList(ListView):
 
 class PostavkaDetail(DetailView):
     model = Postavka
+
+
+class PopisnaPostavkaList(ListView):
+    model = PopisnaPostavka
+    
+
+class PopisnaPostavkaDetail(DetailView):
+    model = PopisnaPostavka

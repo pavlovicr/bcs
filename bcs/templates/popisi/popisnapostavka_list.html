@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1></h1>
+
+    {% if object_list %}
+    <ul>
+
+      {% for popisnapostavka in object_list %}
+      <!-- lahko uporabimo podrobnost_list -->
+      <li>
+        <!-- <a href="{{ podrobnost.get_absolute_url }}">{{ podrobnost.opis }}</a> lahko uporabimo tudi to-->
+        <a href="{% url 'popisnapostavka-detail' popisnapostavka.pk %}">{{ popisnapostavka.postavka }}</a>
+
+
+        {% for podrobnost in popisnapostavka.podrobnost.all %}{{podrobnost.opis}}{% endfor %}
+        <!-- <a href="/podrobnosti/podrobnost/{{ podrobnost.id }}">{{ podrobnost.opis }}</a> tudi to deluje -->
+
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>Tukaj nič novega.</p>
+    {% endif %}
+{% endblock %}

@@ -11,5 +11,7 @@ urlpatterns = [
     url(r'^dela/(?P<pk>\d+)$', views.DelaDetail.as_view(), name='dela-detail'),
     url(r'^vrsta_del/$', views.VrstaDelList.as_view(), name='vrstadel-list'),
     url(r'^vrsta_dela/(?P<pk>\d+)$', views.VrstaDelDetail.as_view(), name='vrstadel-detail'),
+    url(r'^popisne_postavke/$', views.PopisnaPostavkaList.as_view(), name='popisnapostavka-list'),
+    url(r'^popisna_postavka/(?P<pk>\d+)$', views.PopisnaPostavkaDetail.as_view(), name='popisnapostavka-detail'),
 
 ]

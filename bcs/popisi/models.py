@@ -4,7 +4,7 @@ from django.urls import reverse
 #bcs
 from osnova.utils import ChoiceEnum
 from osnova.models import Osnova
-from podrobnosti.models import Merilo, Dokumentacija, Slika, Datoteka
+from podrobnosti.models import Merilo, Dokumentacija, Slika, Datoteka, Podrobnost
 
 
 class SkupinaDel(ChoiceEnum):
@@ -55,10 +55,25 @@ class Dela(Osnova):
 class Postavka(Osnova):
     enota_mere = models.CharField(max_length=10)
     dela = models.ForeignKey('Dela', on_delete=models.SET_NULL, null=True)
-    merilo = models.ManyToManyField(Merilo)
+
 
     def __str__(self):
         return self.opis
 
     def get_absolute_url(self):
         return reverse('postavka-detail', args=[str(self.id)])
+
+
+class PopisnaPostavka(Osnova):
+    postavka = models.ForeignKey('Postavka', on_delete=models.SET_NULL, null=True)
+    podrobnost = models.ManyToManyField('podrobnosti.Podrobnost')
+
+    #@property
+    #def abrakadabra(self):
+    #    return self.abrakadabra.order_by('komentar')
+
+    def __str__(self):
+        return self.opis
+
+    def get_absolute_url(self):
+        return reverse('popisnapostavka-detail', args=[str(self.id)])

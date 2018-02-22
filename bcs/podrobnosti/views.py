@@ -74,6 +74,9 @@ class MeriloSkupina1Detail(DetailView):
 class PodrobnostList(ListView):
     model = Podrobnost
 
+    def get_queryset(self):
+        return Podrobnost.objects.order_by('-opis')
+
 
 class PodrobnostDetail(DetailView):
     model = Podrobnost
