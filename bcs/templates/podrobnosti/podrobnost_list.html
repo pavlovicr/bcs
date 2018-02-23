@@ -3,8 +3,8 @@
 {% block content %}
 
 
-It is {% now "jS F Y H:i" %}
-    <h1></h1>
+
+    <h1>Podrobnosti seznam</h1>
 
     {% if object_list %}
     <ul>
@@ -13,7 +13,7 @@ It is {% now "jS F Y H:i" %}
 
       {% for podrobnost in object_list %}
 
-      <a href="{% url 'podrobnost-detail' podrobnost.pk %}">{{ podrobnost.opis}}</a>{{podrobnost.id}}{{podrobnost.komentar}}
+      <a href="{% url 'podrobnost-detail' podrobnost.pk %}">{{podrobnost.opis}}</a>{{podrobnost.stevilka}}
 
       {% endfor %}
 
@@ -34,14 +34,4 @@ It is {% now "jS F Y H:i" %}
 
 {% comment %}
 <p class="{% cycle 'odd' 'even' %}">{{ podrobnost.opis}},{{ podrobnost.komentar}}</p>
-{% endcomment %}
-
-
-{% comment %}
-{% for o in some_list %}
-    <tr class="{% cycle 'row1' 'row2' %}">
-        ...
-    </tr>
-{% endfor %}
-
 {% endcomment %}

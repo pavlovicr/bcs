@@ -19,7 +19,7 @@ class VrstaDel(Osnova):
     skupina_del = models.CharField(max_length=10, choices=SkupinaDel.choices(), default=SkupinaDel.GRADBENA)
 
     def __str__(self):
-        return self.opis
+        return self.tekst
 
     def get_absolute_url(self):
         return reverse('vrstadel-detail', args=[str(self.id)])
@@ -41,12 +41,12 @@ class Dela(Osnova):
     kakovost_izvedenih_del = models.TextField(blank=True)
     preverjanje_kakovosti_izvedenih_del = models.TextField(blank=True)
     merjenje_prevzem_obracun = models.TextField(blank=True)
-    dokumentacija = models.ManyToManyField(Dokumentacija)
-    slika = models.ManyToManyField(Slika)
-    datoteka = models.ManyToManyField(Datoteka)
+    dokumentacija = models.ManyToManyField((Dokumentacija), blank=True)
+    slika = models.ManyToManyField((Slika), blank=True)
+    datoteka = models.ManyToManyField((Datoteka), blank= True)
 
     def __str__(self):
-        return self.opis
+        return self.tekst
 
     def get_absolute_url(self):
         return reverse('dela-detail', args=[str(self.id)])
@@ -58,7 +58,7 @@ class Postavka(Osnova):
 
 
     def __str__(self):
-        return self.opis
+        return self.tekst
 
     def get_absolute_url(self):
         return reverse('postavka-detail', args=[str(self.id)])
@@ -73,7 +73,7 @@ class PopisnaPostavka(Osnova):
     #    return self.abrakadabra.order_by('komentar')
 
     def __str__(self):
-        return self.opis
+        return self.tekst
 
     def get_absolute_url(self):
         return reverse('popisnapostavka-detail', args=[str(self.id)])

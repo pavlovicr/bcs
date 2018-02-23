@@ -5,7 +5,7 @@ from django.views.generic import ListView
 from django.shortcuts import get_object_or_404
 
 #bcs
-from podrobnosti.models import Dokumentacija,Predmet,Podlaga,Merilo,MeriloOsnova,MeriloSkupina1,Podrobnost,Slika,Datoteka
+from podrobnosti.models import Dokumentacija,PredmetMerila,PodlagaMerila,Merilo,Podrobnost,Slika,Datoteka
 
 
 class DokumentacijaList(ListView):
@@ -32,20 +32,21 @@ class DatotekaDetail(DetailView):
     model = Datoteka
 
 
-class PredmetList(ListView):
-    model = Predmet
+class PredmetMerilaList(ListView):
+    model = PredmetMerila
 
 
-class PredmetDetail(DetailView):
-    model = Predmet
+class PredmetMerilaDetail(DetailView):
+    model = PredmetMerila
 
 
-class PodlagaList(ListView):
-    model = Podlaga
+class PodlagaMerilaList(ListView):
+    model = PodlagaMerila
 
 
-class PodlagaDetail(DetailView):
-    model = Podlaga
+class PodlagaMerilaDetail(DetailView):
+    model = PodlagaMerila
+
 
 class MeriloList(ListView):
     model = Merilo
@@ -55,27 +56,12 @@ class MeriloDetail(DetailView):
     model = Merilo
 
 
-class MeriloOsnovaList(ListView):
-    model = MeriloOsnova
-
-
-class MeriloOsnovaDetail(DetailView):
-    model = MeriloOsnova
-
-
-class MeriloSkupina1List(ListView):
-    model = MeriloSkupina1
-
-
-class MeriloSkupina1Detail(DetailView):
-    model = MeriloSkupina1
-
-
 class PodrobnostList(ListView):
     model = Podrobnost
 
-    def get_queryset(self):
-        return Podrobnost.objects.order_by('-opis')
+
+class PodrobnostDetail(DetailView):
+    model = Podrobnost
 
 
 class PodrobnostDetail(DetailView):
