@@ -23,32 +23,35 @@
 
       <ul>
           <!-- grupiramo list po tekstu podlage merila -->
+          <p>
           {% regroup predmet.list by tekst as podlage %}
           {% for tekst in podlage %}
           <li>{{ tekst.grouper }}</li>
+          </p>
 
           <ul>
           <!-- izpisi, ki pripadajo  podlagi merila -->
-          {% for a in tekst.list %}
-          <p>Komentar: {{a.komentar}}</p>
-          <p>Zahteve : {{a.get_izhodisce_display}}</p>
+          {% for podlaga in tekst.list %}
+          <p>Komentar: {{podlaga.komentar}}</p>
+          <p>Zahteve : {{podlaga.get_izhodisce_display}}</p>
 
 
           <!-- Dokumetnacija -->
-          <p>Dokumentacija :
-          {% for d in a.dokumentacija.all %}
-          {{ d.tekst}} ,
-          {% endfor %} </p>
+          <p> Dokumentacija :
+          {% for d in podlaga.dokumentacija.all %}
+          <a href="{% url 'dokumentacija-detail' d.pk %}">{{ d.tekst }}</a>
+          {% endfor %}
+          </p>
 
           <!-- Slike -->
-          <p>Slike :
-          {% for s in a.slika.all %}
-          {{ s.tekst}}
-          {% endfor %}</p>
-
+          <p> Slike :
+          {% for s in podlaga.slika.all %}
+          <a href="{% url 'slika-detail' s.pk %}">{{ s.tekst }}</a>
+          {% endfor %}
+          </p>
               <ul>
               <!-- Merila -->
-              {% for m in a.merilo_set.all %}
+              {% for m in podlaga.merilo_set.all %}
               <li>Merilo :{{ m.tekst}} </li>
 
                   <ul>
