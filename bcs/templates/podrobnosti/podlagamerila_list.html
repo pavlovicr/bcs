@@ -30,18 +30,21 @@
           <ul>
           <!-- izpisi, ki pripadajo  podlagi merila -->
           {% for a in tekst.list %}
-          Komentar: {{a.komentar}}
-          Zahteve : {{a.get_izhodisce_display}}
+          <p>Komentar: {{a.komentar}}</p>
+          <p>Zahteve : {{a.get_izhodisce_display}}</p>
+
 
           <!-- Dokumetnacija -->
+          <p>Dokumentacija :
           {% for d in a.dokumentacija.all %}
-          Dokumentacija :{{ d.tekst}}
-          {% endfor %}
+          {{ d.tekst}} ,
+          {% endfor %} </p>
 
           <!-- Slike -->
+          <p>Slike :
           {% for s in a.slika.all %}
-          Slika :{{ s.tekst}}
-          {% endfor %}
+          {{ s.tekst}}
+          {% endfor %}</p>
 
               <ul>
               <!-- Merila -->
