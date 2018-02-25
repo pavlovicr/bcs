@@ -1,55 +1,75 @@
-{% extends "base.html" %}
+ {% extends "base.html" %}
 
 {% block content %}
 
 <h1>Strokovne podlage - Seznam</h1>
 
+<!--  grupiramo list po  vrsta del -->
+{% regroup object_list by predmet_merila.dela.vrsta_del as podlage %}
+{% for vrsta_del in podlage %}
+<b>{{ vrsta_del.grouper.tekst }}</b><br>
 
-    <!-- ukaz za grupiranje  -->
-    {% regroup object_list by predmet.opis as abrakadabra %}
+<ul>
+  <!-- grupiramo list po  dela -->
+  {% regroup vrsta_del.list by predmet_merila.dela as podlage %}
+  {% for dela in podlage %}
+  <li><b>{{ dela.grouper.tekst }}</b><br></li>
 
-  <!-- for zanka za grupiranje -->
-    {% for miha in abrakadabra %}
-    <!-- grupiranje naslova. V tem primeru zvrsti -->
-    <li>
-         <b>{{ miha.grouper }}</b><br>
-
-      <!-- grupiramo vsebine. V tem primeru dokumentacijo-->
-      {% for podlaga in miha.list %}
-
-      <p>{% for a in podlaga.dokumentacija.all %}{{a.opis}},{{a.naslov}} {% endfor %}</p>
-
+  <ul>
+      <!-- grupiramo list po  predmetu merila -->
+      {% regroup dela.list by predmet_merila as podlage %}
+      {% for predmet in podlage %}
+      <li><b>{{ predmet.grouper.tekst }}</b><br></li>
 
       <ul>
-          <li>
-            <!-- <a href="{{ podlaga.get_absolute_url }}">{{ podlaga.opis }}</a> lahko uporabimo tudi to-->
-            <a href="{% url 'podlaga-detail' podlaga.pk %}">{{ podlaga.opis }}</a>
-            {% for slika in podlaga.slika.all %}
-            <a href="{{ MEDIA_URL }}{{ slika.image }}">{{slika.opis}}</a>
+          <!-- grupiramo list po tekstu podlage merila -->
+          {% regroup predmet.list by tekst as podlage %}
+          {% for tekst in podlage %}
+          <li>{{ tekst.grouper }}</li>
 
-            {% endfor %}
+          <ul>
+          <!-- izpisi, ki pripadajo  podlagi merila -->
+          {% for a in tekst.list %}
+          Komentar: {{a.komentar}}
+          Zahteve : {{a.get_izhodisce_display}}
 
+          <!-- Dokumetnacija -->
+          {% for d in a.dokumentacija.all %}
+          Dokumentacija :{{ d.tekst}}
+          {% endfor %}
 
-            <ul>
-              <li>
-                {% for merilo in podlaga.merilo_set.all %}
-                <a href="{% url 'merilo-detail' merilo.pk %}">{{ merilo.opis }}</a>
-                    <ul>
-                      <li>
-                        {% for podrobnost in merilo.podrobnost_set.all %}
-                        <a href="{% url 'podrobnost-detail' podrobnost.pk %}"><p>{{ podrobnost.opis }}</p></a>
-                        {% endfor %}
-                      </li>
-                    </ul>
-                {% endfor %}
-              </li>
-            </ul>
-          </li>
+          <!-- Slike -->
+          {% for s in a.slika.all %}
+          Slika :{{ s.tekst}}
+          {% endfor %}
+
+              <ul>
+              <!-- Merila -->
+              {% for m in a.merilo_set.all %}
+              <li>Merilo :{{ m.tekst}} </li>
+
+                  <ul>
+                  <!-- Podrobnost -->
+                  {% for p in m.podrobnost_set.all %}
+                  <li> Podrobnost :{{ p.tekst}} </li>
+                  {% endfor %}
+                  </ul>
+          <!-- komentar, zahteve -->
+          {% endfor %}
+          </ul>
+        <!-- tekst podlage merila?????? -->
+        {% endfor %}
+        </ul>
+      <!-- podlaga_merila tekst -->
+      {% endfor %}
       </ul>
-
-      {% endfor %}
-      {% endfor %}
-
-    </li>
+    <!-- predmet_merila -->
+    {% endfor %}
+  </ul>
+  <!-- dela -->
+  {% endfor %}
+</ul>
+<!-- vrsta_del -->
+{% endfor %}
 
 {% endblock %}

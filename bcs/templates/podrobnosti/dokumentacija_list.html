@@ -21,14 +21,14 @@
 
       <!-- od tu naprej vse po starem -->
       <li>
-        <!-- <a href="{{ dokumentacija.get_absolute_url }}">{{ dokumentacija.opis }}</a> {{dokumentacija.id}} lahko uporabimo tudi to-->
-        <a href="{% url 'dokumentacija-detail' dokumentacija.pk %}">{{ dokumentacija.opis }}</a>
-        <!-- <a href="/podrobnosti/dokumentacija/{{ dokumentacija.id }}">{{ dokumentacija.opis }}</a> {{dokumentacija.id}} tudi to deluje -->
+        <!-- <a href="{{ dokumentacija.get_absolute_url }}">{{ dokumentacija.tekst }}</a> {{dokumentacija.id}} lahko uporabimo tudi to-->
+        <a href="{% url 'dokumentacija-detail' dokumentacija.pk %}">{{ dokumentacija.tekst }}</a>
+        <!-- <a href="/podrobnosti/dokumentacija/{{ dokumentacija.id }}">{{ dokumentacija.tekst }}</a> {{dokumentacija.id}} tudi to deluje -->
 
       </li>
       {% endfor %}<br>
 
       {% endfor %}
     </ul>
-    
+
 {% endblock %}

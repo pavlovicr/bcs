@@ -36,12 +36,24 @@ class PredmetMerilaList(ListView):
     model = PredmetMerila
 
 
+
+
 class PredmetMerilaDetail(DetailView):
     model = PredmetMerila
 
 
 class PodlagaMerilaList(ListView):
     model = PodlagaMerila
+
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = super(PodlagaMerilaList, self).get_queryset(*args, **kwargs)
+
+        queryset = queryset.order_by(
+            'predmet_merila',
+            'tekst'
+        )
+        return queryset
 
 
 class PodlagaMerilaDetail(DetailView):
