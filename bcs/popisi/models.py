@@ -4,7 +4,7 @@ from django.urls import reverse
 #bcs
 from osnova.utils import ChoiceEnum
 from osnova.models import Osnova
-from podrobnosti.models import Merilo, Dokumentacija, Slika, Datoteka, Podrobnost
+from podrobnosti.models import Merilo, Dokumentacija, Podrobnost
 
 
 class SkupinaDel(ChoiceEnum):
@@ -42,8 +42,7 @@ class Dela(Osnova):
     preverjanje_kakovosti_izvedenih_del = models.TextField(blank=True)
     merjenje_prevzem_obracun = models.TextField(blank=True)
     dokumentacija = models.ManyToManyField((Dokumentacija), blank=True)
-    slika = models.ManyToManyField((Slika), blank=True)
-    datoteka = models.ManyToManyField((Datoteka), blank= True)
+
 
     def __str__(self):
         return self.tekst

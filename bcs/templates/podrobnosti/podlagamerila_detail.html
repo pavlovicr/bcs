@@ -5,31 +5,43 @@
 <h4>Področje predmeta podlage :</h4>
   <li>
     <!-- namesto podrocje sem uporabil get_podrocje_display. To je django funkcija za prikaz choices -->
-    {{ podlaga.predmet.get_podrocje.display }}
+    {{ object.predmet_merila.get_podrocje_display }}
   </li>
 
 
   <h1>PODLAGA PODROBNOSTI:</h1>
     <li>
-      <h2>{{ object.opis }}</h2>
+      <h2>{{ object.tekst }}</h2>
    </li>
   <!-- lahko uporabimo object.opis -->
 
 <h6>Komentar : {{ object.komentar }}</h6>
 
-<h6>Slika : </h6>
-{{object.slika.all}}
-{% for slika in podlaga.slika.all %}
-  <a href="{{ MEDIA_URL }}{{ slika.image }}"> {{ slika.opis }}</a>
+<h4>Dokumentacija : </h4>
+
+{% for dokument in object.dokumentacija.all %}
+
+<p>Tekst :{{dokument.tekst}},</p>
+<p>Naslov :{{dokument.naslov}},</p>
+<p>Zvrst :{{dokument.zvrst}},</p>
+<p>File : {% for datoteka in dokument.datoteka.all %}{{datoteka.datoteka}}{% endfor %}</p>
+
+<p>Slike :
+    {% for slika in dokument.image.all %}
+    <a href="{{ MEDIA_URL }}{{ slika.id }}"> {{ slika.image }}</a>
+    {% endfor %}
+</p>
+
+{% for datoteka in dokument.datoteka.all %}
+<p>File :{{datoteka.id}}</p>
 {% endfor %}
 
-{% for dokumentacija in podlaga.dokumentacija.all %}
-
-<h4>Dokumentacija za podlago:</h4>
-  <li>
-    {{ dokumentacija.opis}}
-  </li>
 {% endfor %}
+
+{%comment%}
+    <a href="{{ MEDIA_URL }}{{ dokument.image }}"> {{ slika.image }}</a>
+{%endcomment%}
+
 
 <h4>Predmet Podlage :</h4>
   <li>

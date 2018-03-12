@@ -34,7 +34,7 @@ class PostavkaDetail(DetailView):
 
 class PopisnaPostavkaList(ListView):
     model = PopisnaPostavka
-    
+
 
 class PopisnaPostavkaDetail(DetailView):
     model = PopisnaPostavka

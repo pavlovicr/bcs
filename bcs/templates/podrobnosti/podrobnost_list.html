@@ -13,7 +13,7 @@
 
       {% for podrobnost in object_list %}
 
-      <a href="{% url 'podrobnost-detail' podrobnost.pk %}">{{podrobnost.opis}}</a>{{podrobnost.stevilka}}
+      <li><a href="{% url 'podrobnost-detail' podrobnost.pk %}">{{podrobnost.tekst}}</a></li>
 
       {% endfor %}
 

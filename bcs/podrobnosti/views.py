@@ -7,15 +7,6 @@ from django.shortcuts import get_object_or_404
 #bcs
 from podrobnosti.models import Dokumentacija,PredmetMerila,PodlagaMerila,Merilo,Podrobnost,Slika,Datoteka
 
-
-class DokumentacijaList(ListView):
-    model = Dokumentacija
-
-
-class DokumentacijaDetail(DetailView):
-    model = Dokumentacija
-
-
 class SlikaList(ListView):
     model = Slika
 
@@ -32,10 +23,16 @@ class DatotekaDetail(DetailView):
     model = Datoteka
 
 
+class DokumentacijaList(ListView):
+    model = Dokumentacija
+
+
+class DokumentacijaDetail(DetailView):
+    model = Dokumentacija
+
+
 class PredmetMerilaList(ListView):
     model = PredmetMerila
-
-
 
 
 class PredmetMerilaDetail(DetailView):
@@ -69,10 +66,6 @@ class MeriloDetail(DetailView):
 
 
 class PodrobnostList(ListView):
-    model = Podrobnost
-
-
-class PodrobnostDetail(DetailView):
     model = Podrobnost
 
 

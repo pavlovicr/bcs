@@ -13,5 +13,6 @@ urlpatterns = [
     url(r'^vrsta_dela/(?P<pk>\d+)$', views.VrstaDelDetail.as_view(), name='vrstadel-detail'),
     url(r'^popisne_postavke/$', views.PopisnaPostavkaList.as_view(), name='popisnapostavka-list'),
     url(r'^popisna_postavka/(?P<pk>\d+)$', views.PopisnaPostavkaDetail.as_view(), name='popisnapostavka-detail'),
+    
 
 ]

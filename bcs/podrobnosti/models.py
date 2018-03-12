@@ -2,32 +2,9 @@ from django.db import models
 from django.urls import reverse
 
 
-#BCS
+
 from osnova.utils import ChoiceEnum
 from osnova.models import Osnova
-
-
-class Zvrst(ChoiceEnum):
-    STANDARD = 'Standard'
-    TS = 'Tehnična specifikacija'
-    TP = 'Tehnični predpis'
-    PRAVILNIK = 'Pravilnik'
-    ZNANOST = 'Znanostvena knjiga'
-    PRAKSA = 'Gradbena praksa'
-    SMERNICE = 'Smernice'
-    PRIPOROCILA = 'Priporocila'
-
-
-class Dokumentacija(Osnova):
-    naslov = models.TextField(blank=True)
-    zvrst = models.CharField(max_length=30, choices=Zvrst.choices(), default=Zvrst.STANDARD)
-    komentar = models.TextField()
-
-    def __str__(self):
-        return self.tekst
-
-    def get_absolute_url(self):
-        return reverse('dokumentacija-detail', args=[str(self.id)])
 
 
 class Slika(Osnova):
@@ -48,6 +25,31 @@ class Datoteka(Osnova):
 
     def get_absolute_url(self):
         return reverse('datoteka-detail', args=[str(self.id)])
+
+
+class Zvrst(ChoiceEnum):
+    STANDARD = 'Standard'
+    TS = 'Tehnična specifikacija'
+    TP = 'Tehnični predpis'
+    PRAVILNIK = 'Pravilnik'
+    ZNANOST = 'Znanostvena knjiga'
+    PRAKSA = 'Gradbena praksa'
+    SMERNICE = 'Smernice'
+    PRIPOROCILA = 'Priporocila'
+
+
+class Dokumentacija(Osnova):
+    naslov = models.TextField(blank=True)
+    zvrst = models.CharField(max_length=30, choices=Zvrst.choices(), default=Zvrst.STANDARD)
+    komentar = models.TextField()
+    image = models.ManyToManyField((Slika), blank=True)
+    datoteka = models.ManyToManyField((Datoteka), blank=True)
+
+    def __str__(self):
+        return self.tekst
+
+    def get_absolute_url(self):
+        return reverse('dokumentacija-detail', args=[str(self.id)])
 
 
 class Podrocje(ChoiceEnum):
@@ -83,7 +85,7 @@ class PodlagaMerila(Osnova):
     izhodisce = models.CharField(max_length=10, choices=Izhodisce.choices(), default=Izhodisce.STROKA)
     komentar = models.TextField()
     dokumentacija = models.ManyToManyField((Dokumentacija), blank=True)
-    slika = models.ManyToManyField((Slika), blank=True )
+
 
     def __str__(self):
         return self.tekst
@@ -96,7 +98,7 @@ class Merilo(Osnova):
     podlaga_merila = models.ForeignKey('PodlagaMerila', on_delete=models.SET_NULL, blank=True, null=True)
 
     class Meta:
-        ordering = ['stevilka']
+        ordering = ['podlaga_merila__stevilka']
 
     def __str__(self):
         return self.tekst
@@ -110,7 +112,7 @@ class Podrobnost(Osnova):
     tekst_za_popis = models.TextField(blank=True)
 
     class Meta:
-        ordering = ['merilo__stevilka']
+        ordering = ['merilo__podlaga_merila__stevilka']
 
     def __str__(self):
         return self.tekst

@@ -7,18 +7,30 @@
     {% if object_list %}
     <ul>
 
+
+
+
+
+
       {% for popisnapostavka in object_list %}
       <!-- lahko uporabimo podrobnost_list -->
+
+      {% for podrobnost in popisnapostavka.podrobnost.all %}{{podrobnost.tekst_za_popis}} , {% endfor %}
+
+
+
       <li>
         <!-- <a href="{{ podrobnost.get_absolute_url }}">{{ podrobnost.opis }}</a> lahko uporabimo tudi to-->
         <a href="{% url 'popisnapostavka-detail' popisnapostavka.pk %}">{{ popisnapostavka.postavka }}</a>
 
-
-        {% for podrobnost in popisnapostavka.podrobnost.all %}{{podrobnost.opis}}{% endfor %}
+        {% for podrobnost in popisnapostavka.podrobnost.all %}{{podrobnost.tekst}} , {% endfor %}
         <!-- <a href="/podrobnosti/podrobnost/{{ podrobnost.id }}">{{ podrobnost.opis }}</a> tudi to deluje -->
 
       </li>
       {% endfor %}
+
+
+
 
     </ul>
     {% else %}
