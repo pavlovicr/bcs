@@ -32,7 +32,7 @@
           <ul>
           <!-- izpisi, ki pripadajo  podlagi merila -->
           {% for podlaga in tekst.list %}
-          <p><a href="{% url 'podlagamerila-detail' podlaga.pk %}">{{ "Podrobnosti podlage merila "}}</a></p>
+          <p><a href="{% url 'podlagamerila-detail' podlaga.pk %}">{{ "Podrobnosti Podlage merila "}}</a></p>
           <p>Komentar: {{podlaga.komentar}}</p>
           <p>Zahteve : {{podlaga.get_izhodisce_display}}</p>
 
