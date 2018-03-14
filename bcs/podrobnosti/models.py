@@ -121,6 +121,9 @@ class Podrobnost(Osnova):
         return reverse('podrobnost-detail', args=[str(self.id)])
 
 
+class VIJA():
+	pass
+
 
 class Dolocilo(Osnova):
     """docstring for ."""
