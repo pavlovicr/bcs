@@ -119,9 +119,3 @@ class Podrobnost(Osnova):
 
     def get_absolute_url(self):
         return reverse('podrobnost-detail', args=[str(self.id)])
-
-
-class Dolocilo(Osnova):
-    """docstring for ."""
-    minimalno =  models.TextField(blank=True)
-    razsirjeno =  models.TextField(blank=True)
