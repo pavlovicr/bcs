@@ -5,7 +5,7 @@ from django.urls import reverse
 
 from osnova.utils import ChoiceEnum
 from osnova.models import Osnova
-
+#vaa
 
 class Slika(Osnova):
     image = models.ImageField(blank=True)
@@ -119,3 +119,9 @@ class Podrobnost(Osnova):
 
     def get_absolute_url(self):
         return reverse('podrobnost-detail', args=[str(self.id)])
+
+
+class Dolocilo(Osnova):
+    """docstring for ."""
+    minimalno =  models.TextField(blank=True)
+    razsirjeno =  models.TextField(blank=True)
