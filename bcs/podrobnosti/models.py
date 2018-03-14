@@ -106,7 +106,7 @@ class Merilo(Osnova):
     def get_absolute_url(self):
         return reverse('merilo-detail', args=[str(self.id)])
 
-
+#vaja
 class Podrobnost(Osnova):
     merilo =  models.ForeignKey('Merilo', on_delete=models.SET_NULL, null=True)
     tekst_za_popis = models.TextField(blank=True)
