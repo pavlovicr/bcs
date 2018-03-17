@@ -11,7 +11,9 @@
       <!-- lahko uporabimo slika_list -->
       <li>
         <!-- <a href="{{ slika.get_absolute_url }}">{{ slika.opis }}</a> lahko uporabimo tudi to-->
-        <a href="{% url 'slika-detail' slika.pk %}">{{ slika.opis }}</a><a href="{{ MEDIA_URL }}{{ slika.image }}"> : slika </a>
+        <a href="{% url 'slika-detail' slika.pk %}">{{ slika.tekst }}</a>
+
+        <ul><a href="{{ MEDIA_URL }}{{ slika.image }}"> : {{ slika.tekst }} </a></ul>
         <!-- <a href="/podrobnosti/slika/{{ slika.id }}">{{ slika.opis }}</a> tudi to deluje -->
 
 

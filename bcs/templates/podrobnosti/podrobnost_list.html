@@ -2,36 +2,31 @@
 
 {% block content %}
 
+<h1>Podrobnosti seznam</h1>
 
+{% regroup object_list by get_tip_display as po_tipu %}
 
-    <h1>Podrobnosti seznam</h1>
-
-    {% if object_list %}
+<ul>
+    {% for tip in po_tipu %}
+    <li><h2>{{ tip.grouper }}</h2></li>
     <ul>
-
-
-
-      {% for podrobnost in object_list %}
-
-      <li><a href="{% url 'podrobnost-detail' podrobnost.pk %}">{{podrobnost.tekst}}</a></li>
-
-      {% endfor %}
-
-
+        {% regroup tip.list by merilo.podlaga_merila.predmet_merila as po_predmetu %}
+        {% for predmet in po_predmetu %}
+        <li><h4>Predmet :{{ predmet.grouper }}</h4></li>
+        <ul>
+            {% regroup predmet.list by merilo.podlaga_merila as po_podlagi_merila %}
+            {% for podlaga in po_podlagi_merila %}
+            <li><h5>Podlaga :{{ podlaga.grouper }}</h5></li>
+            <ul>
+                {% for podrobnost in podlaga.list %}
+                <li><a href="{% url 'podrobnost-detail' podrobnost.pk %}">{{ podrobnost.tekst }}, {{ podrobnost.tekst_za_popis }} </a></li>
+                {% endfor %}
+            </ul>
+            {% endfor %}
+        </ul>
+        {% endfor %}
     </ul>
+    {% endfor %}
+</ul>
 
-    {% else %}
-      <p>Tukaj nič novega.</p>
-    {% endif %}
 {% endblock %}
-
-
-
-
-
-
-
-
-{% comment %}
-<p class="{% cycle 'odd' 'even' %}">{{ podrobnost.opis}},{{ podrobnost.komentar}}</p>
-{% endcomment %}

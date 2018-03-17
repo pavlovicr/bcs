@@ -107,7 +107,13 @@ class Merilo(Osnova):
         return reverse('merilo-detail', args=[str(self.id)])
 
 
+class Tip(ChoiceEnum):
+    POPIS = 'Popisna podrobnost'
+    DOLOCILO = 'Dolocilo'
+
+
 class Podrobnost(Osnova):
+    tip = models.CharField(max_length=10, choices=Tip.choices(), default=Tip.POPIS)
     merilo =  models.ForeignKey('Merilo', on_delete=models.SET_NULL, null=True)
     tekst_za_popis = models.TextField(blank=True)
 
@@ -121,7 +127,7 @@ class Podrobnost(Osnova):
         return reverse('podrobnost-detail', args=[str(self.id)])
 
 
-class Dolocilo(Osnova):
-    """docstring for ."""
-    minimalno =  models.TextField(blank=True)
-    razsirjeno =  models.TextField(blank=True)
+#class Dolocilo(Osnova):
+#    """docstring for ."""
+#    minimalno =  models.TextField(blank=True)
+#    razsirjeno =  models.TextField(blank=True)

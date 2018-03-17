@@ -68,6 +68,18 @@ class MeriloDetail(DetailView):
 class PodrobnostList(ListView):
     model = Podrobnost
 
+    def get_queryset(self, *args, **kwargs):
+        queryset = super(PodrobnostList, self).get_queryset(*args, **kwargs)
+
+        queryset = queryset.order_by(
+            'tip',
+            'merilo__podlaga_merila__predmet_merila',
+            'merilo__podlaga_merila',
+            'tekst'
+        )
+        return queryset
+
+
 
 class PodrobnostDetail(DetailView):
     model = Podrobnost
