@@ -1,22 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>MERILO PODROBNOSTI: {{ object.tekst }}</h1>
+  <h1>Podskupina specifikacije: {{ object.tekst }}</h1>
   <!-- lahko uporabimo object.tekst -->
 
 <!-- namesto izhodisce sem uporabil get_izhodisce_display. To je django funkcija za prikaz choices -->
-<h4>Izhodišče : {{ object.get_izhodisce_display }}</h4>
+<h4>Podlaga : {{ object.get_podlaga_display }}</h4>
 <!-- namesto podrocje sem uporabil get_podrocje_display. To je django funkcija za prikaz choices -->
-<h4>Področje :{{ merilo.podlagamerila.predmetmerila.get_podrocje_display }}</h4>
+<h4>Predmet :{{ podskupina.specifikacija.poglavje.get_predmet_display }}</h4>
 
 
-<h2>Predmet :{{ object.podlagamerila.predmetmerila.tekst }}</h2>
+<h2>Poglavje :{{ object.specifikacija.poglavje.tekst }}</h2>
 
-<h2>Podlaga :{{ object.podlagameriala.tekst }}</h2>
+<h2>Specifikacija :{{ object.specifikacija.tekst }}</h2>
 
 
 <h4>Komentar:</h4>
-   <p>{{ object.podlagamerila.komentar }}</p>
+   <p>{{ object.specifikacija.komentar }}</p>
 
 
 {% for podrobnost in object.podrobnost_set.all %}

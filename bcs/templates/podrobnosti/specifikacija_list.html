@@ -5,54 +5,54 @@
 <h1>Strokovne podlage - Seznam</h1>
 
 <!--  grupiramo list po  vrsta del -->
-{% regroup object_list by predmet_merila.dela.vrsta_del as podlage %}
+{% regroup object_list by poglavje.dela.vrsta_del as podlage %}
 {% for vrsta_del in podlage %}
 <b>{{ vrsta_del.grouper.tekst }}</b><br>
 
 <ul>
   <!-- grupiramo list po  dela -->
-  {% regroup vrsta_del.list by predmet_merila.dela as podlage %}
+  {% regroup vrsta_del.list by poglavje.dela as podlage %}
   {% for dela in podlage %}
   <li><b>{{ dela.grouper.tekst }}</b><br></li>
 
   <ul>
       <!-- grupiramo list po  predmetu merila -->
-      {% regroup dela.list by predmet_merila as podlage %}
-      {% for predmet in podlage %}
+      {% regroup dela.list by poglavje as podlage %}
+      {% for poglavje in podlage %}
       <li><b>{{ predmet.grouper.tekst }}</b><br></li>
 
       <ul>
-          <!-- grupiramo list po tekstu podlage merila -->
+          <!-- grupiramo list po tekstu specifikacije -->
           <p>
-          {% regroup predmet.list by tekst as podlage %}
+          {% regroup poglavje.list by tekst as podlage %}
           {% for tekst in podlage %}
           <li>{{ tekst.grouper }}</li>
           </p>
 
           <ul>
-          <!-- izpisi, ki pripadajo  podlagi merila -->
-          {% for podlaga in tekst.list %}
-          <p><a href="{% url 'podlagamerila-detail' podlaga.pk %}">{{ "Podrobnosti Podlage merila "}}</a></p>
-          <p>Komentar: {{podlaga.komentar}}</p>
-          <p>Zahteve : {{podlaga.get_izhodisce_display}}</p>
+          <!-- izpisi, ki pripadajo  specifikaciji -->
+          {% for specifikacija in tekst.list %}
+          <p><a href="{% url 'specifikacija-detail' specifikacija.pk %}">{{ "Podrobnosti Specifikacije "}}</a></p>
+          <p>Komentar: {{specifikacija.komentar}}</p>
+          <p>Zahteve : {{specifikacija.get_podlaga_display}}</p>
 
 
           <!-- Dokumetnacija -->
           <p> Dokumentacija :
-          {% for d in podlaga.dokumentacija.all %}
+          {% for d in specifikacija.dokumentacija.all %}
           <a href="{% url 'dokumentacija-detail' d.pk %}">{{ d.tekst }}</a>
           {% endfor %}
           </p>
 
           <!-- Slike -->
           <p> Slike :
-          {% for s in podlaga.slika.all %}
+          {% for s in specifikacija.slika.all %}
           <a href="{% url 'slika-detail' s.pk %}">{{ s.tekst }}</a>
           {% endfor %}
           </p>
               <ul>
               <!-- Merila -->
-              {% for m in podlaga.merilo_set.all %}
+              {% for m in specifikacija.podskupina_set.all %}
               <li>Merilo :{{ m.tekst}} </li>
 
                   <ul>
@@ -64,7 +64,7 @@
           <!-- komentar, zahteve -->
           {% endfor %}
           </ul>
-        <!-- tekst podlage merila?????? -->
+        <!-- tekst specifikacije?????? -->
         {% endfor %}
         </ul>
       <!-- podlaga_merila tekst -->

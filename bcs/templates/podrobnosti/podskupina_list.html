@@ -9,22 +9,21 @@
 <!-- zdruzi seznam meril iz object_lista po predmetu merila v nov_seznam_meril -->
 
 
-
-    {% regroup object_list by podlaga_merila.predmet_merila.tekst as seznam_meril %}
-    {% for predmet in seznam_meril %}
+    {% regroup object_list by specifikacija.poglavje.tekst as poglavja %}
+    {% for predmet in poglavja %}
     <li>{{ predmet.grouper }}</li>
 
 
-    {% regroup predmet.list by podlaga_merila.tekst as seznam_meril %}
-    {% for podlaga in seznam_meril %}
+    {% regroup predmet.list by specifikacija.tekst as specifikacije %}
+    {% for specifikacija in specifikacije %}
     <ul>
-    <li>{{ podlaga.grouper }}</li>
+    <li>{{ specifikacija.grouper }}</li>
 
 
 
-      {% for merilo in podlaga.list %}
+      {% for podskupina in specifikacija.list %}
       <ul>
-      <li>{{ merilo.tekst }}</li>
+      <li>{{ podskupina.tekst }}</li>
       </ul>
       {% endfor %}
 

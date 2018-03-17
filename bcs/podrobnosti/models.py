@@ -1,11 +1,9 @@
 from django.db import models
 from django.urls import reverse
 
-
-
 from osnova.utils import ChoiceEnum
 from osnova.models import Osnova
-#vaa
+
 
 class Slika(Osnova):
     image = models.ImageField(blank=True)
@@ -52,26 +50,26 @@ class Dokumentacija(Osnova):
         return reverse('dokumentacija-detail', args=[str(self.id)])
 
 
-class Podrocje(ChoiceEnum):
+class Predmet(ChoiceEnum):
     MATERIAL = 'Lastnosti materiala'
     IZDELEK = 'Lastnosti izdelka'
-    PROCES = 'Delovni postopki'
+    PROCES = 'Opis delovnih postopkov'
     VARNOST = 'Varnostne zahteve'
     SPLOSNO = 'Splošno'
 
 
-class PredmetMerila(Osnova):
+class Poglavje(Osnova):
         dela = models.ForeignKey('popisi.Dela',on_delete=models.SET_NULL, null=True)
-        podrocje = models.CharField(max_length=10, choices=Podrocje.choices(), default=Podrocje.MATERIAL)
+        predmet = models.CharField(max_length=10, choices=Predmet.choices(), default=Predmet.MATERIAL)
 
         def __str__(self):
             return self.tekst
 
         def get_absolute_url(self):
-            return reverse('predmetmerila-detail', args=[str(self.id)])
+            return reverse('poglavje-detail', args=[str(self.id)])
 
 
-class Izhodisce(ChoiceEnum):
+class Podlaga(ChoiceEnum):
     ZAKON = 'Zahtevano z zakonom'
     STROKA = 'Pravila stroke'
     PRAKSA = 'Gradbena praksa'
@@ -80,39 +78,45 @@ class Izhodisce(ChoiceEnum):
     IZVAJALCI = 'Priporočila izvajalcev'
 
 
-class PodlagaMerila(Osnova):
-    predmet_merila = models.ForeignKey('PredmetMerila', on_delete=models.SET_NULL, null=True)
-    izhodisce = models.CharField(max_length=10, choices=Izhodisce.choices(), default=Izhodisce.STROKA)
+class Tip(ChoiceEnum):
+    POPIS = 'Popis'
+    DOLOCILO = 'Dolocilo'
+
+
+class Specifikacija(Osnova):
+    tip = models.CharField(max_length=10, choices=Tip.choices(), default=Tip.POPIS)
+    podlaga = models.CharField(max_length=10, choices=Podlaga.choices(), default=Podlaga.STROKA)
+    poglavje = models.ForeignKey('Poglavje', on_delete=models.SET_NULL, null=True)
     komentar = models.TextField()
     dokumentacija = models.ManyToManyField((Dokumentacija), blank=True)
 
-
     def __str__(self):
         return self.tekst
 
     def get_absolute_url(self):
-        return reverse('podlagamerila-detail', args=[str(self.id)])
+        return reverse('specifikacija-detail', args=[str(self.id)])
 
 
-class Merilo(Osnova):
-    podlaga_merila = models.ForeignKey('PodlagaMerila', on_delete=models.SET_NULL, blank=True, null=True)
+class Podskupina(Osnova):
+    specifikacija = models.ForeignKey('Specifikacija', on_delete=models.SET_NULL, blank=True, null=True)
 
     class Meta:
-        ordering = ['podlaga_merila__stevilka']
+        ordering = ['specifikacija__stevilka']
 
     def __str__(self):
         return self.tekst
 
     def get_absolute_url(self):
-        return reverse('merilo-detail', args=[str(self.id)])
+        return reverse('podskupina-detail', args=[str(self.id)])
 
-#vaja
+
 class Podrobnost(Osnova):
-    merilo =  models.ForeignKey('Merilo', on_delete=models.SET_NULL, null=True)
+
+    podskupina =  models.ForeignKey('Podskupina', on_delete=models.SET_NULL, null=True)
     tekst_za_popis = models.TextField(blank=True)
 
     class Meta:
-        ordering = ['merilo__podlaga_merila__stevilka']
+        ordering = ['podskupina__specifikacija__stevilka']
 
     def __str__(self):
         return self.tekst

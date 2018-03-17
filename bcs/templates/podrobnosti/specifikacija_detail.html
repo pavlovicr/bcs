@@ -2,14 +2,14 @@
 
 {% block content %}
 
-<h4>Področje predmeta podlage :</h4>
+<h4>Področje specifikacije :</h4>
   <li>
     <!-- namesto podrocje sem uporabil get_podrocje_display. To je django funkcija za prikaz choices -->
-    {{ object.predmet_merila.get_podrocje_display }}
+    {{ object.poglavje.get_predmet_display }}
   </li>
 
 
-  <h1>PODLAGA PODROBNOSTI:</h1>
+  <h1>SPECIFIKACIJA PODROBNOSTI:</h1>
     <li>
       <h2>{{ object.tekst }}</h2>
    </li>
@@ -43,24 +43,24 @@
 {%endcomment%}
 
 
-<h4>Predmet Podlage :</h4>
+<h4>Poglavje Specifikacije :</h4>
   <li>
-    <p>{{ podlaga.predmet.opis }}</p>
+    <p>{{ specifikacija.poglavje.tekst }}</p>
   </li>
 
 
-{% for merilo in podlaga.merilo_set.all %}
+{% for podskupina in specifikacija.podskupina_set.all %}
 <!-- lahko uporabimo object.podrobnost_set.all -->
-<h4>Merilo podlage:</h4>
+<h4>Podskupina specifikacije:</h4>
 
     <li>
-        {{ merilo.opis }}
+        {{ podskupina.tekst }}
 
         <h4>Podrobnost:</h4>
 
         <li>
-          {% for podrobnost in merilo.podrobnost_set.all %}
-              {{ podrobnost.opis }}
+          {% for podrobnost in podskupina.podrobnost_set.all %}
+              {{ podrobnost.tekst }}
           {% endfor %}
         </li>
 
