@@ -1,0 +1,3486 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.5.10
+-- Dumped by pg_dump version 9.5.10
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: account_emailaddress; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE account_emailaddress (
+    id integer NOT NULL,
+    email character varying(254) NOT NULL,
+    verified boolean NOT NULL,
+    "primary" boolean NOT NULL,
+    user_id integer NOT NULL
+);
+
+
+ALTER TABLE account_emailaddress OWNER TO pavlovicr;
+
+--
+-- Name: account_emailaddress_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE account_emailaddress_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE account_emailaddress_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: account_emailaddress_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE account_emailaddress_id_seq OWNED BY account_emailaddress.id;
+
+
+--
+-- Name: account_emailconfirmation; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE account_emailconfirmation (
+    id integer NOT NULL,
+    created timestamp with time zone NOT NULL,
+    sent timestamp with time zone,
+    key character varying(64) NOT NULL,
+    email_address_id integer NOT NULL
+);
+
+
+ALTER TABLE account_emailconfirmation OWNER TO pavlovicr;
+
+--
+-- Name: account_emailconfirmation_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE account_emailconfirmation_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE account_emailconfirmation_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: account_emailconfirmation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE account_emailconfirmation_id_seq OWNED BY account_emailconfirmation.id;
+
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE auth_group (
+    id integer NOT NULL,
+    name character varying(80) NOT NULL
+);
+
+
+ALTER TABLE auth_group OWNER TO pavlovicr;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE auth_group_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE auth_group_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE auth_group_id_seq OWNED BY auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE auth_group_permissions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE auth_group_permissions OWNER TO pavlovicr;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE auth_group_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE auth_group_permissions_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE auth_group_permissions_id_seq OWNED BY auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE auth_permission OWNER TO pavlovicr;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE auth_permission_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE auth_permission_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE auth_permission_id_seq OWNED BY auth_permission.id;
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id integer NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE django_admin_log OWNER TO pavlovicr;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE django_admin_log_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE django_admin_log_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE django_admin_log_id_seq OWNED BY django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE django_content_type OWNER TO pavlovicr;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE django_content_type_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE django_content_type_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE django_content_type_id_seq OWNED BY django_content_type.id;
+
+
+--
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE django_migrations (
+    id integer NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE django_migrations OWNER TO pavlovicr;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE django_migrations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE django_migrations_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE django_migrations_id_seq OWNED BY django_migrations.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE django_session OWNER TO pavlovicr;
+
+--
+-- Name: django_site; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE django_site (
+    id integer NOT NULL,
+    domain character varying(100) NOT NULL,
+    name character varying(50) NOT NULL
+);
+
+
+ALTER TABLE django_site OWNER TO pavlovicr;
+
+--
+-- Name: django_site_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE django_site_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE django_site_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: django_site_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE django_site_id_seq OWNED BY django_site.id;
+
+
+--
+-- Name: podrobnosti_datoteka; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE podrobnosti_datoteka (
+    id integer NOT NULL,
+    stevilka integer,
+    tekst character varying(100) NOT NULL,
+    datoteka character varying(100) NOT NULL
+);
+
+
+ALTER TABLE podrobnosti_datoteka OWNER TO pavlovicr;
+
+--
+-- Name: podrobnosti_datoteka_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE podrobnosti_datoteka_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE podrobnosti_datoteka_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: podrobnosti_datoteka_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE podrobnosti_datoteka_id_seq OWNED BY podrobnosti_datoteka.id;
+
+
+--
+-- Name: podrobnosti_dokumentacija; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE podrobnosti_dokumentacija (
+    id integer NOT NULL,
+    stevilka integer,
+    tekst character varying(100) NOT NULL,
+    naslov text NOT NULL,
+    zvrst character varying(30) NOT NULL,
+    komentar text NOT NULL
+);
+
+
+ALTER TABLE podrobnosti_dokumentacija OWNER TO pavlovicr;
+
+--
+-- Name: podrobnosti_dokumentacija_datoteka; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE podrobnosti_dokumentacija_datoteka (
+    id integer NOT NULL,
+    dokumentacija_id integer NOT NULL,
+    datoteka_id integer NOT NULL
+);
+
+
+ALTER TABLE podrobnosti_dokumentacija_datoteka OWNER TO pavlovicr;
+
+--
+-- Name: podrobnosti_dokumentacija_datoteka_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE podrobnosti_dokumentacija_datoteka_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE podrobnosti_dokumentacija_datoteka_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: podrobnosti_dokumentacija_datoteka_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE podrobnosti_dokumentacija_datoteka_id_seq OWNED BY podrobnosti_dokumentacija_datoteka.id;
+
+
+--
+-- Name: podrobnosti_dokumentacija_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE podrobnosti_dokumentacija_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE podrobnosti_dokumentacija_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: podrobnosti_dokumentacija_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE podrobnosti_dokumentacija_id_seq OWNED BY podrobnosti_dokumentacija.id;
+
+
+--
+-- Name: podrobnosti_dokumentacija_image; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE podrobnosti_dokumentacija_image (
+    id integer NOT NULL,
+    dokumentacija_id integer NOT NULL,
+    slika_id integer NOT NULL
+);
+
+
+ALTER TABLE podrobnosti_dokumentacija_image OWNER TO pavlovicr;
+
+--
+-- Name: podrobnosti_dokumentacija_image_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE podrobnosti_dokumentacija_image_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE podrobnosti_dokumentacija_image_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: podrobnosti_dokumentacija_image_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE podrobnosti_dokumentacija_image_id_seq OWNED BY podrobnosti_dokumentacija_image.id;
+
+
+--
+-- Name: podrobnosti_merilo; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE podrobnosti_merilo (
+    id integer NOT NULL,
+    stevilka integer,
+    tekst character varying(100) NOT NULL,
+    podlaga_merila_id integer
+);
+
+
+ALTER TABLE podrobnosti_merilo OWNER TO pavlovicr;
+
+--
+-- Name: podrobnosti_merilo_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE podrobnosti_merilo_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE podrobnosti_merilo_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: podrobnosti_merilo_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE podrobnosti_merilo_id_seq OWNED BY podrobnosti_merilo.id;
+
+
+--
+-- Name: podrobnosti_podlagamerila; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE podrobnosti_podlagamerila (
+    id integer NOT NULL,
+    stevilka integer,
+    tekst character varying(100) NOT NULL,
+    izhodisce character varying(10) NOT NULL,
+    komentar text NOT NULL,
+    predmet_merila_id integer
+);
+
+
+ALTER TABLE podrobnosti_podlagamerila OWNER TO pavlovicr;
+
+--
+-- Name: podrobnosti_podlagamerila_dokumentacija; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE podrobnosti_podlagamerila_dokumentacija (
+    id integer NOT NULL,
+    podlagamerila_id integer NOT NULL,
+    dokumentacija_id integer NOT NULL
+);
+
+
+ALTER TABLE podrobnosti_podlagamerila_dokumentacija OWNER TO pavlovicr;
+
+--
+-- Name: podrobnosti_podlagamerila_dokumentacija_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE podrobnosti_podlagamerila_dokumentacija_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE podrobnosti_podlagamerila_dokumentacija_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: podrobnosti_podlagamerila_dokumentacija_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE podrobnosti_podlagamerila_dokumentacija_id_seq OWNED BY podrobnosti_podlagamerila_dokumentacija.id;
+
+
+--
+-- Name: podrobnosti_podlagamerila_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE podrobnosti_podlagamerila_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE podrobnosti_podlagamerila_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: podrobnosti_podlagamerila_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE podrobnosti_podlagamerila_id_seq OWNED BY podrobnosti_podlagamerila.id;
+
+
+--
+-- Name: podrobnosti_podrobnost; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE podrobnosti_podrobnost (
+    id integer NOT NULL,
+    stevilka integer,
+    tekst character varying(100) NOT NULL,
+    tekst_za_popis text NOT NULL,
+    merilo_id integer,
+    tip character varying(10) NOT NULL
+);
+
+
+ALTER TABLE podrobnosti_podrobnost OWNER TO pavlovicr;
+
+--
+-- Name: podrobnosti_podrobnost_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE podrobnosti_podrobnost_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE podrobnosti_podrobnost_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: podrobnosti_podrobnost_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE podrobnosti_podrobnost_id_seq OWNED BY podrobnosti_podrobnost.id;
+
+
+--
+-- Name: podrobnosti_predmetmerila; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE podrobnosti_predmetmerila (
+    id integer NOT NULL,
+    stevilka integer,
+    tekst character varying(100) NOT NULL,
+    podrocje character varying(10) NOT NULL,
+    dela_id integer
+);
+
+
+ALTER TABLE podrobnosti_predmetmerila OWNER TO pavlovicr;
+
+--
+-- Name: podrobnosti_predmetmerila_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE podrobnosti_predmetmerila_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE podrobnosti_predmetmerila_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: podrobnosti_predmetmerila_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE podrobnosti_predmetmerila_id_seq OWNED BY podrobnosti_predmetmerila.id;
+
+
+--
+-- Name: podrobnosti_slika; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE podrobnosti_slika (
+    id integer NOT NULL,
+    stevilka integer,
+    tekst character varying(100) NOT NULL,
+    image character varying(100) NOT NULL
+);
+
+
+ALTER TABLE podrobnosti_slika OWNER TO pavlovicr;
+
+--
+-- Name: podrobnosti_slika_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE podrobnosti_slika_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE podrobnosti_slika_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: podrobnosti_slika_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE podrobnosti_slika_id_seq OWNED BY podrobnosti_slika.id;
+
+
+--
+-- Name: popisi_dela; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE popisi_dela (
+    id integer NOT NULL,
+    stevilka integer,
+    tekst character varying(100) NOT NULL,
+    nivo character varying(10) NOT NULL,
+    predmet text NOT NULL,
+    osnovni_materiali text NOT NULL,
+    osnove_za_izvedbo text NOT NULL,
+    nacin_izvedbe text NOT NULL,
+    kakovost_izvedenih_del text NOT NULL,
+    preverjanje_kakovosti_izvedenih_del text NOT NULL,
+    merjenje_prevzem_obracun text NOT NULL,
+    vrsta_del_id integer
+);
+
+
+ALTER TABLE popisi_dela OWNER TO pavlovicr;
+
+--
+-- Name: popisi_dela_dokumentacija; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE popisi_dela_dokumentacija (
+    id integer NOT NULL,
+    dela_id integer NOT NULL,
+    dokumentacija_id integer NOT NULL
+);
+
+
+ALTER TABLE popisi_dela_dokumentacija OWNER TO pavlovicr;
+
+--
+-- Name: popisi_dela_dokumentacija_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE popisi_dela_dokumentacija_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE popisi_dela_dokumentacija_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: popisi_dela_dokumentacija_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE popisi_dela_dokumentacija_id_seq OWNED BY popisi_dela_dokumentacija.id;
+
+
+--
+-- Name: popisi_dela_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE popisi_dela_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE popisi_dela_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: popisi_dela_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE popisi_dela_id_seq OWNED BY popisi_dela.id;
+
+
+--
+-- Name: popisi_popisnapostavka; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE popisi_popisnapostavka (
+    id integer NOT NULL,
+    stevilka integer,
+    tekst character varying(100) NOT NULL,
+    postavka_id integer
+);
+
+
+ALTER TABLE popisi_popisnapostavka OWNER TO pavlovicr;
+
+--
+-- Name: popisi_popisnapostavka_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE popisi_popisnapostavka_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE popisi_popisnapostavka_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: popisi_popisnapostavka_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE popisi_popisnapostavka_id_seq OWNED BY popisi_popisnapostavka.id;
+
+
+--
+-- Name: popisi_popisnapostavka_podrobnost; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE popisi_popisnapostavka_podrobnost (
+    id integer NOT NULL,
+    popisnapostavka_id integer NOT NULL,
+    podrobnost_id integer NOT NULL
+);
+
+
+ALTER TABLE popisi_popisnapostavka_podrobnost OWNER TO pavlovicr;
+
+--
+-- Name: popisi_popisnapostavka_podrobnost_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE popisi_popisnapostavka_podrobnost_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE popisi_popisnapostavka_podrobnost_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: popisi_popisnapostavka_podrobnost_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE popisi_popisnapostavka_podrobnost_id_seq OWNED BY popisi_popisnapostavka_podrobnost.id;
+
+
+--
+-- Name: popisi_postavka; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE popisi_postavka (
+    id integer NOT NULL,
+    stevilka integer,
+    tekst character varying(100) NOT NULL,
+    enota_mere character varying(10) NOT NULL,
+    dela_id integer
+);
+
+
+ALTER TABLE popisi_postavka OWNER TO pavlovicr;
+
+--
+-- Name: popisi_postavka_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE popisi_postavka_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE popisi_postavka_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: popisi_postavka_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE popisi_postavka_id_seq OWNED BY popisi_postavka.id;
+
+
+--
+-- Name: popisi_vrstadel; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE popisi_vrstadel (
+    id integer NOT NULL,
+    stevilka integer,
+    tekst character varying(100) NOT NULL,
+    skupina_del character varying(10) NOT NULL
+);
+
+
+ALTER TABLE popisi_vrstadel OWNER TO pavlovicr;
+
+--
+-- Name: popisi_vrstadel_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE popisi_vrstadel_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE popisi_vrstadel_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: popisi_vrstadel_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE popisi_vrstadel_id_seq OWNED BY popisi_vrstadel.id;
+
+
+--
+-- Name: socialaccount_socialaccount; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE socialaccount_socialaccount (
+    id integer NOT NULL,
+    provider character varying(30) NOT NULL,
+    uid character varying(191) NOT NULL,
+    last_login timestamp with time zone NOT NULL,
+    date_joined timestamp with time zone NOT NULL,
+    extra_data text NOT NULL,
+    user_id integer NOT NULL
+);
+
+
+ALTER TABLE socialaccount_socialaccount OWNER TO pavlovicr;
+
+--
+-- Name: socialaccount_socialaccount_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE socialaccount_socialaccount_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE socialaccount_socialaccount_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: socialaccount_socialaccount_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE socialaccount_socialaccount_id_seq OWNED BY socialaccount_socialaccount.id;
+
+
+--
+-- Name: socialaccount_socialapp; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE socialaccount_socialapp (
+    id integer NOT NULL,
+    provider character varying(30) NOT NULL,
+    name character varying(40) NOT NULL,
+    client_id character varying(191) NOT NULL,
+    secret character varying(191) NOT NULL,
+    key character varying(191) NOT NULL
+);
+
+
+ALTER TABLE socialaccount_socialapp OWNER TO pavlovicr;
+
+--
+-- Name: socialaccount_socialapp_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE socialaccount_socialapp_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE socialaccount_socialapp_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: socialaccount_socialapp_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE socialaccount_socialapp_id_seq OWNED BY socialaccount_socialapp.id;
+
+
+--
+-- Name: socialaccount_socialapp_sites; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE socialaccount_socialapp_sites (
+    id integer NOT NULL,
+    socialapp_id integer NOT NULL,
+    site_id integer NOT NULL
+);
+
+
+ALTER TABLE socialaccount_socialapp_sites OWNER TO pavlovicr;
+
+--
+-- Name: socialaccount_socialapp_sites_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE socialaccount_socialapp_sites_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE socialaccount_socialapp_sites_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: socialaccount_socialapp_sites_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE socialaccount_socialapp_sites_id_seq OWNED BY socialaccount_socialapp_sites.id;
+
+
+--
+-- Name: socialaccount_socialtoken; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE socialaccount_socialtoken (
+    id integer NOT NULL,
+    token text NOT NULL,
+    token_secret text NOT NULL,
+    expires_at timestamp with time zone,
+    account_id integer NOT NULL,
+    app_id integer NOT NULL
+);
+
+
+ALTER TABLE socialaccount_socialtoken OWNER TO pavlovicr;
+
+--
+-- Name: socialaccount_socialtoken_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE socialaccount_socialtoken_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE socialaccount_socialtoken_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: socialaccount_socialtoken_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE socialaccount_socialtoken_id_seq OWNED BY socialaccount_socialtoken.id;
+
+
+--
+-- Name: users_user; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE users_user (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean NOT NULL,
+    username character varying(150) NOT NULL,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(30) NOT NULL,
+    email character varying(254) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL,
+    name character varying(255) NOT NULL
+);
+
+
+ALTER TABLE users_user OWNER TO pavlovicr;
+
+--
+-- Name: users_user_groups; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE users_user_groups (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE users_user_groups OWNER TO pavlovicr;
+
+--
+-- Name: users_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE users_user_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE users_user_groups_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: users_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE users_user_groups_id_seq OWNED BY users_user_groups.id;
+
+
+--
+-- Name: users_user_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE users_user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE users_user_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: users_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE users_user_id_seq OWNED BY users_user.id;
+
+
+--
+-- Name: users_user_user_permissions; Type: TABLE; Schema: public; Owner: pavlovicr
+--
+
+CREATE TABLE users_user_user_permissions (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE users_user_user_permissions OWNER TO pavlovicr;
+
+--
+-- Name: users_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: pavlovicr
+--
+
+CREATE SEQUENCE users_user_user_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE users_user_user_permissions_id_seq OWNER TO pavlovicr;
+
+--
+-- Name: users_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: pavlovicr
+--
+
+ALTER SEQUENCE users_user_user_permissions_id_seq OWNED BY users_user_user_permissions.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY account_emailaddress ALTER COLUMN id SET DEFAULT nextval('account_emailaddress_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY account_emailconfirmation ALTER COLUMN id SET DEFAULT nextval('account_emailconfirmation_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY auth_group ALTER COLUMN id SET DEFAULT nextval('auth_group_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY auth_permission ALTER COLUMN id SET DEFAULT nextval('auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY django_admin_log ALTER COLUMN id SET DEFAULT nextval('django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY django_content_type ALTER COLUMN id SET DEFAULT nextval('django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY django_migrations ALTER COLUMN id SET DEFAULT nextval('django_migrations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY django_site ALTER COLUMN id SET DEFAULT nextval('django_site_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_datoteka ALTER COLUMN id SET DEFAULT nextval('podrobnosti_datoteka_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_dokumentacija ALTER COLUMN id SET DEFAULT nextval('podrobnosti_dokumentacija_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_dokumentacija_datoteka ALTER COLUMN id SET DEFAULT nextval('podrobnosti_dokumentacija_datoteka_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_dokumentacija_image ALTER COLUMN id SET DEFAULT nextval('podrobnosti_dokumentacija_image_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_merilo ALTER COLUMN id SET DEFAULT nextval('podrobnosti_merilo_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_podlagamerila ALTER COLUMN id SET DEFAULT nextval('podrobnosti_podlagamerila_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_podlagamerila_dokumentacija ALTER COLUMN id SET DEFAULT nextval('podrobnosti_podlagamerila_dokumentacija_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_podrobnost ALTER COLUMN id SET DEFAULT nextval('podrobnosti_podrobnost_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_predmetmerila ALTER COLUMN id SET DEFAULT nextval('podrobnosti_predmetmerila_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_slika ALTER COLUMN id SET DEFAULT nextval('podrobnosti_slika_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY popisi_dela ALTER COLUMN id SET DEFAULT nextval('popisi_dela_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY popisi_dela_dokumentacija ALTER COLUMN id SET DEFAULT nextval('popisi_dela_dokumentacija_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY popisi_popisnapostavka ALTER COLUMN id SET DEFAULT nextval('popisi_popisnapostavka_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY popisi_popisnapostavka_podrobnost ALTER COLUMN id SET DEFAULT nextval('popisi_popisnapostavka_podrobnost_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY popisi_postavka ALTER COLUMN id SET DEFAULT nextval('popisi_postavka_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY popisi_vrstadel ALTER COLUMN id SET DEFAULT nextval('popisi_vrstadel_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY socialaccount_socialaccount ALTER COLUMN id SET DEFAULT nextval('socialaccount_socialaccount_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY socialaccount_socialapp ALTER COLUMN id SET DEFAULT nextval('socialaccount_socialapp_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY socialaccount_socialapp_sites ALTER COLUMN id SET DEFAULT nextval('socialaccount_socialapp_sites_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY socialaccount_socialtoken ALTER COLUMN id SET DEFAULT nextval('socialaccount_socialtoken_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY users_user ALTER COLUMN id SET DEFAULT nextval('users_user_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY users_user_groups ALTER COLUMN id SET DEFAULT nextval('users_user_groups_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY users_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('users_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- Data for Name: account_emailaddress; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY account_emailaddress (id, email, verified, "primary", user_id) FROM stdin;
+\.
+
+
+--
+-- Name: account_emailaddress_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('account_emailaddress_id_seq', 1, false);
+
+
+--
+-- Data for Name: account_emailconfirmation; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY account_emailconfirmation (id, created, sent, key, email_address_id) FROM stdin;
+\.
+
+
+--
+-- Name: account_emailconfirmation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('account_emailconfirmation_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('auth_group_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add group	1	add_group
+2	Can change group	1	change_group
+3	Can delete group	1	delete_group
+4	Can add permission	2	add_permission
+5	Can change permission	2	change_permission
+6	Can delete permission	2	delete_permission
+7	Can add content type	3	add_contenttype
+8	Can change content type	3	change_contenttype
+9	Can delete content type	3	delete_contenttype
+10	Can add session	4	add_session
+11	Can change session	4	change_session
+12	Can delete session	4	delete_session
+13	Can add site	5	add_site
+14	Can change site	5	change_site
+15	Can delete site	5	delete_site
+16	Can add log entry	6	add_logentry
+17	Can change log entry	6	change_logentry
+18	Can delete log entry	6	delete_logentry
+19	Can add email confirmation	7	add_emailconfirmation
+20	Can change email confirmation	7	change_emailconfirmation
+21	Can delete email confirmation	7	delete_emailconfirmation
+22	Can add email address	8	add_emailaddress
+23	Can change email address	8	change_emailaddress
+24	Can delete email address	8	delete_emailaddress
+25	Can add social application token	9	add_socialtoken
+26	Can change social application token	9	change_socialtoken
+27	Can delete social application token	9	delete_socialtoken
+28	Can add social account	10	add_socialaccount
+29	Can change social account	10	change_socialaccount
+30	Can delete social account	10	delete_socialaccount
+31	Can add social application	11	add_socialapp
+32	Can change social application	11	change_socialapp
+33	Can delete social application	11	delete_socialapp
+34	Can add user	12	add_user
+35	Can change user	12	change_user
+36	Can delete user	12	delete_user
+37	Can add vrsta del	13	add_vrstadel
+38	Can change vrsta del	13	change_vrstadel
+39	Can delete vrsta del	13	delete_vrstadel
+40	Can add postavka	14	add_postavka
+41	Can change postavka	14	change_postavka
+42	Can delete postavka	14	delete_postavka
+43	Can add dela	15	add_dela
+44	Can change dela	15	change_dela
+45	Can delete dela	15	delete_dela
+46	Can add popisna postavka	16	add_popisnapostavka
+47	Can change popisna postavka	16	change_popisnapostavka
+48	Can delete popisna postavka	16	delete_popisnapostavka
+49	Can add podlaga merila	17	add_podlagamerila
+50	Can change podlaga merila	17	change_podlagamerila
+51	Can delete podlaga merila	17	delete_podlagamerila
+52	Can add podrobnost	18	add_podrobnost
+53	Can change podrobnost	18	change_podrobnost
+54	Can delete podrobnost	18	delete_podrobnost
+55	Can add dokumentacija	19	add_dokumentacija
+56	Can change dokumentacija	19	change_dokumentacija
+57	Can delete dokumentacija	19	delete_dokumentacija
+58	Can add datoteka	20	add_datoteka
+59	Can change datoteka	20	change_datoteka
+60	Can delete datoteka	20	delete_datoteka
+61	Can add predmet merila	21	add_predmetmerila
+62	Can change predmet merila	21	change_predmetmerila
+63	Can delete predmet merila	21	delete_predmetmerila
+64	Can add slika	22	add_slika
+65	Can change slika	22	change_slika
+66	Can delete slika	22	delete_slika
+67	Can add merilo	23	add_merilo
+68	Can change merilo	23	change_merilo
+69	Can delete merilo	23	delete_merilo
+\.
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('auth_permission_id_seq', 69, true);
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+1	2018-02-23 10:28:52.274453-08	1	SIST 1026:2016	1	[{"added": {}}]	19	1
+2	2018-02-23 10:30:23.302311-08	2	SIST EN 206:2013	1	[{"added": {}}]	19	1
+3	2018-02-23 10:31:27.371453-08	3	SIST EN 13670:2010/A101:2010	1	[{"added": {}}]	19	1
+4	2018-02-23 10:33:26.113599-08	4	SIST EN 13670:2010	1	[{"added": {}}]	19	1
+5	2018-02-23 10:36:55.598435-08	5	SIST – TP CEN TR 15739	1	[{"added": {}}]	19	1
+6	2018-02-23 10:38:30.755823-08	6	FABRIZZIO	1	[{"added": {}}]	19	1
+7	2018-02-23 10:39:18.321273-08	7	GIPOSS	1	[{"added": {}}]	19	1
+8	2018-02-23 10:42:19.684565-08	1	Priporočene stopnje izpostavljenosti po SIST EN 206 in SIST 1026	1	[{"added": {}}]	20	1
+9	2018-02-23 10:43:27.216709-08	1	Preglednica N.3 - Stopnje izpostavljenosti	1	[{"added": {}}]	22	1
+10	2018-02-23 10:43:31.961297-08	1	Preglednica N.3 - Stopnje izpostavljenosti	2	[]	22	1
+11	2018-02-23 10:44:08.841141-08	2	Tabela 8 - tlačne trdnosti - normalno težek beton	1	[{"added": {}}]	22	1
+12	2018-02-23 10:44:47.885794-08	3	Tabela 9 - tlačne trdnosti - lahek beton	1	[{"added": {}}]	22	1
+13	2018-02-23 10:45:26.347325-08	4	Tabela 2.1 - Splošne zahteve za neopažene površine	1	[{"added": {}}]	22	1
+14	2018-02-23 10:45:43.918043-08	5	Tabela 2.2 - Splošne zahteve za opažene površine	1	[{"added": {}}]	22	1
+15	2018-02-23 10:45:59.979708-08	6	Tabela 2.3 - Splošne zahteve za opažene površine	1	[{"added": {}}]	22	1
+16	2018-02-23 10:46:22.775898-08	7	Tabela 2.4 - Splošne zahteve za opažene površine	1	[{"added": {}}]	22	1
+17	2018-02-23 10:46:46.083402-08	8	Tabela 2.5 - Splošne zahteve za opažene površine	1	[{"added": {}}]	22	1
+18	2018-02-23 10:47:31.242681-08	9	Tabele 4,5,6,7 konsistenca betona	1	[{"added": {}}]	22	1
+19	2018-02-23 10:48:43.277221-08	10	preglednica N.7 - prodor vode	1	[{"added": {}}]	22	1
+20	2018-02-23 10:49:17.069327-08	11	Tabela preseki betonskih konstrukcij	1	[{"added": {}}]	22	1
+21	2018-02-23 10:51:09.504451-08	1	Betonska dela	1	[{"added": {}}]	13	1
+22	2018-02-23 10:51:23.977289-08	1	Betoniranje	1	[{"added": {}}]	15	1
+23	2018-02-23 10:51:40.461143-08	1	Lastnosti svežega in strjenega betona po SIST EN 206 in SIST 1026	1	[{"added": {}}]	21	1
+24	2018-02-23 10:52:54.691571-08	2	Tehnološko tehnični pogoji za izvajanje betoniranj	1	[{"added": {}}]	21	1
+25	2018-02-23 10:55:22.316035-08	3	Zahteve za vidne betone po SIST EN 13670	1	[{"added": {}}]	21	1
+26	2018-02-23 10:56:46.568545-08	1	Tlačne trdnosti betona po SIST EN 216 in SIST 1026	1	[{"added": {}}]	17	1
+27	2018-02-23 10:58:43.302668-08	2	Stopnje izpostavljenosti po SIST EN 206 in SIST 1026	1	[{"added": {}}]	17	1
+28	2018-02-23 11:01:01.812588-08	12	Zahtevana vsebina specifikacij betona po SIST EN 206 in SIST 1026	1	[{"added": {}}]	22	1
+29	2018-02-23 11:01:19.936566-08	3	Vsebnost kloridov po SIST EN 206	1	[{"added": {}}]	17	1
+30	2018-02-23 11:03:01.528921-08	4	Odpornost na prodor vode po SIST EN 206 in SIST1026	1	[{"added": {}}]	17	1
+31	2018-02-23 11:04:08.508102-08	5	Konsistenca betona po SIST EN 206 in SIST 1026	1	[{"added": {}}]	17	1
+32	2018-02-23 11:05:14.351483-08	6	Preseki betonskih konstrukcij	1	[{"added": {}}]	17	1
+33	2018-02-23 11:06:42.743868-08	7	Zahteve za vidne betone po SIST EN 13670	1	[{"added": {}}]	17	1
+34	2018-02-23 11:07:26.236974-08	3	Izvajanje betonskih konstrukcij po SIST EN 13670  in SIST 13670/A101	2	[{"changed": {"fields": ["tekst"]}}]	21	1
+35	2018-02-23 11:09:39.839497-08	6	Preseki betonskih konstrukcij - GRADBENA PRAKSA	2	[{"changed": {"fields": ["tekst"]}}]	17	1
+36	2018-02-23 11:12:06.330838-08	1	Tlačna trdnost betona	1	[{"added": {}}]	23	1
+37	2018-02-23 11:12:33.99168-08	2	Vsebnost kloridov	1	[{"added": {}}]	23	1
+38	2018-02-23 11:16:21.366559-08	8	Dmax Razredi glede na najvecje zrno agregata	1	[{"added": {}}]	17	1
+39	2018-02-23 11:17:29.392838-08	3	Maksimalno zrno Dmax	1	[{"added": {}}]	23	1
+40	2018-02-23 11:17:50.271708-08	4	Konsistenca	1	[{"added": {}}]	23	1
+41	2018-02-23 11:19:22.654736-08	5	Ni nevarnosti korozije ali agresivnega delovanja	1	[{"added": {}}]	23	1
+42	2018-02-23 11:19:50.934763-08	6	Odpornost na korozijo zaradi karbonatizacije	1	[{"added": {}}]	23	1
+43	2018-02-23 11:20:35.862764-08	7	Odpornost na korozijo zaradi kloridov- morska voda	1	[{"added": {}}]	23	1
+44	2018-02-23 11:21:08.399902-08	8	Odpornost na korozijo zaradi kloridov - drugi kloridi	1	[{"added": {}}]	23	1
+45	2018-02-23 11:21:30.44526-08	9	Odpornost na zmrzovanje-tajanje	1	[{"added": {}}]	23	1
+46	2018-02-23 11:22:01.440834-08	10	Odpornost na kemijsko agresivna okolja	1	[{"added": {}}]	23	1
+47	2018-02-23 11:22:51.097885-08	11	Odpornost proti obrabi površine	1	[{"added": {}}]	23	1
+48	2018-02-23 11:23:25.803454-08	12	Odpornost na prodor vode	1	[{"added": {}}]	23	1
+49	2018-02-23 11:24:06.375231-08	13	Splošne zahteve za zaključene obdelave pri neopaženi površini	1	[{"added": {}}]	23	1
+50	2018-02-23 11:24:48.501959-08	14	Presek betonske konstrukcije	1	[{"added": {}}]	23	1
+51	2018-02-23 11:30:09.531466-08	1	8/10	1	[{"added": {}}]	18	1
+52	2018-02-23 11:30:43.014278-08	2	12/15	1	[{"added": {}}]	18	1
+53	2018-02-23 11:34:35.125251-08	1	8/10	3		18	1
+54	2018-02-23 11:34:42.059669-08	2	12/15	3		18	1
+55	2018-02-23 11:34:58.167779-08	3	8/10	1	[{"added": {}}]	18	1
+56	2018-02-23 11:35:14.123843-08	4	12/15	1	[{"added": {}}]	18	1
+57	2018-02-23 11:35:36.665689-08	5	16/20	1	[{"added": {}}]	18	1
+58	2018-02-23 11:35:55.193752-08	6	20/25	1	[{"added": {}}]	18	1
+59	2018-02-23 11:36:36.584143-08	7	25/30	1	[{"added": {}}]	18	1
+60	2018-02-23 11:41:30.346306-08	8	30/37	1	[{"added": {}}]	18	1
+61	2018-02-23 11:42:07.373853-08	9	35/45	1	[{"added": {}}]	18	1
+62	2018-02-23 11:42:29.741703-08	10	40/50	1	[{"added": {}}]	18	1
+63	2018-02-23 11:44:55.428946-08	11	XC1	1	[{"added": {}}]	18	1
+64	2018-02-23 11:46:19.406741-08	12	XC2	1	[{"added": {}}]	18	1
+65	2018-02-23 11:47:17.332154-08	13	XC3	1	[{"added": {}}]	18	1
+66	2018-02-23 11:47:33.886972-08	14	XC4	1	[{"added": {}}]	18	1
+67	2018-02-23 11:47:59.109276-08	15	XS1	1	[{"added": {}}]	18	1
+68	2018-02-23 11:48:11.796696-08	16	XS2	1	[{"added": {}}]	18	1
+69	2018-02-23 11:48:21.569967-08	17	XS3	1	[{"added": {}}]	18	1
+70	2018-02-23 11:48:56.618288-08	18	XD1	1	[{"added": {}}]	18	1
+71	2018-02-23 11:49:07.916399-08	19	XD2	1	[{"added": {}}]	18	1
+72	2018-02-23 11:49:22.73656-08	20	XD3	1	[{"added": {}}]	18	1
+73	2018-02-23 11:49:50.025896-08	21	XF1	1	[{"added": {}}]	18	1
+74	2018-02-23 11:50:04.633404-08	22	XF2	1	[{"added": {}}]	18	1
+75	2018-02-23 11:50:22.031188-08	23	XF3	1	[{"added": {}}]	18	1
+76	2018-02-23 11:50:34.876584-08	24	XF4	1	[{"added": {}}]	18	1
+77	2018-02-23 11:51:06.346607-08	25	XA1	1	[{"added": {}}]	18	1
+78	2018-02-23 11:51:19.745755-08	26	XA2	1	[{"added": {}}]	18	1
+79	2018-02-23 11:51:29.173609-08	27	XA3	1	[{"added": {}}]	18	1
+80	2018-02-23 11:51:51.966423-08	28	XM1	1	[{"added": {}}]	18	1
+81	2018-02-23 11:52:03.044601-08	29	XM2	1	[{"added": {}}]	18	1
+82	2018-02-23 11:52:16.202576-08	30	XM3	1	[{"added": {}}]	18	1
+83	2018-02-23 11:52:54.234134-08	31	PV-I	1	[{"added": {}}]	18	1
+84	2018-02-23 11:53:06.947061-08	32	PV-II	1	[{"added": {}}]	18	1
+85	2018-02-23 11:53:22.733562-08	33	PV-III	1	[{"added": {}}]	18	1
+86	2018-02-23 11:53:38.115084-08	34	od 0,12 do 0,30 m3/m2,m1	1	[{"added": {}}]	18	1
+87	2018-02-23 11:53:56.234937-08	35	do 0,12 m3/m2,m1	1	[{"added": {}}]	18	1
+88	2018-02-23 11:54:12.858157-08	36	nad 0,30 m3/m2,m1	1	[{"added": {}}]	18	1
+89	2018-02-23 11:54:33.652886-08	37	enostavne obdelave	1	[{"added": {}}]	18	1
+90	2018-02-23 11:55:06.450851-08	38	navadna obdelava	1	[{"added": {}}]	18	1
+91	2018-02-23 11:55:23.740482-08	39	posebna obdelava	1	[{"added": {}}]	18	1
+92	2018-02-23 11:56:00.806974-08	40	XC0	1	[{"added": {}}]	18	1
+93	2018-02-23 11:57:05.323208-08	1	Vgrajevanje betona	1	[{"added": {}}]	14	1
+94	2018-02-23 11:58:48.790853-08	1	dodatni opis	1	[{"added": {}}]	16	1
+95	2018-02-23 11:59:39.132445-08	2	bo	1	[{"added": {}}]	16	1
+96	2018-02-23 13:54:27.284087-08	3	Dmax	2	[{"changed": {"fields": ["tekst"]}}]	23	1
+97	2018-02-23 13:54:43.269173-08	1	Tlačna trdnost	2	[{"changed": {"fields": ["tekst"]}}]	23	1
+98	2018-02-23 13:55:26.090588-08	14	Presek  konstrukcije	2	[{"changed": {"fields": ["tekst"]}}]	23	1
+99	2018-02-23 13:58:37.013506-08	8	Razredi glede na najvecje zrno agregata Dmax	2	[{"changed": {"fields": ["tekst"]}}]	17	1
+100	2018-02-24 06:40:32.841044-08	6	Odpornost na korozijo zaradi karbonatizacije	2	[]	23	1
+101	2018-02-25 04:58:56.36731-08	41	S1	1	[{"added": {}}]	18	1
+102	2018-02-25 04:59:06.72058-08	42	S2	1	[{"added": {}}]	18	1
+103	2018-02-25 04:59:16.077126-08	43	S3	1	[{"added": {}}]	18	1
+104	2018-02-25 04:59:26.75592-08	44	S4	1	[{"added": {}}]	18	1
+105	2018-02-25 04:59:36.850031-08	45	S5	1	[{"added": {}}]	18	1
+106	2018-02-25 05:00:17.1951-08	46	Dmax = 32 mm	1	[{"added": {}}]	18	1
+107	2018-02-25 05:00:33.336338-08	47	Dmax= 16 mm	1	[{"added": {}}]	18	1
+108	2018-02-25 05:00:46.242289-08	48	Dmax = 8 mm	1	[{"added": {}}]	18	1
+109	2018-02-25 05:01:04.633054-08	49	Dmax = 4 m	1	[{"added": {}}]	18	1
+110	2018-02-25 09:30:27.477836-08	9	Splošne zahteve za obdelave pri opaženi površini in razredi vidne površine betona	1	[{"added": {}}]	17	1
+111	2018-02-25 09:30:55.185382-08	15	Zahteve za vidni beton	1	[{"added": {}}]	23	1
+112	2018-02-25 09:36:10.19464-08	50	VB 0	1	[{"added": {}}]	18	1
+113	2018-02-25 09:40:16.843814-08	7	Zahteve za vidne betone po SIST EN 13670	3		17	1
+114	2018-02-25 09:42:32.674784-08	10	Tabela 2.1 - Splošne zahteve za zaključene obdelave pri neopaženi površini	1	[{"added": {}}]	17	1
+115	2018-02-25 09:43:02.562292-08	10	Splošne zahteve za zaključene obdelave pri neopaženi površini	2	[{"changed": {"fields": ["tekst"]}}]	17	1
+116	2018-02-25 09:48:20.894102-08	11	Splošne zahteve za  obdelave pri neopaženi in opaženi površini	1	[{"added": {}}]	17	1
+117	2018-02-25 09:48:48.96707-08	9	Splošne zahteve za obdelave pri opaženi površini in razredi vidne površine betona	3		17	1
+118	2018-02-25 09:49:07.509726-08	10	Splošne zahteve za zaključene obdelave pri neopaženi površini	3		17	1
+119	2018-02-25 09:49:27.270466-08	15	Zahteve za vidni beton	3		23	1
+120	2018-02-25 09:49:49.869197-08	13	Splošne zahteve za zaključene obdelave pri neopaženi površini	2	[{"changed": {"fields": ["podlaga_merila"]}}]	23	1
+121	2018-02-25 09:51:09.542597-08	16	Splošne zahteve za obdelave pri opaženi površini in razredi vidne površine betonaršine	1	[{"added": {}}]	23	1
+122	2018-02-25 09:52:06.705467-08	50	VB 0	2	[{"changed": {"fields": ["merilo"]}}]	18	1
+123	2018-02-25 09:54:19.446175-08	50	Osnovna obdelava  VB 0	2	[{"changed": {"fields": ["tekst"]}}]	18	1
+124	2018-02-25 09:54:26.800873-08	50	Osnovna obdelava  VB 0	2	[]	18	1
+125	2018-02-25 10:16:26.856153-08	51	Navadna obdelava VB 1	1	[{"added": {}}]	18	1
+126	2018-02-25 10:22:06.038799-08	52	Enostavna obdelava VB2	1	[{"added": {}}]	18	1
+127	2018-02-25 10:22:22.411906-08	52	Enostavna obdelava VB2	2	[]	18	1
+128	2018-02-25 10:23:22.51565-08	53	Posebna obdelava VB 3	1	[{"added": {}}]	18	1
+129	2018-02-25 10:27:25.250564-08	8	Tabela 2.5 - Splošne zahteve za opažene površine VB 4	2	[{"changed": {"fields": ["tekst"]}}]	22	1
+130	2018-02-25 10:27:41.003506-08	7	Tabela 2.4 - Splošne zahteve za opažene površine VB 3	2	[{"changed": {"fields": ["tekst"]}}]	22	1
+131	2018-02-25 10:28:02.793633-08	6	Tabela 2.3 - Splošne zahteve za opažene površine VB 1 in VB 2	2	[{"changed": {"fields": ["tekst"]}}]	22	1
+132	2018-02-25 10:28:30.195361-08	6	Tabela 2.3 - Splošne zahteve za opažene površine  VB 2	2	[{"changed": {"fields": ["tekst"]}}]	22	1
+133	2018-02-25 10:28:56.26462-08	5	Tabela 2.2 - Splošne zahteve za opažene površine	2	[]	22	1
+134	2018-02-25 10:29:25.846615-08	5	Tabela 2.2 - Splošne zahteve za opažene površine VB 0 in VB 1	2	[{"changed": {"fields": ["tekst"]}}]	22	1
+135	2018-02-25 11:01:33.265196-08	3	Vsebnost kloridov po SIST EN 206	2	[{"changed": {"fields": ["stevilka"]}}]	17	1
+136	2018-02-25 11:01:49.41906-08	5	Konsistenca betona po SIST EN 206 in SIST 1026	2	[{"changed": {"fields": ["stevilka"]}}]	17	1
+137	2018-02-25 11:02:06.878143-08	8	Razredi glede na najvecje zrno agregata Dmax	2	[{"changed": {"fields": ["stevilka"]}}]	17	1
+138	2018-02-25 11:02:22.384876-08	2	Stopnje izpostavljenosti po SIST EN 206 in SIST 1026	2	[{"changed": {"fields": ["stevilka"]}}]	17	1
+139	2018-02-25 11:02:46.108544-08	4	Odpornost na prodor vode po SIST EN 206 in SIST1026	2	[{"changed": {"fields": ["stevilka"]}}]	17	1
+140	2018-02-25 11:03:04.367047-08	6	Preseki betonskih konstrukcij - GRADBENA PRAKSA	2	[{"changed": {"fields": ["stevilka"]}}]	17	1
+141	2018-02-25 11:03:18.614835-08	11	Splošne zahteve za  obdelave pri neopaženi in opaženi površini	2	[{"changed": {"fields": ["stevilka"]}}]	17	1
+142	2018-02-26 06:43:00.356179-08	17	Pogoji za izvajanje betonskih del	1	[{"added": {}}]	23	1
+143	2018-02-26 06:43:05.669949-08	54	Določilo za izvajanje betonskih del	1	[{"added": {}}]	18	1
+144	2018-02-26 06:45:42.232729-08	17	Pogoji za izvajanje betonskih del	3		23	1
+145	2018-02-26 08:25:08.184744-08	8	Tehnologija betona	1	[{"added": {}}]	19	1
+146	2018-02-26 08:35:27.855485-08	8	TEHNOLOGIJA BETONA - Drago Saje	2	[{"changed": {"fields": ["tekst"]}}]	19	1
+147	2018-02-26 10:41:26.673933-08	8	TEHNOLOGIJA BETONA - Teorija	2	[{"changed": {"fields": ["tekst", "zvrst", "datoteka"]}}]	19	1
+148	2018-02-26 10:43:17.173128-08	7	Preseki betonskih konstrukcij	2	[{"changed": {"fields": ["tekst", "image"]}}]	19	1
+149	2018-02-26 10:47:11.221437-08	9	Preglednica N.3 - Stopnje izpostavljenosti	1	[{"added": {}}]	19	1
+150	2018-02-26 10:49:21.126461-08	9	Preglednica N.3 - Stopnje izpostavljenosti	2	[{"changed": {"fields": ["naslov"]}}]	19	1
+151	2018-02-26 10:51:15.016583-08	10	Preglednica N.7 - prodor vode	1	[{"added": {}}]	19	1
+152	2018-02-26 12:18:48.351368-08	1	Preseki betonskih konstrukcij	1	[{"added": {}}]	22	1
+153	2018-02-26 12:19:08.026648-08	2	Preglednica N.3 - Stopnje izpostavljenosti	1	[{"added": {}}]	22	1
+154	2018-02-26 12:19:35.815297-08	3	Preglednica N.7 - prodor vode	1	[{"added": {}}]	22	1
+155	2018-02-26 12:23:30.928415-08	4	Preglednica N.5 zahtevane lastnosti betona	1	[{"added": {}}]	22	1
+156	2018-02-26 12:23:54.604969-08	5	Preseki betonskih konstrukcij	1	[{"added": {}}]	22	1
+157	2018-02-26 12:25:00.141968-08	1	Beonska dela dločila	2	[{"changed": {"fields": ["tekst"]}}]	22	1
+158	2018-02-26 12:25:12.960432-08	1	Betonska dela dločila	2	[{"changed": {"fields": ["tekst"]}}]	22	1
+159	2018-02-26 12:26:03.115345-08	6	Tabela 2.1 - Splošne zahteve za neopažene površine	1	[{"added": {}}]	22	1
+160	2018-02-26 12:26:16.607227-08	7	Tabela 2.2 - Splošne zahteve za opažene površine	1	[{"added": {}}]	22	1
+192	2018-02-26 12:31:35.905451-08	39	Tabela 2.3 - Splošne zahteve za opažene površine	1	[{"added": {}}]	22	1
+193	2018-02-26 12:32:01.179652-08	40	Tabela 2.4 - Splošne zahteve za opažene površine	1	[{"added": {}}]	22	1
+194	2018-02-26 12:32:23.975005-08	41	Tabela 2.5 - Splošne zahteve za opažene površine	1	[{"added": {}}]	22	1
+195	2018-02-26 12:32:49.174946-08	42	Tabela 8 - tlačne trdnosti - normalno težek beton	1	[{"added": {}}]	22	1
+196	2018-02-26 12:33:16.917588-08	43	Tabela 8 - tlačne trdnosti - normalno težek beton	1	[{"added": {}}]	22	1
+197	2018-02-26 12:34:07.36987-08	44	Tabela 9 - tlačne trdnosti - lahek beton	1	[{"added": {}}]	22	1
+198	2018-02-26 12:35:09.677998-08	45	Tabela 4 - Stopnje poseda	1	[{"added": {}}]	22	1
+199	2018-02-26 12:37:03.737451-08	46	Tabela 5,6,7 Stopnje zgoščenosti, Vebe in razleza	1	[{"added": {}}]	22	1
+200	2018-02-26 12:38:20.100403-08	47	Tabela - klasifikacija konsistence betona	1	[{"added": {}}]	22	1
+201	2018-02-26 12:39:04.3132-08	48	Tabela - Vsebina specifikacije  betona	1	[{"added": {}}]	22	1
+202	2018-02-26 12:40:12.980878-08	1	Priporočene stopnje izpostavljenosti po SIST EN 206 in SIST 1026	1	[{"added": {}}]	20	1
+203	2018-02-26 12:40:50.288804-08	2	Tehnologija betona - Teorija	1	[{"added": {}}]	20	1
+204	2018-02-26 12:42:19.856516-08	10	Preglednica N.7 - prodor vode	2	[{"changed": {"fields": ["image"]}}]	19	1
+205	2018-02-26 12:42:35.881837-08	9	Preglednica N.3 - Stopnje izpostavljenosti	2	[{"changed": {"fields": ["image"]}}]	19	1
+206	2018-02-26 12:43:20.874489-08	8	TEHNOLOGIJA BETONA - Teorija	2	[{"changed": {"fields": ["datoteka"]}}]	19	1
+207	2018-02-26 12:43:37.432521-08	7	Preseki betonskih konstrukcij	2	[{"changed": {"fields": ["image"]}}]	19	1
+208	2018-02-26 12:44:43.607628-08	6	Določila Fabrizzio	2	[{"changed": {"fields": ["tekst", "image"]}}]	19	1
+209	2018-02-26 12:46:40.145675-08	11	Tabela 2.1 - Splošne zahteve za neopažene površine	1	[{"added": {}}]	19	1
+210	2018-02-26 12:47:34.635134-08	12	Splošne zahteve za opažene površine	1	[{"added": {}}]	19	1
+211	2018-02-26 12:49:02.055405-08	13	Tlačne trdnosti	1	[{"added": {}}]	19	1
+212	2018-02-26 12:52:56.924685-08	6	Preseki betonskih konstrukcij - GRADBENA PRAKSA	2	[{"changed": {"fields": ["dokumentacija"]}}]	17	1
+213	2018-02-26 12:53:22.330764-08	2	Stopnje izpostavljenosti po SIST EN 206 in SIST 1026	2	[{"changed": {"fields": ["dokumentacija"]}}]	17	1
+214	2018-02-26 12:53:44.418119-08	4	Odpornost na prodor vode po SIST EN 206 in SIST1026	2	[{"changed": {"fields": ["dokumentacija"]}}]	17	1
+215	2018-02-26 12:54:49.122848-08	11	Splošne zahteve za  obdelave pri neopaženi in opaženi površini	2	[{"changed": {"fields": ["dokumentacija"]}}]	17	1
+216	2018-02-27 07:37:02.274472-08	2	Splošni tehnološko tehnični pogoji za izvajanje betoniranj	2	[{"changed": {"fields": ["tekst"]}}]	21	1
+217	2018-02-28 12:41:07.196148-08	12	Betoniranje v neugodnih vremenskih razmerahvremenu	1	[{"added": {}}]	17	1
+218	2018-02-28 12:41:51.824321-08	12	Pogoji za betoniranje v neugodnih vremenskih razmerahvremenu	2	[{"changed": {"fields": ["tekst"]}}]	17	1
+219	2018-02-28 12:42:14.421138-08	12	Pogoji za betoniranje v neugodnih vremenskih razmerah	2	[{"changed": {"fields": ["tekst"]}}]	17	1
+220	2018-02-28 12:45:51.799126-08	12	Določila pri izvajanju betoniranj	2	[{"changed": {"fields": ["tekst"]}}]	17	1
+221	2018-02-28 12:47:25.102381-08	12	Določila pri izvajanju betoniranj	2	[]	17	1
+222	2018-02-28 12:48:02.56454-08	12	Zakonska določila pri izvajanju betoniranj	2	[{"changed": {"fields": ["tekst"]}}]	17	1
+223	2018-02-28 12:50:08.697675-08	13	Pogodbena določila za izvajanje betoniranj	1	[{"added": {}}]	17	1
+224	2018-02-28 12:51:50.125615-08	18	Izvajanje del v različnih vremenskih pogojih	1	[{"added": {}}]	23	1
+225	2018-02-28 12:52:45.134801-08	18	Določila za izvajanje del v različnih vremenskih pogojih	2	[{"changed": {"fields": ["tekst"]}}]	23	1
+226	2018-02-28 13:03:49.714625-08	4	Zahteve DIN 206, ki jih mora upoštevati izvajalec del	1	[{"added": {}}]	21	1
+227	2018-02-28 13:04:51.07451-08	4	Izvajanje betonskih konstrukcij glede na zahteve DIN 206	2	[{"changed": {"fields": ["tekst"]}}]	21	1
+228	2018-02-28 13:07:23.868727-08	12	Zakonska določila pri izvajanju betoniranj glede na SIST EN 13670	2	[{"changed": {"fields": ["tekst"]}}]	17	1
+229	2018-02-28 13:11:15.863994-08	4	Zakonska določila za izvajanje betonskih konstrukcij	2	[{"changed": {"fields": ["tekst", "podrocje"]}}]	21	1
+230	2018-02-28 13:14:04.103766-08	55	Določila glede Temperature betona	1	[{"added": {}}]	18	1
+231	2018-02-28 13:15:11.851156-08	55	Določila glede Temperature betona	2	[{"changed": {"fields": ["tekst_za_popis"]}}]	18	1
+232	2018-02-28 13:50:08.037803-08	55	Temperature betona - pogoji	2	[{"changed": {"fields": ["tekst"]}}]	18	1
+233	2018-02-28 13:55:15.140699-08	14	določila za izvajanje betoniranj	1	[{"added": {}}]	17	1
+234	2018-03-15 07:18:39.580573-07	5	predmet podlage merila za izvajanje betonerskih del	1	[{"added": {}}]	21	1
+235	2018-03-15 07:18:43.902741-07	15	podlaga določila za betonerska dela	1	[{"added": {}}]	17	1
+236	2018-03-15 07:18:46.216399-07	19	predmet betonerskih del	1	[{"added": {}}]	23	1
+237	2018-03-15 07:18:48.974141-07	56	določilo1	1	[{"added": {}}]	18	1
+238	2018-03-15 07:27:08.938169-07	13	Splošna določila za izvajanje betoniranj - gradbena praksa	2	[{"changed": {"fields": ["tekst"]}}]	17	1
+239	2018-03-15 07:28:04.619278-07	19	predmet betonerskih del	2	[{"changed": {"fields": ["podlaga_merila"]}}]	23	1
+240	2018-03-15 07:29:03.97982-07	14	določila za izvajanje betoniranj	3		17	1
+241	2018-03-15 07:29:20.759066-07	15	podlaga določila za betonerska dela	3		17	1
+242	2018-03-15 09:06:33.895242-07	19	Vsebina predmeta v okviru  dela betoniranje	2	[{"changed": {"fields": ["tekst"]}}]	23	1
+243	2018-03-15 09:27:32.283445-07	10	40/50	2	[{"changed": {"fields": ["tip"]}}]	18	1
+244	2018-03-15 09:27:36.610858-07	9	35/45	2	[{"changed": {"fields": ["tip"]}}]	18	1
+245	2018-03-15 09:27:40.309344-07	8	30/37	2	[{"changed": {"fields": ["tip"]}}]	18	1
+246	2018-03-15 09:27:44.684411-07	7	25/30	2	[{"changed": {"fields": ["tip"]}}]	18	1
+247	2018-03-15 09:27:49.756718-07	6	20/25	2	[{"changed": {"fields": ["tip"]}}]	18	1
+248	2018-03-15 09:27:54.401333-07	5	16/20	2	[{"changed": {"fields": ["tip"]}}]	18	1
+249	2018-03-15 09:27:59.258911-07	4	12/15	2	[{"changed": {"fields": ["tip"]}}]	18	1
+250	2018-03-15 09:28:03.632017-07	3	8/10	2	[{"changed": {"fields": ["tip"]}}]	18	1
+251	2018-03-15 09:28:07.681073-07	45	S5	2	[{"changed": {"fields": ["tip"]}}]	18	1
+252	2018-03-15 09:28:11.952843-07	44	S4	2	[{"changed": {"fields": ["tip"]}}]	18	1
+253	2018-03-15 09:28:15.726992-07	43	S3	2	[{"changed": {"fields": ["tip"]}}]	18	1
+254	2018-03-15 09:28:19.509855-07	42	S2	2	[{"changed": {"fields": ["tip"]}}]	18	1
+255	2018-03-15 09:28:23.639316-07	41	S1	2	[{"changed": {"fields": ["tip"]}}]	18	1
+256	2018-03-15 09:28:27.73997-07	49	Dmax = 4 m	2	[{"changed": {"fields": ["tip"]}}]	18	1
+257	2018-03-15 09:28:35.75429-07	48	Dmax = 8 mm	2	[{"changed": {"fields": ["tip"]}}]	18	1
+258	2018-03-15 09:28:40.567029-07	47	Dmax= 16 mm	2	[{"changed": {"fields": ["tip"]}}]	18	1
+259	2018-03-15 09:28:44.142239-07	46	Dmax = 32 mm	2	[{"changed": {"fields": ["tip"]}}]	18	1
+260	2018-03-15 09:28:48.311359-07	40	XC0	2	[{"changed": {"fields": ["tip"]}}]	18	1
+261	2018-03-15 09:28:52.604345-07	30	XM3	2	[{"changed": {"fields": ["tip"]}}]	18	1
+262	2018-03-15 09:28:56.373763-07	29	XM2	2	[{"changed": {"fields": ["tip"]}}]	18	1
+263	2018-03-15 09:29:07.765012-07	28	XM1	2	[{"changed": {"fields": ["tip"]}}]	18	1
+264	2018-03-15 09:29:12.617989-07	27	XA3	2	[{"changed": {"fields": ["tip"]}}]	18	1
+265	2018-03-15 09:29:17.496034-07	25	XA1	2	[{"changed": {"fields": ["tip"]}}]	18	1
+266	2018-03-15 09:29:22.735959-07	26	XA2	2	[{"changed": {"fields": ["tip"]}}]	18	1
+267	2018-03-15 09:29:28.749415-07	25	XA1	2	[]	18	1
+268	2018-03-15 09:29:35.455971-07	24	XF4	2	[{"changed": {"fields": ["tip"]}}]	18	1
+269	2018-03-15 09:29:43.369603-07	23	XF3	2	[{"changed": {"fields": ["tip"]}}]	18	1
+270	2018-03-15 09:29:52.200021-07	22	XF2	2	[{"changed": {"fields": ["tip"]}}]	18	1
+271	2018-03-15 09:30:00.094602-07	21	XF1	2	[{"changed": {"fields": ["tip"]}}]	18	1
+272	2018-03-15 09:31:08.657054-07	54	Določilo za izvajanje betonskih del	2	[{"changed": {"fields": ["tip", "merilo"]}}]	18	1
+273	2018-03-15 09:31:29.755777-07	56	določilo1	2	[{"changed": {"fields": ["tip"]}}]	18	1
+274	2018-03-15 09:32:18.768653-07	54	Določilo za izvajanje betonskih del	2	[{"changed": {"fields": ["merilo"]}}]	18	1
+275	2018-03-15 15:11:31.778806-07	18	XD1	2	[{"changed": {"fields": ["tip"]}}]	18	1
+276	2018-03-15 15:12:05.393646-07	19	XD2	2	[{"changed": {"fields": ["tip"]}}]	18	1
+277	2018-03-15 15:12:17.285533-07	20	XD3	2	[{"changed": {"fields": ["tip"]}}]	18	1
+278	2018-03-15 15:12:28.983877-07	33	PV-III	2	[{"changed": {"fields": ["tip"]}}]	18	1
+279	2018-03-15 15:12:40.277477-07	32	PV-II	2	[{"changed": {"fields": ["tip"]}}]	18	1
+280	2018-03-15 15:12:50.411585-07	31	PV-I	2	[{"changed": {"fields": ["tip"]}}]	18	1
+281	2018-03-15 15:13:00.814416-07	36	nad 0,30 m3/m2,m1	2	[{"changed": {"fields": ["tip"]}}]	18	1
+282	2018-03-15 15:13:11.570227-07	35	do 0,12 m3/m2,m1	2	[{"changed": {"fields": ["tip"]}}]	18	1
+283	2018-03-15 15:13:23.974094-07	34	od 0,12 do 0,30 m3/m2,m1	2	[{"changed": {"fields": ["tip"]}}]	18	1
+284	2018-03-15 15:13:37.160961-07	53	Posebna obdelava VB 3	2	[{"changed": {"fields": ["tip"]}}]	18	1
+285	2018-03-15 15:13:46.862609-07	52	Enostavna obdelava VB2	2	[{"changed": {"fields": ["tip"]}}]	18	1
+286	2018-03-15 15:13:56.440032-07	51	Navadna obdelava VB 1	2	[{"changed": {"fields": ["tip"]}}]	18	1
+287	2018-03-15 15:14:09.979152-07	50	Osnovna obdelava  VB 0	2	[{"changed": {"fields": ["tip"]}}]	18	1
+288	2018-03-15 15:14:18.548613-07	39	posebna obdelava	2	[{"changed": {"fields": ["tip"]}}]	18	1
+289	2018-03-15 15:14:28.442818-07	38	navadna obdelava	2	[{"changed": {"fields": ["tip"]}}]	18	1
+290	2018-03-15 15:14:39.029767-07	37	enostavne obdelave	2	[{"changed": {"fields": ["tip"]}}]	18	1
+291	2018-03-15 15:15:16.716461-07	11	XC1	2	[{"changed": {"fields": ["tip"]}}]	18	1
+292	2018-03-15 15:15:26.777352-07	12	XC2	2	[{"changed": {"fields": ["tip"]}}]	18	1
+293	2018-03-15 15:15:35.109982-07	13	XC3	2	[{"changed": {"fields": ["tip"]}}]	18	1
+294	2018-03-15 15:15:42.8022-07	14	XC4	2	[{"changed": {"fields": ["tip"]}}]	18	1
+295	2018-03-15 15:15:50.607256-07	15	XS1	2	[{"changed": {"fields": ["tip"]}}]	18	1
+296	2018-03-15 15:16:00.277873-07	16	XS2	2	[{"changed": {"fields": ["tip"]}}]	18	1
+297	2018-03-15 15:16:13.16335-07	17	XS3	2	[{"changed": {"fields": ["tip"]}}]	18	1
+298	2018-03-15 15:16:59.658809-07	55	Temperature betona - pogoji	2	[{"changed": {"fields": ["tip"]}}]	18	1
+299	2018-03-15 16:07:10.72587-07	56	določilo1	2	[]	18	1
+300	2018-03-16 08:57:57.341128-07	56	določilo1	2	[{"changed": {"fields": ["tekst_za_popis"]}}]	18	1
+301	2018-03-16 08:58:27.358837-07	56	določilo1	2	[{"changed": {"fields": ["tekst_za_popis"]}}]	18	1
+302	2018-03-16 09:00:11.955783-07	56	Predmet betonerskih del	2	[{"changed": {"fields": ["tekst"]}}]	18	1
+303	2018-03-16 09:04:48.11317-07	54	Temperatura sveže betonske mešanice :	2	[{"changed": {"fields": ["tekst"]}}]	18	1
+304	2018-03-16 09:05:03.528387-07	55	Temperature betona - pogoji	3		18	1
+305	2018-03-16 10:30:53.396344-07	54	Temperatura svežega betona v času dostave na kraj vgrajevanja betonske mešanice :	2	[{"changed": {"fields": ["tekst", "tekst_za_popis"]}}]	18	1
+306	2018-03-16 10:36:25.70586-07	18	Izvajanje del v različnih vremenskih pogojih	2	[{"changed": {"fields": ["tekst"]}}]	23	1
+307	2018-03-16 10:39:21.166431-07	3	Lastnosti svežega in strjenega betona po SIST EN 206 in SIST 1026	2	[{"changed": {"fields": ["tekst"]}}]	21	1
+308	2018-03-16 10:40:15.883514-07	12	Zahteve za beton po SIST 1026 . Poglavje 5	2	[{"changed": {"fields": ["tekst"]}}]	17	1
+309	2018-03-16 10:44:57.084054-07	54	Temperatura svežega betona v času dostave na kraj vgrajevanja betonske mešanice :	2	[]	18	1
+310	2018-03-16 10:48:43.420667-07	16	Zahteve za beton po SIST 1026 . Poglavje 7	1	[{"added": {}}]	17	1
+311	2018-03-16 10:48:51.191752-07	20	Dodelava sveže betonske mešanice na gradbišču	1	[{"added": {}}]	23	1
+312	2018-03-16 10:52:24.572811-07	57	Dodajanje superplastifikatorjev in drugih dodatkov na gradbišču	1	[{"added": {}}]	18	1
+313	2018-03-16 10:58:40.509496-07	20	Dodelava sveže betonske mešanice na gradbišču	2	[]	23	1
+314	2018-03-16 10:59:00.40022-07	57	Dodajanje superplastifikatorjev in drugih dodatkov na gradbišču	2	[{"changed": {"fields": ["tekst_za_popis"]}}]	18	1
+315	2018-03-16 11:02:07.822862-07	21	Prevoz betona	1	[{"added": {}}]	23	1
+316	2018-03-16 11:42:46.51262-07	58	Prevoz betona	1	[{"added": {}}]	18	1
+317	2018-03-16 11:51:45.664664-07	1	Betonarska dela	2	[{"changed": {"fields": ["tekst"]}}]	15	1
+318	2018-03-16 11:59:55.146984-07	17	Specifikacija betona (projekt betona)	1	[{"added": {}}]	17	1
+319	2018-03-16 12:00:45.079061-07	22	Dokumentacija - Specifika betona	1	[{"added": {}}]	23	1
+320	2018-03-16 12:16:34.252045-07	59	Specifikacija betona po točki 6. SIST EN 206	1	[{"added": {}}]	18	1
+321	2018-03-16 12:17:18.967763-07	56	Predmet betonarskih del	2	[{"changed": {"fields": ["tekst"]}}]	18	1
+322	2018-03-16 12:17:53.484996-07	59	Dokumentacija - Specifikacija betona po točki 6. SIST EN 206	2	[{"changed": {"fields": ["tekst"]}}]	18	1
+323	2018-03-16 13:26:25.804173-07	59	Dokumentacija - Specifikacija betona po točki 6. SIST EN 206	2	[{"changed": {"fields": ["tip"]}}]	18	1
+324	2018-03-16 22:45:46.033798-07	1	Lastnosti svežega in strjenega betona po SIST EN 206 in SIST 1026	3		21	1
+325	2018-03-16 22:46:27.592558-07	1	Tlačne trdnosti betona po SIST EN 216 in SIST 1026	2	[{"changed": {"fields": ["predmet_merila"]}}]	17	1
+326	2018-03-16 22:46:39.94919-07	2	Stopnje izpostavljenosti po SIST EN 206 in SIST 1026	2	[{"changed": {"fields": ["predmet_merila"]}}]	17	1
+327	2018-03-16 22:46:52.219771-07	3	Vsebnost kloridov po SIST EN 206	2	[{"changed": {"fields": ["predmet_merila"]}}]	17	1
+328	2018-03-16 22:47:05.295666-07	4	Odpornost na prodor vode po SIST EN 206 in SIST1026	2	[{"changed": {"fields": ["predmet_merila"]}}]	17	1
+329	2018-03-16 22:47:19.3194-07	5	Konsistenca betona po SIST EN 206 in SIST 1026	2	[{"changed": {"fields": ["predmet_merila"]}}]	17	1
+330	2018-03-16 22:47:28.542425-07	6	Preseki betonskih konstrukcij - GRADBENA PRAKSA	2	[]	17	1
+331	2018-03-16 22:47:46.008432-07	8	Razredi glede na najvecje zrno agregata Dmax	2	[{"changed": {"fields": ["predmet_merila"]}}]	17	1
+332	2018-03-16 22:48:39.141139-07	6	Izvajanje betonskih konstrukcij po SIST EN 13670  in SIST 13670/A101	1	[{"added": {}}]	21	1
+333	2018-03-16 22:48:44.966515-07	11	Splošne zahteve za  obdelave pri neopaženi in opaženi površini	2	[{"changed": {"fields": ["predmet_merila"]}}]	17	1
+334	2018-03-16 22:49:04.239468-07	12	Zahteve za beton po SIST 1026 . Poglavje 5	2	[]	17	1
+335	2018-03-16 22:49:17.225965-07	13	Splošna določila za izvajanje betoniranj - gradbena praksa	2	[]	17	1
+336	2018-03-16 22:49:46.490673-07	16	Zahteve za beton po SIST 1026 . Poglavje 7	2	[{"changed": {"fields": ["predmet_merila"]}}]	17	1
+337	2018-03-16 22:49:55.978561-07	12	Zahteve za beton po SIST 1026 . Poglavje 5	2	[]	17	1
+338	2018-03-16 22:50:05.514122-07	17	Specifikacija betona (projekt betona)	2	[]	17	1
+339	2018-03-16 22:51:47.404789-07	16	Zahteve za beton po SIST 1026 . Poglavje 7	2	[]	17	1
+340	2018-03-16 22:52:02.379721-07	12	Zahteve za beton po SIST 1026 . Poglavje 5	2	[]	17	1
+341	2018-03-17 02:57:28.03638-07	17	Specifikacija betona (projekt betona)	2	[]	17	1
+342	2018-03-17 02:57:30.497834-07	22	Dokumentacija - Specifika betona	2	[]	23	1
+343	2018-03-17 02:57:33.493911-07	59	Dokumentacija - Specifikacija betona po točki 6. SIST EN 206	2	[]	18	1
+344	2018-03-17 02:58:46.170388-07	12	Zahteve za beton po SIST 1026 . Poglavje 5	2	[{"changed": {"fields": ["dokumentacija"]}}]	17	1
+345	2018-03-17 02:58:48.319663-07	18	Izvajanje del v različnih vremenskih pogojih	2	[]	23	1
+346	2018-03-17 02:58:51.355351-07	54	Temperatura svežega betona v času dostave na kraj vgrajevanja betonske mešanice :	2	[]	18	1
+347	2018-03-17 02:59:25.342619-07	16	Zahteve za beton po SIST 1026 . Poglavje 7	2	[{"changed": {"fields": ["dokumentacija"]}}]	17	1
+348	2018-03-17 02:59:27.327101-07	20	Dodelava sveže betonske mešanice na gradbišču	2	[]	23	1
+349	2018-03-17 02:59:29.413384-07	57	Dodajanje superplastifikatorjev in drugih dodatkov na gradbišču	2	[]	18	1
+\.
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('django_admin_log_id_seq', 349, true);
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY django_content_type (id, app_label, model) FROM stdin;
+1	auth	group
+2	auth	permission
+3	contenttypes	contenttype
+4	sessions	session
+5	sites	site
+6	admin	logentry
+7	account	emailconfirmation
+8	account	emailaddress
+9	socialaccount	socialtoken
+10	socialaccount	socialaccount
+11	socialaccount	socialapp
+12	users	user
+13	popisi	vrstadel
+14	popisi	postavka
+15	popisi	dela
+16	popisi	popisnapostavka
+17	podrobnosti	podlagamerila
+18	podrobnosti	podrobnost
+19	podrobnosti	dokumentacija
+20	podrobnosti	datoteka
+21	podrobnosti	predmetmerila
+22	podrobnosti	slika
+23	podrobnosti	merilo
+\.
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('django_content_type_id_seq', 23, true);
+
+
+--
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY django_migrations (id, app, name, applied) FROM stdin;
+1	contenttypes	0001_initial	2018-02-23 10:22:47.126814-08
+2	contenttypes	0002_remove_content_type_name	2018-02-23 10:22:47.139994-08
+3	auth	0001_initial	2018-02-23 10:22:47.185469-08
+4	auth	0002_alter_permission_name_max_length	2018-02-23 10:22:47.196265-08
+5	auth	0003_alter_user_email_max_length	2018-02-23 10:22:47.208677-08
+6	auth	0004_alter_user_username_opts	2018-02-23 10:22:47.220461-08
+7	auth	0005_alter_user_last_login_null	2018-02-23 10:22:47.231803-08
+8	auth	0006_require_contenttypes_0002	2018-02-23 10:22:47.234342-08
+9	auth	0007_alter_validators_add_error_messages	2018-02-23 10:22:47.244342-08
+10	auth	0008_alter_user_username_max_length	2018-02-23 10:22:47.254982-08
+11	users	0001_initial	2018-02-23 10:22:47.297871-08
+12	account	0001_initial	2018-02-23 10:22:47.352258-08
+13	account	0002_email_max_length	2018-02-23 10:22:47.378244-08
+14	admin	0001_initial	2018-02-23 10:22:47.409045-08
+15	admin	0002_logentry_remove_auto_add	2018-02-23 10:22:47.423761-08
+16	podrobnosti	0001_initial	2018-02-23 10:22:47.469818-08
+17	popisi	0001_initial	2018-02-23 10:22:47.602488-08
+18	podrobnosti	0002_auto_20180223_1822	2018-02-23 10:22:47.758317-08
+19	sessions	0001_initial	2018-02-23 10:22:47.772009-08
+20	sites	0001_initial	2018-02-23 10:22:47.780435-08
+21	sites	0002_alter_domain_unique	2018-02-23 10:22:47.792585-08
+22	sites	0003_set_site_domain_and_name	2018-02-23 10:22:47.833411-08
+23	socialaccount	0001_initial	2018-02-23 10:22:47.977071-08
+24	socialaccount	0002_token_max_lengths	2018-02-23 10:22:48.026454-08
+25	socialaccount	0003_extra_data_default_dict	2018-02-23 10:22:48.041686-08
+26	popisi	0002_auto_20180226_1832	2018-02-26 10:32:50.186935-08
+27	podrobnosti	0003_auto_20180226_1832	2018-02-26 10:32:50.29694-08
+28	podrobnosti	0004_auto_20180226_2000	2018-02-26 12:00:48.461272-08
+29	podrobnosti	0005_podrobnost_tip	2018-03-15 09:26:29.493345-07
+\.
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('django_migrations_id_seq', 29, true);
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY django_session (session_key, session_data, expire_date) FROM stdin;
+aboq2g3gps6piykxykojry6otjljhayq	ODBlZjhlNTkxZGNiODNmNzVkNjcwODNlMjdjYjAwZjEyODhjMWNmMTp7Il9hdXRoX3VzZXJfaGFzaCI6IjE1OTA5ZGQwNTUzYzdhOTUxNTk5MzlkNTU1NTM5ZjVmMDkxM2YwYjUiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2018-03-09 10:25:05.977058-08
+xchbnxgwg04vna3ytmfb9y1gjnk2zoo1	ZDhlNmFlM2NlYmM3YThjZDA2NDEzYzU3MjVjODgxMmY3MTY5NTU0Yzp7Il9hdXRoX3VzZXJfaGFzaCI6IjE1OTA5ZGQwNTUzYzdhOTUxNTk5MzlkNTU1NTM5ZjVmMDkxM2YwYjUiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=	2018-03-26 05:20:05.463949-07
+\.
+
+
+--
+-- Data for Name: django_site; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY django_site (id, domain, name) FROM stdin;
+1	example.com	bcs
+\.
+
+
+--
+-- Name: django_site_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('django_site_id_seq', 1, false);
+
+
+--
+-- Data for Name: podrobnosti_datoteka; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY podrobnosti_datoteka (id, stevilka, tekst, datoteka) FROM stdin;
+1	1	Priporočene stopnje izpostavljenosti po SIST EN 206 in SIST 1026	Priporočene_stopnje_izpostavljenosti_po_SIST_EN_1026_R21tcQ1.pdf
+2	2	Tehnologija betona - Teorija	Tehnologija_betona_TEORIJA_Vxp1N58.pdf
+\.
+
+
+--
+-- Name: podrobnosti_datoteka_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('podrobnosti_datoteka_id_seq', 2, true);
+
+
+--
+-- Data for Name: podrobnosti_dokumentacija; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY podrobnosti_dokumentacija (id, stevilka, tekst, naslov, zvrst, komentar) FROM stdin;
+1	1	SIST 1026:2016	Beton - Specifikacija, lastnosti, proizvodnja in skladnost - Pravila za uporabo SIST EN 206	STANDARD	Ta slovenski nacionalni standard vsebuje pravila, ki se uporabljajo v povezavi s standardom SIST EN 206:2013, Beton – Specifikacija, lastnosti, proizvodnja in skladnost, kjer ta to zahteva ali dovoljuje. V njem se: – uveljavljajo razlike v zaščitni ravni, izhajajoče iz podnebnih in geografskih razmer, – navajajo predpisi, veljavni v Republiki Sloveniji, če SIST EN 206 predlaga uporabo predpisov, veljavnih v kraju uporabe betona, – določajo manjkajoči postopki preskušanja in merila skladnosti za nekatere lastnosti betona, – dajejo navodila za izpolnitev nekaterih zahtev ali določil standarda SIST EN 206, – ohranja veljava nekaterih tradicionalnih zahtev in določil za proizvodnjo betona. Vsebina tega standarda je vezana na poglavja SIST EN 206:2013. Številčenje točk v tem standardu je prevzeto iz SIST EN 206:2013, nato pa sledita navodilo o spremembi oziroma dopolnitvi v poševnem tisku in besedilo, ki ga je treba na navedenem mestu dodati ali dopolniti. Navodilo o spremembi oziroma dopolnitvi SIST EN 206:2013 Besedilo, ki ga je treba na navedenem mestu dodati ali dopolniti. Ta slovenski nacionalni standard vključuje dopolnitve dodatkov od A do F iz standarda SIST EN 206:2013, ki so v tem standardu označeni s črkami od A do F, ter dodatke k temu nacionalnemu standardu, ki so označeni kot dodatki od NA do NF.
+2	2	SIST EN 206:2013	Beton - Specifikacija, lastnosti, proizvodnja in skladnost	STANDARD	Ta evropski standard velja za beton za konstrukcije, betonirane na mestu uporabe, za montažne konstrukcije ter za montažne konstrukcijske izdelke za stavbe in inženirske konstrukcije. (2) Beton po tem evropskem standardu je lahko: – normalno težek, težek in lahek, – proizveden na gradbišču, transportni beton ali proizveden v obratu za montažne betonske izdelke, – zgoščen ali samozgoščevalni beton, ki ne vsebuje znatnih količin zajetega zraka, razen namerno vnesenega zraka. (3) Ta standard predpisuje zahteve za: – osnovne materiale za beton, – lastnosti svežega in strjenega betona ter njihovo preverjanje, – omejitve za sestavo betona, – specifikacijo betona, – dostavo svežega betona, – postopke kontrole proizvodnje, – merila skladnosti in vrednotenje skladnosti. (4) Drugi evropski standardi za specifične proizvode, npr. montažne izdelke, ali za postopke s področja tega standarda lahko zahtevajo ali dovoljujejo odstopanja od tega standarda. (5) V drugih evropskih standardih so lahko podane dodatne ali drugačne zahteve za specifično uporabo, na primer: – za beton za ceste in druge prometne površine (npr. betonska vozišča po EN 13877-1), – za posebne tehnologije (npr. brizgani beton, skladen z EN 14487). (6) Dodatne zahteve ali drugačne preskusne metode so lahko specificirane za posebne tipe betonov in namen uporabe, na primer: – beton za masivne konstrukcije (npr. pregrade), – suhe betonske mešanice, – beton z Dmax 4 mm ali manj (malta), – samozgoščevalne betone (SCC), ki vsebujejo lahki ali težki agregat ali vlakna, – beton z odprto strukturo (npr. porozne betone za dreniranje). (7) Ta standard ne velja za: – avtoklavirani celičast beton, – penobeton, – beton z gostoto pod 800 kg/m3, – ognjevzdržni beton. (8) Ta standard ne obravnava zdravstvenih in varnostnih zahtev za zaščito delavcev med proizvodnjo in dostavo betona.
+3	3	SIST EN 13670:2010/A101:2010	Izvajanje betonskih konstrukcij - Nacionalni dodatek	STANDARD	Ta evropski standard vsebuje splošne zahteve za izvajanje betonskih konstrukcij. (2) Ta standard predpostavlja, da bodo vse posebne zahteve, ki so pomembne za določeno konstrukcijo, navedene v izvedbeni specifikaciji. (3) Ta standard velja za stalne in tudi za začasne betonske konstrukcije. (4) V izvedbeni specifikaciji naj se upoštevajo in na zahtevo podajo dodatne ali različne zahteve, če se uporabijo: a) beton z lahkim agregatom, b) drugi materiali (na primer vlakna) ali osnovni materiali za beton, c) posebne tehnologije/inovativne zasnove. (5) Ta standard ne velja za betonske elemente, ki se pri izvajanju del uporabljajo samo kot oprema ali gradbeni pripomoček. (6) Ta standard ne obravnava specifikacije, proizvodnje in skladnosti betona. (7) Ta standard ne velja za proizvodnjo montažnih betonskih elementov, ki so izdelani v skladu s standardi za proizvod. (8) Ta standard ne obravnava varnostnih in zdravstvenih vidikov izvajanja del ali zahtev tretje stranke glede varnosti. (9) Ta standard ne obravnava pogodbenih zadev ali odgovornosti za ugotovljena dejanja. OPOMBA: V skladu z zasnovo tega standarda so lahko dopolnilne zahteve, in sicer za posamezni projekt v izvedbeni specifikaciji, podane na nacionalni ravni v nacionalnem dodatku, splošno veljavne pa v evropskih standardih za posebne namene, na primer v standardih za specialna geotehnična dela.
+4	4	SIST EN 13670:2010	Izvajanje betonskih konstrukcij	STANDARD	Ta evropski standard podaja skupne zahteve za izvajanje betonskih konstrukcij in velja za dela in situ ter za gradnjo z uporabo montažnih betonskih elementov. (2) Ta standard pričakuje, da specifikacija izvajanja navaja vse specifične zahteve, pomembne za določeno konstrukcijo. (3) Ta standard velja za stalne in začasne betonske konstrukcije. (4) Preučiti je treba dodatne ali drugačne zahteve in jih po potrebi navesti v specifikaciji izvajanja, kadar se uporabljajo: a) lahki agregati za beton, b) drugi materiali (npr. vlakna) ali sestavni materiali, c) posebne tehnologije/inovativne zasnove. (5) Ta standard ne velja za betonske elemente, ki se uporabljajo le kot oprema ali gradbena pomoč pri izvajanju. (6) Ta standard ne zajema specifikacije, proizvodnje in skladnosti betona. (7) Ta standard ne velja za proizvodnjo montažnih betonskih elementov, narejenih v skladu s standardi za proizvode. (8) Ta standard ne zajema varnostnih in zdravstvenih vidikov izvajanja ali varnostnih zahtev tretje strani. (9) Ta standard ne zajema pogodbenih vprašanj ali odgovornosti za opredeljene ukrepe.
+5	5	SIST – TP CEN TR 15739	Tehnična smernica- CEN/TR 15739:2008 Precast concrete products - Concrete finishes - Identification	STANDARD	Precast concrete products - Concrete finishes - Identification
+12	1	Splošne zahteve za opažene površine		STANDARD	brez
+13	\N	Tlačne trdnosti		STANDARD	brez
+10	1	Preglednica N.7 - prodor vode	Izvleček iz standarda SIST EN 206:2013 in SIST 1026:2016	STANDARD	Brez
+9	1	Preglednica N.3 - Stopnje izpostavljenosti	Izvleček iz standarda SIST EN 206:2013 in SIST 1026:2016	STANDARD	Brez
+8	8	TEHNOLOGIJA BETONA - Teorija	TEHNOLOGIJA BETONA \r\nDrago Saje PREDAVANJA \r\nLjubljana, 2015	ZNANOST	Ni ravno gradbena praksa
+7	7	Preseki betonskih konstrukcij	GNG GRADBENE NORME Gipos	PRAKSA	Leto izdaje 1997
+6	6	Določila Fabrizzio	STANDARDIZIRANI OPISI DEL - VISOKE GRADNJE	PRAKSA	Prvi standardizirani popisi pripravljeni za računalniško obdelavo. Leto 1969
+11	1	Tabela 2.1 - Splošne zahteve za neopažene površine		STANDARD	brez
+\.
+
+
+--
+-- Data for Name: podrobnosti_dokumentacija_datoteka; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY podrobnosti_dokumentacija_datoteka (id, dokumentacija_id, datoteka_id) FROM stdin;
+1	8	2
+\.
+
+
+--
+-- Name: podrobnosti_dokumentacija_datoteka_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('podrobnosti_dokumentacija_datoteka_id_seq', 1, true);
+
+
+--
+-- Name: podrobnosti_dokumentacija_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('podrobnosti_dokumentacija_id_seq', 13, true);
+
+
+--
+-- Data for Name: podrobnosti_dokumentacija_image; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY podrobnosti_dokumentacija_image (id, dokumentacija_id, slika_id) FROM stdin;
+1	10	3
+2	9	2
+3	7	5
+4	6	1
+5	11	6
+6	12	40
+7	12	41
+8	12	39
+9	12	7
+10	13	43
+11	13	44
+\.
+
+
+--
+-- Name: podrobnosti_dokumentacija_image_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('podrobnosti_dokumentacija_image_id_seq', 11, true);
+
+
+--
+-- Data for Name: podrobnosti_merilo; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY podrobnosti_merilo (id, stevilka, tekst, podlaga_merila_id) FROM stdin;
+2	2	Vsebnost kloridov	3
+4	4	Konsistenca	5
+5	5	Ni nevarnosti korozije ali agresivnega delovanja	2
+7	7	Odpornost na korozijo zaradi kloridov- morska voda	2
+8	8	Odpornost na korozijo zaradi kloridov - drugi kloridi	2
+9	9	Odpornost na zmrzovanje-tajanje	2
+10	10	Odpornost na kemijsko agresivna okolja	2
+11	11	Odpornost proti obrabi površine	2
+12	12	Odpornost na prodor vode	4
+3	3	Dmax	8
+1	1	Tlačna trdnost	1
+14	14	Presek  konstrukcije	6
+6	6	Odpornost na korozijo zaradi karbonatizacije	2
+13	13	Splošne zahteve za zaključene obdelave pri neopaženi površini	11
+16	2	Splošne zahteve za obdelave pri opaženi površini in razredi vidne površine betonaršine	11
+19	150	Vsebina predmeta v okviru  dela betoniranje	13
+21	\N	Prevoz betona	16
+22	\N	Dokumentacija - Specifika betona	17
+18	1	Izvajanje del v različnih vremenskih pogojih	12
+20	111	Dodelava sveže betonske mešanice na gradbišču	16
+\.
+
+
+--
+-- Name: podrobnosti_merilo_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('podrobnosti_merilo_id_seq', 22, true);
+
+
+--
+-- Data for Name: podrobnosti_podlagamerila; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY podrobnosti_podlagamerila (id, stevilka, tekst, izhodisce, komentar, predmet_merila_id) FROM stdin;
+17	\N	Specifikacija betona (projekt betona)	ZAKON	brez	3
+12	100	Zahteve za beton po SIST 1026 . Poglavje 5	ZAKON	Najprej je treba obdelati, kar je zahtevano z zakonom	3
+16	200	Zahteve za beton po SIST 1026 . Poglavje 7	ZAKON	brez	3
+1	1	Tlačne trdnosti betona po SIST EN 216 in SIST 1026	ZAKON	Brez	3
+2	5	Stopnje izpostavljenosti po SIST EN 206 in SIST 1026	ZAKON	Brez	3
+3	2	Vsebnost kloridov po SIST EN 206	ZAKON	Brez	3
+4	7	Odpornost na prodor vode po SIST EN 206 in SIST1026	ZAKON	Brez	3
+5	3	Konsistenca betona po SIST EN 206 in SIST 1026	ZAKON	Brez	3
+6	8	Preseki betonskih konstrukcij - GRADBENA PRAKSA	ZAKON	Brez	2
+8	4	Razredi glede na najvecje zrno agregata Dmax	ZAKON	Za razvršcanje betona glede na najvecjo zrno agregata je treba uporabiti zgornjo nazivno velikost najbolj\r\ngrobe frakcije v betonu (Dmax).	3
+11	9	Splošne zahteve za  obdelave pri neopaženi in opaženi površini	ZAKON	Brez	6
+13	102	Splošna določila za izvajanje betoniranj - gradbena praksa	ZDRUZENJA	Pogodbena ni pravi izraz , ker gre za priporočilo.	2
+\.
+
+
+--
+-- Data for Name: podrobnosti_podlagamerila_dokumentacija; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY podrobnosti_podlagamerila_dokumentacija (id, podlagamerila_id, dokumentacija_id) FROM stdin;
+1	1	1
+2	1	2
+5	3	1
+6	3	2
+9	5	1
+10	5	2
+12	6	7
+16	8	1
+17	8	2
+24	2	9
+25	4	10
+26	11	11
+27	11	12
+29	12	2
+30	16	2
+\.
+
+
+--
+-- Name: podrobnosti_podlagamerila_dokumentacija_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('podrobnosti_podlagamerila_dokumentacija_id_seq', 30, true);
+
+
+--
+-- Name: podrobnosti_podlagamerila_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('podrobnosti_podlagamerila_id_seq', 17, true);
+
+
+--
+-- Data for Name: podrobnosti_podrobnost; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY podrobnosti_podrobnost (id, stevilka, tekst, tekst_za_popis, merilo_id, tip) FROM stdin;
+10	8	40/50	,	1	POPIS
+9	7	35/45	,	1	POPIS
+8	6	30/37	,	1	POPIS
+7	5	25/30	,	1	POPIS
+6	4	20/25	,	1	POPIS
+5	3	16/20	,	1	POPIS
+4	2	12/15	,	1	POPIS
+3	1	8/10	,	1	POPIS
+45	5	S5		4	POPIS
+44	4	S4		4	POPIS
+43	3	S3		4	POPIS
+42	2	S2		4	POPIS
+41	1	S1		4	POPIS
+49	4	Dmax = 4 m		3	POPIS
+48	3	Dmax = 8 mm		3	POPIS
+47	2	Dmax= 16 mm		3	POPIS
+46	1	Dmax = 32 mm		3	POPIS
+40	6	XC0		5	POPIS
+30	17	XM3		11	POPIS
+29	16	XM2		11	POPIS
+28	15	XM1		11	POPIS
+27	14	XA3		10	POPIS
+26	13	XA2		10	POPIS
+25	12	XA1		10	POPIS
+24	11	XF4		9	POPIS
+23	10	XF3		9	POPIS
+22	9	XF2		9	POPIS
+21	8	XF1		9	POPIS
+18	5	XD1		8	POPIS
+19	6	XD2		8	POPIS
+20	7	XD3		8	POPIS
+33	3	PV-III		12	POPIS
+32	2	PV-II		12	POPIS
+31	1	PV-I		12	POPIS
+36	3	nad 0,30 m3/m2,m1		14	POPIS
+35	2	do 0,12 m3/m2,m1		14	POPIS
+34	1	od 0,12 do 0,30 m3/m2,m1		14	POPIS
+53	4	Posebna obdelava VB 3		16	POPIS
+52	3	Enostavna obdelava VB2	Splošne ali posebne zahteve :\r\nBrez segregacije, krušenja robov ali izcedkov. Izvedena poravnava z letvijo , zaribana oziroma zglajena zgornja - odprta ploskev . \r\nBrez večjih zračnih luknjic. Opazovalec je najmanj na 5 m od površine betona.\r\nBarvno odstopanje ni pomembno C(2).\r\nZračne luknjice in tekstura po T(2), največja še dovoljena površina zračnega mehurčka 1,5 cm2 (premer luknjice 13,8 mm) in globina 3mm, površina z zračnimi mehurčki lahko zavzame le 3 % celotne vidne površine elementa ; površina , kjer je koncentracija večja od 2%, ne sme predstavljati več kot 10 % vidne površine elementa.\r\nRavnost po kriteriju P(2) oziroma največ 3 mmpod ravnilom dolžine 200 mm oziroma 8 mm pod 2-m letvijo.\r\nZahteve C(2),T(2) in P(2)so povzete po SIST - TP CEN/TR 15739\r\nPovršine se lahko še fino brusijo kot dodaten zahtevek pri barvanju arhitektonsko obdelanih površin.\r\n\r\nUporaba: \r\nČe je vizualni učinek pomemben, npr ploskve, ki se priložnostno vidijo in neposredno barvane arhitektonsko obdelane površine	16	POPIS
+51	2	Navadna obdelava VB 1	Splošne ali posebne zahteve :\r\nBrez segregacije, krušenja robov ali izcedkov. Izvedena poravnava z letvijo , zaribana oziroma zglajena zgornja - odprta ploskev . \r\nBrez večjih zračnih luknjic. Opazovalec je najmanj na 10 m od površine betona.\r\nBarvno odstopanje ni pomembno C(1).\r\nZračne luknjice in tekstura po T(1), največja še dovoljena površina zračnega mehurčka 3,0 cm2 (premer luknjice 19,58 mm) in globina 6mm, površina z zračnimi mehurčki lahko zavzame le 5 % celotne vidne površine elementa ; površina , kjer je koncentracija večja od 5%, ne sme predstavljati več kot 15 % vidne površine elementa.\r\nRavnost po kriteriju P(1) oziroma največ 6 mm pod ravnilom dolžine 200 mm oziroma 15 mm pod 2-m letvijo.\r\nZahteve C(1) in P(2) so povzete po SIST - TP CEN/TR 15739, zahteva T(1) pa je pripravljena kot ustrezno zmanjšana T(2)\r\n\r\nUporaba: \r\nČe videz ni pomemben ali , če je predvidena obdelava z nanosom , npr. ometane ploskve ali nevidne površine kot so notranjost vodov ali jaškov za dvigala.	16	POPIS
+50	1	Osnovna obdelava  VB 0	Splošne ali posebne zahteve :\r\nBrez segregacije, krušenja robov ali izcedkov. Izvedena poravnava z letvijo , zaribana oziroma zglajena zgornja - odprta ploskev . Beton brez zahtev za vidno površino.\r\nUporaba: \r\nČe ni potrebna nobena posebna zahteva, npr. temelji.	16	POPIS
+39	3	posebna obdelava		13	POPIS
+38	2	navadna obdelava		13	POPIS
+37	1	enostavne obdelave		13	POPIS
+11	1	XC1	/	6	POPIS
+12	2	XC2		6	POPIS
+13	3	XC3		6	POPIS
+14	4	XC4		6	POPIS
+15	5	XS1		7	POPIS
+16	6	XS2		7	POPIS
+17	\N	XS3		7	POPIS
+54	\N	Temperatura svežega betona v času dostave na kraj vgrajevanja betonske mešanice :	Temperatura svežega betona v času dostave na kraj vgrajevanja ne sme biti :\r\n- nižja od +5 st. C, če je temperatura zraka nad -3 st C\r\n- nižja od +10 st. C, če je temperatura zraka pod -3 st. C\r\n- višja od + 30 st. C\r\n\r\n\r\n\r\nBetonska dela je potrebno izvajati v času, ko temperatura ozračja na mestu vgrajevanja betona ne\t\r\npade pod 5°C in ne preseže 30°C v brez\tveterju. Drugače so pri vgradnji betona potrebni posebni\t\r\nukrepi.\t\r\nPri transportu in vgradnji betona morajo vsa zrna v plastični mešanici ostati enakomerno\t\r\nrazporejena, brez pojava usedanja večjih in težjih zrn\t\r\nagregata ter prekomernega izcejanja vode.\t\r\nZrak vgrajen v beton zmanjšuje pojav usedanja agregata in izcejanja vode.\t\r\nBeton pripravljamo kar se da blizu mesta vgradnje ali pa ga tja pripeljemo v ustreznih mešalcih.	18	DOLOCILO
+56	150	Predmet betonarskih del	- čiščenje in močenje opažev neposredno pred pričetkom betoniranja;\t\t\t\r\n - čiščenje betonskega železa od blata, maščob in rje, ki se lušči, postavljanje podložk in začasno vezanje armature k opažu;\t\t\t\r\n - manjša popravila opažev pri betoniranju;\t\t\t\r\n - vmetavanje betona v opaže in premeščanje lijaka med betoniranjem;\t\t\t\r\n - čiščenje prostorov in delovnih naprav po dovršenem delu;\t\t\t\r\n - zaščita in močenje betona;\t\t\t\r\n - vsi potrebni transportni in drugi odri za potrebe betoniranja so zajeti v enotni ceni betona.\t\t\t\r\n - naprava in odstranitev opažev, podpor, potrebnih pri vgrajevanju betona niso zapopadeni v standardih za betonska dela. Ta dela se obračunavajo pri tesarskih delih.\t\t\t\r\n - dela in ukrepe po določilih veljavnih predpisov varstva pri delu;	19	DOLOCILO
+57	\N	Dodajanje superplastifikatorjev in drugih dodatkov na gradbišču	Če se na gradbišču v skladu s predvidenim tehnološkim postopkom ali zaradi uravnavanja konsistence dodaja superplastifikator, je treba v dobavnico vpisati naslednje podatke :\r\n- čas dodajanja superplastifikatorja\r\n- ocenjeno količino betona v mešalniku\r\n- dodano vrsto in količino superplastifikatorja,\r\n- konsistenco betona , določeno pred dodajanjem in po njem\r\n- pri aeriranih betonih : vsebnost zraka po dodajanju\r\nSuperplastifikator, ki se dodaja na gradbišču, mora biti združljiv z že vsebovanimi kemijskimi dodatki in ga mora odobriti proizvajalec betona.\r\nDodajanje superplastifikatorja na gradbišču mora nadzorovati oseba , odgovorna za kontrolo proizvodnje betona. Količino superplastifikatorja , ki se dodaja , je treba na ustrezen način meriti. skupna količina vsebovanega dodatka ne sme presegati največje količine, ki jo predpisuje proizvajalec dodatka.Če se za transport uporabljajo vozila z agitatorjem, je treba potrebni čas premešanja betona v agitatorju določiti s predhodnim poskusom.	20	DOLOCILO
+58	\N	Prevoz betona	Svež beton je treba prevažati v avtomešalnikih ali na vozilih z agitatorjem.Neposredno pred vgraditvijo ga je treba še enkrat premešati. Z običajnimi prekucniki se sme prevažati le beton s čvrsto konsistenco (S1, V0 , C0, F1).\r\nČe s projektom  betona ni določeno drugače, je treba avtomešalnik popolnoma izprazniti najpozneje 90 minut po prvem stiku cementa z vodo v betonarni, prevozna sredstva brez agitatorja za prevoz betona s čvrsto konsistenco pa najpozneje po 45minutah.\r\nKadar sta temperaturi zraka in betona pod 15 st. C, je treba avtomešalnik izprazniti najpozneje po 120 minutah, prevozno sredstvo brez agitatorja pa v 90 minutah.	21	DOLOCILO
+59	\N	Dokumentacija - Specifikacija betona po točki 6. SIST EN 206	Izdajatelj specifikacije betona mora zagotoviti, da vsebuje proizvajalcu predana specifikacija vse pomembne zahteve za lastnosti betona. izdajatelj specifikacije mora predpisati tudi vse zahteve za tiste lastnosti betona , ki so potrebne za njegov transport po dostavi , vgrajevanje , zgoščevanje , nego in nadaljno obdelavo. Če je potrebno mora specifikacija vsebovati vse posebne zahteve (npr. arhitektonsko obdelavo površine). \r\nizdajatelj specifikacije mora upoštevati : \r\n- uporabo svežega in strjenega betona\r\n- pogoje negovanja\r\n- dimenzije konstrukcije(razvijanje hidratacijske toplote)\r\n- vplive okolja katerim bo konstrukcija izpostavljena,\r\n- morebitne zahteve za prosti agregat na površini, ali za obdelane površine.\r\n- morebitne zahteve v zvezi z zaščitnim slojem nad armaturo ali minimalno dimenzijo prereza.npr. nazivno velikost največjega zrna.\r\n- morebitne  omejitve glede uporabe osnovnih materialov z ogotovljeno primernostjo npr zaradi stopnje izpostavljenosti.	22	DOLOCILO
+\.
+
+
+--
+-- Name: podrobnosti_podrobnost_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('podrobnosti_podrobnost_id_seq', 59, true);
+
+
+--
+-- Data for Name: podrobnosti_predmetmerila; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY podrobnosti_predmetmerila (id, stevilka, tekst, podrocje, dela_id) FROM stdin;
+2	3	Splošni tehnološko tehnični pogoji za izvajanje betoniranj	PROCES	1
+4	4	Zakonska določila za izvajanje betonskih konstrukcij	PROCES	1
+5	150	predmet podlage merila za izvajanje betonerskih del	MATERIAL	1
+3	2	Lastnosti svežega in strjenega betona po SIST EN 206 in SIST 1026	IZDELEK	1
+6	\N	Izvajanje betonskih konstrukcij po SIST EN 13670  in SIST 13670/A101	PROCES	1
+\.
+
+
+--
+-- Name: podrobnosti_predmetmerila_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('podrobnosti_predmetmerila_id_seq', 6, true);
+
+
+--
+-- Data for Name: podrobnosti_slika; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY podrobnosti_slika (id, stevilka, tekst, image) FROM stdin;
+2	2	Preglednica N.3 - Stopnje izpostavljenosti	preglednica_N.3_lftKXQ9.jpg
+3	3	Preglednica N.7 - prodor vode	Preglednica_N.7_YC5DaJJ.jpg
+4	4	Preglednica N.5 zahtevane lastnosti betona	Prelednica_N.5._Zahtevane_posebne_lastnosti_strjenega_betona_za_posamezne_stopnje.jpg
+5	5	Preseki betonskih konstrukcij	presek_betonskih_konstrukcij_7ubIUF3.jpg
+1	1	Betonska dela dločila	betonska_dela_določila_qi0Roq4.jpg
+6	6	Tabela 2.1 - Splošne zahteve za neopažene površine	tabela_2.1_RJi1H0z.jpg
+7	7	Tabela 2.2 - Splošne zahteve za opažene površine	Tabela_2.2_tgaASTh.jpg
+39	8	Tabela 2.3 - Splošne zahteve za opažene površine	tabela_2.3_x7cFsXy.jpg
+40	9	Tabela 2.4 - Splošne zahteve za opažene površine	tabela_2.4_uDgxFSc.jpg
+41	10	Tabela 2.5 - Splošne zahteve za opažene površine	tabela_2.5_IkuGKEe.jpg
+42	11	Tabela 8 - tlačne trdnosti - normalno težek beton	Tabela_8._razredi_tlačne_trdnosti_za_normalno_težek_in_težek_beton_jtFE48n.jpg
+43	11	Tabela 8 - tlačne trdnosti - normalno težek beton	Tabela_8._razredi_tlačne_trdnosti_za_normalno_težek_in_težek_beton_8GuIXpa.jpg
+44	12	Tabela 9 - tlačne trdnosti - lahek beton	Tabela_9._Razredi_tlačne_trdnosti_za_lahek_beton_d4M598s.jpg
+45	13	Tabela 4 - Stopnje poseda	Tabela4._Stopnje_poseda.jpg
+46	14	Tabela 5,6,7 Stopnje zgoščenosti, Vebe in razleza	Tabela567_Stopnje_zgoščenosti_Vebe_in_razleza.jpg
+47	15	Tabela - klasifikacija konsistence betona	Tabele_za_klasifikacijo_konsistence_betona_EEWP1SM.jpg
+48	16	Tabela - Vsebina specifikacije  betona	vsebina_specifikacije_betona_5GIQpiS.jpg
+\.
+
+
+--
+-- Name: podrobnosti_slika_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('podrobnosti_slika_id_seq', 48, true);
+
+
+--
+-- Data for Name: popisi_dela; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY popisi_dela (id, stevilka, tekst, nivo, predmet, osnovni_materiali, osnove_za_izvedbo, nacin_izvedbe, kakovost_izvedenih_del, preverjanje_kakovosti_izvedenih_del, merjenje_prevzem_obracun, vrsta_del_id) FROM stdin;
+1	1	Betonarska dela	NIZEK								1
+\.
+
+
+--
+-- Data for Name: popisi_dela_dokumentacija; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY popisi_dela_dokumentacija (id, dela_id, dokumentacija_id) FROM stdin;
+\.
+
+
+--
+-- Name: popisi_dela_dokumentacija_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('popisi_dela_dokumentacija_id_seq', 1, false);
+
+
+--
+-- Name: popisi_dela_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('popisi_dela_id_seq', 1, true);
+
+
+--
+-- Data for Name: popisi_popisnapostavka; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY popisi_popisnapostavka (id, stevilka, tekst, postavka_id) FROM stdin;
+1	1	dodatni opis	1
+2	2	bo	1
+\.
+
+
+--
+-- Name: popisi_popisnapostavka_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('popisi_popisnapostavka_id_seq', 2, true);
+
+
+--
+-- Data for Name: popisi_popisnapostavka_podrobnost; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY popisi_popisnapostavka_podrobnost (id, popisnapostavka_id, podrobnost_id) FROM stdin;
+1	1	16
+2	1	35
+3	1	38
+4	1	22
+5	1	8
+6	1	12
+7	1	31
+8	2	33
+9	2	36
+10	2	37
+11	2	10
+12	2	14
+13	2	20
+14	2	21
+15	2	30
+\.
+
+
+--
+-- Name: popisi_popisnapostavka_podrobnost_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('popisi_popisnapostavka_podrobnost_id_seq', 15, true);
+
+
+--
+-- Data for Name: popisi_postavka; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY popisi_postavka (id, stevilka, tekst, enota_mere, dela_id) FROM stdin;
+1	1	Vgrajevanje betona	m3	1
+\.
+
+
+--
+-- Name: popisi_postavka_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('popisi_postavka_id_seq', 1, true);
+
+
+--
+-- Data for Name: popisi_vrstadel; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY popisi_vrstadel (id, stevilka, tekst, skupina_del) FROM stdin;
+1	2	Betonska dela	GRADBENA
+\.
+
+
+--
+-- Name: popisi_vrstadel_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('popisi_vrstadel_id_seq', 1, true);
+
+
+--
+-- Data for Name: socialaccount_socialaccount; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY socialaccount_socialaccount (id, provider, uid, last_login, date_joined, extra_data, user_id) FROM stdin;
+\.
+
+
+--
+-- Name: socialaccount_socialaccount_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('socialaccount_socialaccount_id_seq', 1, false);
+
+
+--
+-- Data for Name: socialaccount_socialapp; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY socialaccount_socialapp (id, provider, name, client_id, secret, key) FROM stdin;
+\.
+
+
+--
+-- Name: socialaccount_socialapp_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('socialaccount_socialapp_id_seq', 1, false);
+
+
+--
+-- Data for Name: socialaccount_socialapp_sites; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY socialaccount_socialapp_sites (id, socialapp_id, site_id) FROM stdin;
+\.
+
+
+--
+-- Name: socialaccount_socialapp_sites_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('socialaccount_socialapp_sites_id_seq', 1, false);
+
+
+--
+-- Data for Name: socialaccount_socialtoken; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY socialaccount_socialtoken (id, token, token_secret, expires_at, account_id, app_id) FROM stdin;
+\.
+
+
+--
+-- Name: socialaccount_socialtoken_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('socialaccount_socialtoken_id_seq', 1, false);
+
+
+--
+-- Data for Name: users_user; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY users_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined, name) FROM stdin;
+1	argon2$argon2i$v=19$m=512,t=2,p=2$SHU0a2Y3ZmtKalM2$uPhNuokdToorGsTUUxjStA	2018-03-12 05:20:05.454375-07	t	pavlovicr			rados.pavlovic@gmail.com	t	t	2018-02-23 10:24:01.302015-08	
+\.
+
+
+--
+-- Data for Name: users_user_groups; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY users_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Name: users_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('users_user_groups_id_seq', 1, false);
+
+
+--
+-- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('users_user_id_seq', 1, true);
+
+
+--
+-- Data for Name: users_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: pavlovicr
+--
+
+COPY users_user_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Name: users_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
+--
+
+SELECT pg_catalog.setval('users_user_user_permissions_id_seq', 1, false);
+
+
+--
+-- Name: account_emailaddress_email_key; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY account_emailaddress
+    ADD CONSTRAINT account_emailaddress_email_key UNIQUE (email);
+
+
+--
+-- Name: account_emailaddress_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY account_emailaddress
+    ADD CONSTRAINT account_emailaddress_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: account_emailconfirmation_key_key; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY account_emailconfirmation
+    ADD CONSTRAINT account_emailconfirmation_key_key UNIQUE (key);
+
+
+--
+-- Name: account_emailconfirmation_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY account_emailconfirmation
+    ADD CONSTRAINT account_emailconfirmation_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions_group_id_permission_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_0cd325b0_uniq UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission_content_type_id_codename_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_01ab375a_uniq UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type_app_label_model_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_app_label_model_76bd3d3b_uniq UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: django_site_domain_a2e37b91_uniq; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY django_site
+    ADD CONSTRAINT django_site_domain_a2e37b91_uniq UNIQUE (domain);
+
+
+--
+-- Name: django_site_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY django_site
+    ADD CONSTRAINT django_site_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: podrobnosti_datoteka_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_datoteka
+    ADD CONSTRAINT podrobnosti_datoteka_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: podrobnosti_dokumentacij_dokumentacija_id_datotek_8f7fe895_uniq; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_dokumentacija_datoteka
+    ADD CONSTRAINT podrobnosti_dokumentacij_dokumentacija_id_datotek_8f7fe895_uniq UNIQUE (dokumentacija_id, datoteka_id);
+
+
+--
+-- Name: podrobnosti_dokumentacij_dokumentacija_id_slika_i_22348971_uniq; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_dokumentacija_image
+    ADD CONSTRAINT podrobnosti_dokumentacij_dokumentacija_id_slika_i_22348971_uniq UNIQUE (dokumentacija_id, slika_id);
+
+
+--
+-- Name: podrobnosti_dokumentacija_datoteka_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_dokumentacija_datoteka
+    ADD CONSTRAINT podrobnosti_dokumentacija_datoteka_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: podrobnosti_dokumentacija_image_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_dokumentacija_image
+    ADD CONSTRAINT podrobnosti_dokumentacija_image_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: podrobnosti_dokumentacija_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_dokumentacija
+    ADD CONSTRAINT podrobnosti_dokumentacija_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: podrobnosti_merilo_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_merilo
+    ADD CONSTRAINT podrobnosti_merilo_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: podrobnosti_podlagameril_podlagamerila_id_dokumen_d5e499e7_uniq; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_podlagamerila_dokumentacija
+    ADD CONSTRAINT podrobnosti_podlagameril_podlagamerila_id_dokumen_d5e499e7_uniq UNIQUE (podlagamerila_id, dokumentacija_id);
+
+
+--
+-- Name: podrobnosti_podlagamerila_dokumentacija_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_podlagamerila_dokumentacija
+    ADD CONSTRAINT podrobnosti_podlagamerila_dokumentacija_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: podrobnosti_podlagamerila_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_podlagamerila
+    ADD CONSTRAINT podrobnosti_podlagamerila_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: podrobnosti_podrobnost_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_podrobnost
+    ADD CONSTRAINT podrobnosti_podrobnost_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: podrobnosti_predmetmerila_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_predmetmerila
+    ADD CONSTRAINT podrobnosti_predmetmerila_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: podrobnosti_slika_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_slika
+    ADD CONSTRAINT podrobnosti_slika_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: popisi_dela_dokumentacij_dela_id_dokumentacija_id_25703e14_uniq; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY popisi_dela_dokumentacija
+    ADD CONSTRAINT popisi_dela_dokumentacij_dela_id_dokumentacija_id_25703e14_uniq UNIQUE (dela_id, dokumentacija_id);
+
+
+--
+-- Name: popisi_dela_dokumentacija_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY popisi_dela_dokumentacija
+    ADD CONSTRAINT popisi_dela_dokumentacija_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: popisi_dela_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY popisi_dela
+    ADD CONSTRAINT popisi_dela_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: popisi_popisnapostavka_p_popisnapostavka_id_podro_07403ac4_uniq; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY popisi_popisnapostavka_podrobnost
+    ADD CONSTRAINT popisi_popisnapostavka_p_popisnapostavka_id_podro_07403ac4_uniq UNIQUE (popisnapostavka_id, podrobnost_id);
+
+
+--
+-- Name: popisi_popisnapostavka_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY popisi_popisnapostavka
+    ADD CONSTRAINT popisi_popisnapostavka_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: popisi_popisnapostavka_podrobnost_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY popisi_popisnapostavka_podrobnost
+    ADD CONSTRAINT popisi_popisnapostavka_podrobnost_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: popisi_postavka_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY popisi_postavka
+    ADD CONSTRAINT popisi_postavka_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: popisi_vrstadel_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY popisi_vrstadel
+    ADD CONSTRAINT popisi_vrstadel_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: socialaccount_socialaccount_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY socialaccount_socialaccount
+    ADD CONSTRAINT socialaccount_socialaccount_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: socialaccount_socialaccount_provider_uid_fc810c6e_uniq; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY socialaccount_socialaccount
+    ADD CONSTRAINT socialaccount_socialaccount_provider_uid_fc810c6e_uniq UNIQUE (provider, uid);
+
+
+--
+-- Name: socialaccount_socialapp__socialapp_id_site_id_71a9a768_uniq; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY socialaccount_socialapp_sites
+    ADD CONSTRAINT socialaccount_socialapp__socialapp_id_site_id_71a9a768_uniq UNIQUE (socialapp_id, site_id);
+
+
+--
+-- Name: socialaccount_socialapp_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY socialaccount_socialapp
+    ADD CONSTRAINT socialaccount_socialapp_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: socialaccount_socialapp_sites_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY socialaccount_socialapp_sites
+    ADD CONSTRAINT socialaccount_socialapp_sites_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: socialaccount_socialtoken_app_id_account_id_fca4e0ac_uniq; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY socialaccount_socialtoken
+    ADD CONSTRAINT socialaccount_socialtoken_app_id_account_id_fca4e0ac_uniq UNIQUE (app_id, account_id);
+
+
+--
+-- Name: socialaccount_socialtoken_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY socialaccount_socialtoken
+    ADD CONSTRAINT socialaccount_socialtoken_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY users_user_groups
+    ADD CONSTRAINT users_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_user_groups_user_id_group_id_b88eab82_uniq; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY users_user_groups
+    ADD CONSTRAINT users_user_groups_user_id_group_id_b88eab82_uniq UNIQUE (user_id, group_id);
+
+
+--
+-- Name: users_user_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY users_user
+    ADD CONSTRAINT users_user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY users_user_user_permissions
+    ADD CONSTRAINT users_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_user_user_permissions_user_id_permission_id_43338c45_uniq; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY users_user_user_permissions
+    ADD CONSTRAINT users_user_user_permissions_user_id_permission_id_43338c45_uniq UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: users_user_username_key; Type: CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY users_user
+    ADD CONSTRAINT users_user_username_key UNIQUE (username);
+
+
+--
+-- Name: account_emailaddress_email_03be32b2_like; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX account_emailaddress_email_03be32b2_like ON account_emailaddress USING btree (email varchar_pattern_ops);
+
+
+--
+-- Name: account_emailaddress_user_id_2c513194; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX account_emailaddress_user_id_2c513194 ON account_emailaddress USING btree (user_id);
+
+
+--
+-- Name: account_emailconfirmation_email_address_id_5b7f8c58; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX account_emailconfirmation_email_address_id_5b7f8c58 ON account_emailconfirmation USING btree (email_address_id);
+
+
+--
+-- Name: account_emailconfirmation_key_f43612bd_like; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX account_emailconfirmation_key_f43612bd_like ON account_emailconfirmation USING btree (key varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX auth_group_name_a6ea08ec_like ON auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_group_id_b120cbf9; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX auth_group_permissions_group_id_b120cbf9 ON auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id_84c5c92e; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX auth_group_permissions_permission_id_84c5c92e ON auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_content_type_id_2f476e4b; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX auth_permission_content_type_id_2f476e4b ON auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_content_type_id_c4bce8eb; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX django_admin_log_content_type_id_c4bce8eb ON django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_user_id_c564eba6; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX django_admin_log_user_id_c564eba6 ON django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_session_expire_date_a5c62663; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX django_session_expire_date_a5c62663 ON django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX django_session_session_key_c0390e0f_like ON django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- Name: django_site_domain_a2e37b91_like; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX django_site_domain_a2e37b91_like ON django_site USING btree (domain varchar_pattern_ops);
+
+
+--
+-- Name: podrobnosti_dokumentacija_datoteka_datoteka_id_6c1174f5; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX podrobnosti_dokumentacija_datoteka_datoteka_id_6c1174f5 ON podrobnosti_dokumentacija_datoteka USING btree (datoteka_id);
+
+
+--
+-- Name: podrobnosti_dokumentacija_datoteka_dokumentacija_id_93274613; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX podrobnosti_dokumentacija_datoteka_dokumentacija_id_93274613 ON podrobnosti_dokumentacija_datoteka USING btree (dokumentacija_id);
+
+
+--
+-- Name: podrobnosti_dokumentacija_image_dokumentacija_id_adfa25ee; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX podrobnosti_dokumentacija_image_dokumentacija_id_adfa25ee ON podrobnosti_dokumentacija_image USING btree (dokumentacija_id);
+
+
+--
+-- Name: podrobnosti_dokumentacija_image_slika_id_31a70e42; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX podrobnosti_dokumentacija_image_slika_id_31a70e42 ON podrobnosti_dokumentacija_image USING btree (slika_id);
+
+
+--
+-- Name: podrobnosti_merilo_podlaga_merila_id_13ebf81f; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX podrobnosti_merilo_podlaga_merila_id_13ebf81f ON podrobnosti_merilo USING btree (podlaga_merila_id);
+
+
+--
+-- Name: podrobnosti_podlagamerila__dokumentacija_id_2c4c8b0b; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX podrobnosti_podlagamerila__dokumentacija_id_2c4c8b0b ON podrobnosti_podlagamerila_dokumentacija USING btree (dokumentacija_id);
+
+
+--
+-- Name: podrobnosti_podlagamerila__podlagamerila_id_38407715; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX podrobnosti_podlagamerila__podlagamerila_id_38407715 ON podrobnosti_podlagamerila_dokumentacija USING btree (podlagamerila_id);
+
+
+--
+-- Name: podrobnosti_podlagamerila_predmet_merila_id_e6305b5d; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX podrobnosti_podlagamerila_predmet_merila_id_e6305b5d ON podrobnosti_podlagamerila USING btree (predmet_merila_id);
+
+
+--
+-- Name: podrobnosti_podrobnost_merilo_id_b9aea91a; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX podrobnosti_podrobnost_merilo_id_b9aea91a ON podrobnosti_podrobnost USING btree (merilo_id);
+
+
+--
+-- Name: podrobnosti_predmetmerila_dela_id_2676e68c; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX podrobnosti_predmetmerila_dela_id_2676e68c ON podrobnosti_predmetmerila USING btree (dela_id);
+
+
+--
+-- Name: popisi_dela_dokumentacija_dela_id_ac6b5230; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX popisi_dela_dokumentacija_dela_id_ac6b5230 ON popisi_dela_dokumentacija USING btree (dela_id);
+
+
+--
+-- Name: popisi_dela_dokumentacija_dokumentacija_id_8e177dd7; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX popisi_dela_dokumentacija_dokumentacija_id_8e177dd7 ON popisi_dela_dokumentacija USING btree (dokumentacija_id);
+
+
+--
+-- Name: popisi_dela_vrsta_del_id_825c2e4a; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX popisi_dela_vrsta_del_id_825c2e4a ON popisi_dela USING btree (vrsta_del_id);
+
+
+--
+-- Name: popisi_popisnapostavka_podrobnost_podrobnost_id_82bbfca8; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX popisi_popisnapostavka_podrobnost_podrobnost_id_82bbfca8 ON popisi_popisnapostavka_podrobnost USING btree (podrobnost_id);
+
+
+--
+-- Name: popisi_popisnapostavka_podrobnost_popisnapostavka_id_8ade3779; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX popisi_popisnapostavka_podrobnost_popisnapostavka_id_8ade3779 ON popisi_popisnapostavka_podrobnost USING btree (popisnapostavka_id);
+
+
+--
+-- Name: popisi_popisnapostavka_postavka_id_ff0f803d; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX popisi_popisnapostavka_postavka_id_ff0f803d ON popisi_popisnapostavka USING btree (postavka_id);
+
+
+--
+-- Name: popisi_postavka_dela_id_ab4bf663; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX popisi_postavka_dela_id_ab4bf663 ON popisi_postavka USING btree (dela_id);
+
+
+--
+-- Name: socialaccount_socialaccount_user_id_8146e70c; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX socialaccount_socialaccount_user_id_8146e70c ON socialaccount_socialaccount USING btree (user_id);
+
+
+--
+-- Name: socialaccount_socialapp_sites_site_id_2579dee5; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX socialaccount_socialapp_sites_site_id_2579dee5 ON socialaccount_socialapp_sites USING btree (site_id);
+
+
+--
+-- Name: socialaccount_socialapp_sites_socialapp_id_97fb6e7d; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX socialaccount_socialapp_sites_socialapp_id_97fb6e7d ON socialaccount_socialapp_sites USING btree (socialapp_id);
+
+
+--
+-- Name: socialaccount_socialtoken_account_id_951f210e; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX socialaccount_socialtoken_account_id_951f210e ON socialaccount_socialtoken USING btree (account_id);
+
+
+--
+-- Name: socialaccount_socialtoken_app_id_636a42d7; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX socialaccount_socialtoken_app_id_636a42d7 ON socialaccount_socialtoken USING btree (app_id);
+
+
+--
+-- Name: users_user_groups_group_id_9afc8d0e; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX users_user_groups_group_id_9afc8d0e ON users_user_groups USING btree (group_id);
+
+
+--
+-- Name: users_user_groups_user_id_5f6f5a90; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX users_user_groups_user_id_5f6f5a90 ON users_user_groups USING btree (user_id);
+
+
+--
+-- Name: users_user_user_permissions_permission_id_0b93982e; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX users_user_user_permissions_permission_id_0b93982e ON users_user_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: users_user_user_permissions_user_id_20aca447; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX users_user_user_permissions_user_id_20aca447 ON users_user_user_permissions USING btree (user_id);
+
+
+--
+-- Name: users_user_username_06e46fe6_like; Type: INDEX; Schema: public; Owner: pavlovicr
+--
+
+CREATE INDEX users_user_username_06e46fe6_like ON users_user USING btree (username varchar_pattern_ops);
+
+
+--
+-- Name: account_emailaddress_user_id_2c513194_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY account_emailaddress
+    ADD CONSTRAINT account_emailaddress_user_id_2c513194_fk_users_user_id FOREIGN KEY (user_id) REFERENCES users_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: account_emailconfirmation_email_address_id_5b7f8c58_fk; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY account_emailconfirmation
+    ADD CONSTRAINT account_emailconfirmation_email_address_id_5b7f8c58_fk FOREIGN KEY (email_address_id) REFERENCES account_emailaddress(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_permission_content_type_id_2f476e4b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log_content_type_id_c4bce8eb_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log_user_id_c564eba6_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_c564eba6_fk_users_user_id FOREIGN KEY (user_id) REFERENCES users_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: podrobnosti_dokument_datoteka_id_6c1174f5_fk_podrobnos; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_dokumentacija_datoteka
+    ADD CONSTRAINT podrobnosti_dokument_datoteka_id_6c1174f5_fk_podrobnos FOREIGN KEY (datoteka_id) REFERENCES podrobnosti_datoteka(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: podrobnosti_dokument_dokumentacija_id_93274613_fk_podrobnos; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_dokumentacija_datoteka
+    ADD CONSTRAINT podrobnosti_dokument_dokumentacija_id_93274613_fk_podrobnos FOREIGN KEY (dokumentacija_id) REFERENCES podrobnosti_dokumentacija(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: podrobnosti_dokument_dokumentacija_id_adfa25ee_fk_podrobnos; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_dokumentacija_image
+    ADD CONSTRAINT podrobnosti_dokument_dokumentacija_id_adfa25ee_fk_podrobnos FOREIGN KEY (dokumentacija_id) REFERENCES podrobnosti_dokumentacija(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: podrobnosti_dokument_slika_id_31a70e42_fk_podrobnos; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_dokumentacija_image
+    ADD CONSTRAINT podrobnosti_dokument_slika_id_31a70e42_fk_podrobnos FOREIGN KEY (slika_id) REFERENCES podrobnosti_slika(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: podrobnosti_merilo_podlaga_merila_id_13ebf81f_fk_podrobnos; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_merilo
+    ADD CONSTRAINT podrobnosti_merilo_podlaga_merila_id_13ebf81f_fk_podrobnos FOREIGN KEY (podlaga_merila_id) REFERENCES podrobnosti_podlagamerila(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: podrobnosti_podlagam_dokumentacija_id_2c4c8b0b_fk_podrobnos; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_podlagamerila_dokumentacija
+    ADD CONSTRAINT podrobnosti_podlagam_dokumentacija_id_2c4c8b0b_fk_podrobnos FOREIGN KEY (dokumentacija_id) REFERENCES podrobnosti_dokumentacija(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: podrobnosti_podlagam_podlagamerila_id_38407715_fk_podrobnos; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_podlagamerila_dokumentacija
+    ADD CONSTRAINT podrobnosti_podlagam_podlagamerila_id_38407715_fk_podrobnos FOREIGN KEY (podlagamerila_id) REFERENCES podrobnosti_podlagamerila(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: podrobnosti_podlagam_predmet_merila_id_e6305b5d_fk_podrobnos; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_podlagamerila
+    ADD CONSTRAINT podrobnosti_podlagam_predmet_merila_id_e6305b5d_fk_podrobnos FOREIGN KEY (predmet_merila_id) REFERENCES podrobnosti_predmetmerila(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: podrobnosti_podrobno_merilo_id_b9aea91a_fk_podrobnos; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_podrobnost
+    ADD CONSTRAINT podrobnosti_podrobno_merilo_id_b9aea91a_fk_podrobnos FOREIGN KEY (merilo_id) REFERENCES podrobnosti_merilo(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: podrobnosti_predmetmerila_dela_id_2676e68c_fk_popisi_dela_id; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY podrobnosti_predmetmerila
+    ADD CONSTRAINT podrobnosti_predmetmerila_dela_id_2676e68c_fk_popisi_dela_id FOREIGN KEY (dela_id) REFERENCES popisi_dela(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: popisi_dela_dokument_dokumentacija_id_8e177dd7_fk_podrobnos; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY popisi_dela_dokumentacija
+    ADD CONSTRAINT popisi_dela_dokument_dokumentacija_id_8e177dd7_fk_podrobnos FOREIGN KEY (dokumentacija_id) REFERENCES podrobnosti_dokumentacija(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: popisi_dela_dokumentacija_dela_id_ac6b5230_fk_popisi_dela_id; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY popisi_dela_dokumentacija
+    ADD CONSTRAINT popisi_dela_dokumentacija_dela_id_ac6b5230_fk_popisi_dela_id FOREIGN KEY (dela_id) REFERENCES popisi_dela(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: popisi_dela_vrsta_del_id_825c2e4a_fk_popisi_vrstadel_id; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY popisi_dela
+    ADD CONSTRAINT popisi_dela_vrsta_del_id_825c2e4a_fk_popisi_vrstadel_id FOREIGN KEY (vrsta_del_id) REFERENCES popisi_vrstadel(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: popisi_popisnapostav_podrobnost_id_82bbfca8_fk_podrobnos; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY popisi_popisnapostavka_podrobnost
+    ADD CONSTRAINT popisi_popisnapostav_podrobnost_id_82bbfca8_fk_podrobnos FOREIGN KEY (podrobnost_id) REFERENCES podrobnosti_podrobnost(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: popisi_popisnapostav_popisnapostavka_id_8ade3779_fk_popisi_po; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY popisi_popisnapostavka_podrobnost
+    ADD CONSTRAINT popisi_popisnapostav_popisnapostavka_id_8ade3779_fk_popisi_po FOREIGN KEY (popisnapostavka_id) REFERENCES popisi_popisnapostavka(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: popisi_popisnapostav_postavka_id_ff0f803d_fk_popisi_po; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY popisi_popisnapostavka
+    ADD CONSTRAINT popisi_popisnapostav_postavka_id_ff0f803d_fk_popisi_po FOREIGN KEY (postavka_id) REFERENCES popisi_postavka(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: popisi_postavka_dela_id_ab4bf663_fk_popisi_dela_id; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY popisi_postavka
+    ADD CONSTRAINT popisi_postavka_dela_id_ab4bf663_fk_popisi_dela_id FOREIGN KEY (dela_id) REFERENCES popisi_dela(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: socialaccount_social_account_id_951f210e_fk_socialacc; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY socialaccount_socialtoken
+    ADD CONSTRAINT socialaccount_social_account_id_951f210e_fk_socialacc FOREIGN KEY (account_id) REFERENCES socialaccount_socialaccount(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: socialaccount_social_app_id_636a42d7_fk_socialacc; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY socialaccount_socialtoken
+    ADD CONSTRAINT socialaccount_social_app_id_636a42d7_fk_socialacc FOREIGN KEY (app_id) REFERENCES socialaccount_socialapp(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: socialaccount_social_site_id_2579dee5_fk_django_si; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY socialaccount_socialapp_sites
+    ADD CONSTRAINT socialaccount_social_site_id_2579dee5_fk_django_si FOREIGN KEY (site_id) REFERENCES django_site(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: socialaccount_social_socialapp_id_97fb6e7d_fk_socialacc; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY socialaccount_socialapp_sites
+    ADD CONSTRAINT socialaccount_social_socialapp_id_97fb6e7d_fk_socialacc FOREIGN KEY (socialapp_id) REFERENCES socialaccount_socialapp(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: socialaccount_socialaccount_user_id_8146e70c_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY socialaccount_socialaccount
+    ADD CONSTRAINT socialaccount_socialaccount_user_id_8146e70c_fk_users_user_id FOREIGN KEY (user_id) REFERENCES users_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: users_user_groups_group_id_9afc8d0e_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY users_user_groups
+    ADD CONSTRAINT users_user_groups_group_id_9afc8d0e_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: users_user_groups_user_id_5f6f5a90_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY users_user_groups
+    ADD CONSTRAINT users_user_groups_user_id_5f6f5a90_fk_users_user_id FOREIGN KEY (user_id) REFERENCES users_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: users_user_user_perm_permission_id_0b93982e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY users_user_user_permissions
+    ADD CONSTRAINT users_user_user_perm_permission_id_0b93982e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: users_user_user_permissions_user_id_20aca447_fk_users_user_id; Type: FK CONSTRAINT; Schema: public; Owner: pavlovicr
+--
+
+ALTER TABLE ONLY users_user_user_permissions
+    ADD CONSTRAINT users_user_user_permissions_user_id_20aca447_fk_users_user_id FOREIGN KEY (user_id) REFERENCES users_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
