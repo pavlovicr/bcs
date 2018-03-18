@@ -46,8 +46,11 @@ class SpecifikacijaList(ListView):
         queryset = super(SpecifikacijaList, self).get_queryset(*args, **kwargs)
 
         queryset = queryset.order_by(
+            'tip',
+            'poglavje__dela__vrsta_del',
+            'poglavje__dela',
             'poglavje',
-            'tekst'
+            #'tekst'
         )
         return queryset
 
