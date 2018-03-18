@@ -26,7 +26,7 @@
             <li><b>{{ poglavje.grouper }}</b></li>
             <ul>
                 <!--  listamo specifikacije -->
-                {% for specifikacija in poglavje.list %}
+                {% for specifikacija in poglavje.list|dictsort:'stevilka' %}
                 <li><b>{{ specifikacija.tekst }},</b></li>
                 <ul>
                     <!--  znotraj specifikacij grupiramo podskupine -->

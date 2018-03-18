@@ -62,6 +62,9 @@ class Poglavje(Osnova):
         dela = models.ForeignKey('popisi.Dela',on_delete=models.SET_NULL, null=True)
         predmet = models.CharField(max_length=10, choices=Predmet.choices(), default=Predmet.MATERIAL)
 
+        class Meta:
+            ordering = ['stevilka']
+
         def __str__(self):
             return self.tekst
 

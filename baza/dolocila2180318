@@ -1924,6 +1924,35 @@ COPY django_admin_log (id, action_time, object_id, object_repr, action_flag, cha
 355	2018-03-18 11:44:58.491727-07	3	Vsebnost kloridov	2	[{"changed": {"fields": ["komentar"]}}]	25	1
 356	2018-03-18 11:45:08.642194-07	2	Stopnje izpostavljenosti	2	[{"changed": {"fields": ["komentar"]}}]	25	1
 357	2018-03-18 11:45:19.890558-07	1	Tlačne trdnosti betona	2	[{"changed": {"fields": ["komentar"]}}]	25	1
+358	2018-03-18 12:51:09.134697-07	14	Splošna določila	2	[{"changed": {"fields": ["stevilka"]}}]	25	1
+359	2018-03-18 12:51:28.562724-07	17	Dokumentacija - Specifikacija betona po točki 6. SIST EN 206	2	[{"changed": {"fields": ["stevilka"]}}]	25	1
+360	2018-03-18 12:52:10.093145-07	15	Temperatura svežega betona v času dostave na kraj vgrajevanja betonske mešanice :	2	[{"changed": {"fields": ["stevilka"]}}]	25	1
+361	2018-03-18 12:52:32.880734-07	16	Prevoz betona	2	[{"changed": {"fields": ["stevilka"]}}]	25	1
+362	2018-03-18 12:52:43.318415-07	13	Dodajanje superplastifikatorjev in drugih dodatkov na gradbišču	2	[{"changed": {"fields": ["stevilka"]}}]	25	1
+363	2018-03-18 12:52:59.155022-07	1	Tlačne trdnosti betona	2	[]	25	1
+364	2018-03-18 12:55:34.396008-07	14	Splošna določila	2	[]	25	1
+365	2018-03-18 13:03:54.178736-07	2	Tehnološko tehnični pogoji za izvajanje betoniranj	2	[{"changed": {"fields": ["stevilka"]}}]	26	1
+366	2018-03-18 13:04:00.514237-07	1	Lastnosti svežega in strjenega betona po SIST EN 206 in SIST 1026	2	[{"changed": {"fields": ["stevilka"]}}]	26	1
+367	2018-03-18 13:04:06.795796-07	1	Lastnosti svežega in strjenega betona po SIST EN 206 in SIST 1026	2	[{"changed": {"fields": ["stevilka"]}}]	26	1
+368	2018-03-18 13:06:30.237567-07	1	Tlačne trdnosti betona	2	[{"changed": {"fields": ["stevilka"]}}]	25	1
+369	2018-03-18 13:07:20.570175-07	1	Tlačne trdnosti betona	2	[{"changed": {"fields": ["stevilka"]}}]	25	1
+370	2018-03-18 13:07:37.492675-07	3	Vsebnost kloridov	2	[{"changed": {"fields": ["stevilka"]}}]	25	1
+371	2018-03-18 13:07:50.965738-07	5	Konsistenca betona	2	[{"changed": {"fields": ["stevilka"]}}]	25	1
+372	2018-03-18 13:08:01.90299-07	8	Zrno agregata   Dmax	2	[{"changed": {"fields": ["stevilka"]}}]	25	1
+373	2018-03-18 13:08:39.671787-07	1	Tlačne trdnosti betona	2	[{"changed": {"fields": ["stevilka"]}}]	25	1
+374	2018-03-18 13:08:48.990226-07	3	Vsebnost kloridov	2	[{"changed": {"fields": ["stevilka"]}}]	25	1
+375	2018-03-18 13:09:00.713184-07	5	Konsistenca betona	2	[{"changed": {"fields": ["stevilka"]}}]	25	1
+376	2018-03-18 13:09:11.09789-07	8	Zrno agregata   Dmax	2	[{"changed": {"fields": ["stevilka"]}}]	25	1
+377	2018-03-18 13:09:30.198873-07	2	Stopnje izpostavljenosti	2	[{"changed": {"fields": ["stevilka"]}}]	25	1
+378	2018-03-18 13:09:56.975655-07	11	Splošne zahteve za  obdelave pri neopaženi in opaženi površini	2	[{"changed": {"fields": ["stevilka"]}}]	25	1
+379	2018-03-18 13:10:12.285241-07	4	Odpornost na prodor vode	2	[{"changed": {"fields": ["stevilka"]}}]	25	1
+380	2018-03-18 13:10:24.040694-07	6	Preseki betonskih konstrukcij	2	[{"changed": {"fields": ["stevilka"]}}]	25	1
+381	2018-03-18 13:11:27.190378-07	2	Stopnje izpostavljenosti	2	[{"changed": {"fields": ["stevilka"]}}]	25	1
+382	2018-03-18 13:11:36.875433-07	4	Odpornost na prodor vode	2	[{"changed": {"fields": ["stevilka"]}}]	25	1
+383	2018-03-18 13:11:47.415336-07	4	Odpornost na prodor vode	2	[{"changed": {"fields": ["stevilka"]}}]	25	1
+384	2018-03-18 13:12:04.467772-07	11	Splošne zahteve za  obdelave pri neopaženi in opaženi površini	2	[{"changed": {"fields": ["stevilka"]}}]	25	1
+385	2018-03-18 13:25:54.440612-07	3	Izvajanje betonskih konstrukcij po SIST EN 13670  in SIST 13670/A101	2	[{"changed": {"fields": ["stevilka"]}}]	26	1
+386	2018-03-18 13:26:02.798656-07	1	Lastnosti svežega in strjenega betona po SIST EN 206 in SIST 1026	2	[{"changed": {"fields": ["stevilka"]}}]	26	1
 \.
 
 
@@ -1931,7 +1960,7 @@ COPY django_admin_log (id, action_time, object_id, object_repr, action_flag, cha
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: pavlovicr
 --
 
-SELECT pg_catalog.setval('django_admin_log_id_seq', 357, true);
+SELECT pg_catalog.setval('django_admin_log_id_seq', 386, true);
 
 
 --
@@ -2247,9 +2276,9 @@ COPY podrobnosti_podskupina (id, stevilka, tekst) FROM stdin;
 --
 
 COPY podrobnosti_poglavje (id, stevilka, tekst, predmet, dela_id) FROM stdin;
-3	2	Izvajanje betonskih konstrukcij po SIST EN 13670  in SIST 13670/A101	IZDELEK	1
-1	1	Lastnosti svežega in strjenega betona po SIST EN 206 in SIST 1026	MATERIAL	1
-2	3	Tehnološko tehnični pogoji za izvajanje betoniranj	PROCES	1
+2	1	Tehnološko tehnični pogoji za izvajanje betoniranj	PROCES	1
+3	3	Izvajanje betonskih konstrukcij po SIST EN 13670  in SIST 13670/A101	IZDELEK	1
+1	2	Lastnosti svežega in strjenega betona po SIST EN 206 in SIST 1026	MATERIAL	1
 \.
 
 
@@ -2294,19 +2323,19 @@ SELECT pg_catalog.setval('podrobnosti_slika_id_seq', 14, true);
 --
 
 COPY podrobnosti_specifikacija (id, stevilka, tekst, predmet, komentar, poglavje_id, tip, podlaga) FROM stdin;
-15	\N	Temperatura svežega betona v času dostave na kraj vgrajevanja betonske mešanice :	Zahtevano z zakonom		1	DOLOCILO	ZAKON
-8	4	Zrno agregata   Dmax	ZAKON	Za razvršcanje betona glede na najvecjo zrno agregata je treba uporabiti zgornjo nazivno velikost najbolj\r\ngrobe frakcije v betonu (Dmax).	1	POPIS	ZAKON
-14	\N	Splošna določila	Zahtevano z zakonom		2	DOLOCILO	PRAKSA
-13	\N	Dodajanje superplastifikatorjev in drugih dodatkov na gradbišču	Zahtevano z zakonom		1	DOLOCILO	ZAKON
-11	9	Splošne zahteve za  obdelave pri neopaženi in opaženi površini	ZAKON		3	POPIS	ZAKON
-6	8	Preseki betonskih konstrukcij	ZAKON		2	POPIS	STROKA
-5	3	Konsistenca betona	ZAKON	Po standardu lahko uporabimo tudi VEBE, ....	1	POPIS	ZAKON
-17	\N	Dokumentacija - Specifikacija betona po točki 6. SIST EN 206	Zahtevano z zakonom		1	DOLOCILO	ZAKON
-16	\N	Prevoz betona	Zahtevano z zakonom		1	DOLOCILO	ZAKON
-4	7	Odpornost na prodor vode	ZAKON		1	POPIS	ZAKON
-3	2	Vsebnost kloridov	ZAKON		1	POPIS	ZAKON
-2	5	Stopnje izpostavljenosti	ZAKON		1	POPIS	ZAKON
-1	1	Tlačne trdnosti betona	ZAKON		1	POPIS	ZAKON
+17	2	Dokumentacija - Specifikacija betona po točki 6. SIST EN 206	Zahtevano z zakonom		1	DOLOCILO	ZAKON
+15	3	Temperatura svežega betona v času dostave na kraj vgrajevanja betonske mešanice :	Zahtevano z zakonom		1	DOLOCILO	ZAKON
+16	4	Prevoz betona	Zahtevano z zakonom		1	DOLOCILO	ZAKON
+13	5	Dodajanje superplastifikatorjev in drugih dodatkov na gradbišču	Zahtevano z zakonom		1	DOLOCILO	ZAKON
+14	1	Splošna določila	Zahtevano z zakonom		2	DOLOCILO	PRAKSA
+1	11	Tlačne trdnosti betona	ZAKON		1	POPIS	ZAKON
+3	12	Vsebnost kloridov	ZAKON		1	POPIS	ZAKON
+5	13	Konsistenca betona	ZAKON	Po standardu lahko uporabimo tudi VEBE, ....	1	POPIS	ZAKON
+8	14	Zrno agregata   Dmax	ZAKON	Za razvršcanje betona glede na najvecjo zrno agregata je treba uporabiti zgornjo nazivno velikost najbolj\r\ngrobe frakcije v betonu (Dmax).	1	POPIS	ZAKON
+6	18	Preseki betonskih konstrukcij	ZAKON		2	POPIS	STROKA
+2	15	Stopnje izpostavljenosti	ZAKON		1	POPIS	ZAKON
+4	17	Odpornost na prodor vode	ZAKON		1	POPIS	ZAKON
+11	21	Splošne zahteve za  obdelave pri neopaženi in opaženi površini	ZAKON		3	POPIS	ZAKON
 \.
 
 
