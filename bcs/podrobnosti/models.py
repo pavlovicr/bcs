@@ -39,7 +39,7 @@ class Zvrst(ChoiceEnum):
 class Dokumentacija(Osnova):
     naslov = models.TextField(blank=True)
     zvrst = models.CharField(max_length=30, choices=Zvrst.choices(), default=Zvrst.STANDARD)
-    komentar = models.TextField()
+    komentar = models.TextField(blank=True)
     image = models.ManyToManyField((Slika), blank=True)
     datoteka = models.ManyToManyField((Datoteka), blank=True)
 
@@ -87,7 +87,7 @@ class Specifikacija(Osnova):
     tip = models.CharField(max_length=10, choices=Tip.choices(), default=Tip.POPIS)
     podlaga = models.CharField(max_length=10, choices=Podlaga.choices(), default=Podlaga.STROKA)
     poglavje = models.ForeignKey('Poglavje', on_delete=models.SET_NULL, null=True)
-    komentar = models.TextField()
+    komentar = models.TextField(blank=True)
     dokumentacija = models.ManyToManyField((Dokumentacija), blank=True)
 
     def __str__(self):
@@ -98,10 +98,6 @@ class Specifikacija(Osnova):
 
 
 class Podskupina(Osnova):
-    specifikacija = models.ForeignKey('Specifikacija', on_delete=models.SET_NULL, blank=True, null=True)
-
-    class Meta:
-        ordering = ['specifikacija__stevilka']
 
     def __str__(self):
         return self.tekst
@@ -111,12 +107,12 @@ class Podskupina(Osnova):
 
 
 class Podrobnost(Osnova):
-
-    podskupina =  models.ForeignKey('Podskupina', on_delete=models.SET_NULL, null=True)
+    podskupina =  models.ForeignKey('Podskupina', on_delete=models.SET_NULL, blank=True, null=True)
+    specifikacija = models.ForeignKey('Specifikacija', on_delete=models.SET_NULL, null=True)
     tekst_za_popis = models.TextField(blank=True)
 
     class Meta:
-        ordering = ['podskupina__specifikacija__stevilka']
+        ordering = ['specifikacija__stevilka']
 
     def __str__(self):
         return self.tekst

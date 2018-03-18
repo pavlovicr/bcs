@@ -2,40 +2,41 @@
 
 {% block content %}
 
-<h1>Strokovne podlage - Seznam</h1>
+<h4>Strokovne podlage - Seznam</h4>
 
 <!--  grupiramo list po  tip specifikacije (popis,dolocilo) -->
 {% regroup object_list by tip as podlage %}
 {% for tip in podlage %}
-<li><h2>{{ tip.grouper }}</h2></li>
+<b>{{ tip.grouper }}</b>
 
 <ul>
     <!--  grupiramo list po  vrsta del -->
     {% regroup tip.list by poglavje.dela.vrsta_del as podlage %}
     {% for vrsta_del in podlage %}
-    <li><h3>{{ vrsta_del.grouper }}</h3></li>
+    <li><h6>{{ vrsta_del.grouper }}</h6></li>
     <ul>
         <!--  grupiramo list po  dela -->
         {% regroup vrsta_del.list by poglavje.dela as podlage %}
         {% for dela in podlage %}
-        <li><h3>{{ dela.grouper }}</h3></li>
+        <li><h6>{{ dela.grouper }}</h6></li>
         <ul>
             <!--  grupiramo list po  poglavje -->
             {% regroup dela.list by poglavje as podlage %}
             {% for poglavje in podlage %}
-            <li><h3>{{ poglavje.grouper }}</h3></li>
+            <li><b>{{ poglavje.grouper }}</b></li>
             <ul>
                 <!--  listamo specifikacije -->
                 {% for specifikacija in poglavje.list %}
-                <li><h3>{{ specifikacija.tekst }},</h3>{{specifikacija.komentar}}</li>
+                <li><b>{{ specifikacija.tekst }},</b></li>
                 <ul>
-                    <!--  znotraj specifikacij listamo podskupine specifikacij -->
-                    {% for podskupina in specifikacija.podskupina_set.all %}
-                    <li>{{ podskupina.tekst }}</li>
+                    <!--  znotraj specifikacij grupiramo podskupine -->
+                    {% regroup specifikacija.podrobnost_set.all by podskupina as podlage %}
+                    {% for podskupina in podlage %}
+                    <li>{{ podskupina.grouper }}</li>
                     <ul>
                         <!--  znotraj poskupi specifikacij listamo podrobnosti -->
-                        {% for podrobnost in podskupina.podrobnost_set.all %}
-                        <li>{{ podrobnost.tekst }}</li>
+                        {% for podrobnost in podskupina.list %}
+                        <li>{{ podrobnost.tekst }}, {{podrobnost.tekst_za_popis}}</li>
                         {% endfor %}
                     </ul>
                     {% endfor %}
