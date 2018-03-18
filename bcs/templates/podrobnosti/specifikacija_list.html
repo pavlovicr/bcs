@@ -20,10 +20,28 @@
         {% for dela in podlage %}
         <li><h3>{{ dela.grouper }}</h3></li>
         <ul>
-            <!--  grupiramo list po  dela -->
+            <!--  grupiramo list po  poglavje -->
             {% regroup dela.list by poglavje as podlage %}
             {% for poglavje in podlage %}
             <li><h3>{{ poglavje.grouper }}</h3></li>
+            <ul>
+                <!--  listamo specifikacije -->
+                {% for specifikacija in poglavje.list %}
+                <li><h3>{{ specifikacija.tekst }},</h3>{{specifikacija.komentar}}</li>
+                <ul>
+                    <!--  znotraj specifikacij listamo podskupine specifikacij -->
+                    {% for podskupina in specifikacija.podskupina_set.all %}
+                    <li>{{ podskupina.tekst }}</li>
+                    <ul>
+                        <!--  znotraj poskupi specifikacij listamo podrobnosti -->
+                        {% for podrobnost in podskupina.podrobnost_set.all %}
+                        <li>{{ podrobnost.tekst }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}
+                </ul>
+                {% endfor %}
+            </ul>
             {% endfor %}
         </ul>
         {% endfor %}
