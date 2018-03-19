@@ -100,17 +100,17 @@ class Specifikacija(Osnova):
         return reverse('specifikacija-detail', args=[str(self.id)])
 
 
-class Podskupina(Osnova):
+class Segment(Osnova):
 
     def __str__(self):
         return self.tekst
 
     def get_absolute_url(self):
-        return reverse('podskupina-detail', args=[str(self.id)])
+        return reverse('segment-detail', args=[str(self.id)])
 
 
 class Podrobnost(Osnova):
-    podskupina =  models.ForeignKey('Podskupina', on_delete=models.SET_NULL, blank=True, null=True)
+    segment =  models.ForeignKey('Segment', on_delete=models.SET_NULL, blank=True, null=True)
     specifikacija = models.ForeignKey('Specifikacija', on_delete=models.SET_NULL, null=True)
     tekst_za_popis = models.TextField(blank=True)
 

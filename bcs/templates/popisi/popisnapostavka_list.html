@@ -13,9 +13,9 @@
 
 
       {% for popisnapostavka in object_list %}
-      <!-- lahko uporabimo podrobnost_list -->
+      <li><b>{{popisnapostavka.tekst}}</b></li>
 
-      {% for podrobnost in popisnapostavka.podrobnost.all %}{{podrobnost.tekst_za_popis}} , {% endfor %}
+      {% for podrobnost in popisnapostavka.podrobnost.all %}<li>{{podrobnost.tekst_za_popis}}</li> {% endfor %}
 
 
 

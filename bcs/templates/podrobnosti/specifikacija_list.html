@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h4>Strokovne podlage - Seznam</h4>
+<h4>Specifikacije</h4>
 
 <!--  grupiramo list po  tip specifikacije (popis,dolocilo) -->
 {% regroup object_list by tip as podlage %}
@@ -26,16 +26,16 @@
             <li><b>{{ poglavje.grouper }}</b></li>
             <ul>
                 <!--  listamo specifikacije -->
-                {% for specifikacija in poglavje.list|dictsort:'stevilka' %}
+                {% for specifikacija in poglavje.list %}
                 <li><b>{{ specifikacija.tekst }},</b></li>
                 <ul>
                     <!--  znotraj specifikacij grupiramo podskupine -->
-                    {% regroup specifikacija.podrobnost_set.all by podskupina as podlage %}
-                    {% for podskupina in podlage %}
-                    <li>{{ podskupina.grouper }}</li>
+                    {% regroup specifikacija.podrobnost_set.all by segment as podlage %}
+                    {% for segment in podlage %}
+                            {{ segment.grouper.tekst }}
                     <ul>
                         <!--  znotraj poskupi specifikacij listamo podrobnosti -->
-                        {% for podrobnost in podskupina.list %}
+                        {% for podrobnost in segment.list %}
                         <li>{{ podrobnost.tekst }}, {{podrobnost.tekst_za_popis}}</li>
                         {% endfor %}
                     </ul>

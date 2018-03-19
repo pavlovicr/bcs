@@ -5,7 +5,7 @@ from django.views.generic import ListView
 from django.shortcuts import get_object_or_404
 
 #bcs
-from podrobnosti.models import Dokumentacija,Poglavje,Specifikacija,Podskupina,Podrobnost,Slika,Datoteka
+from podrobnosti.models import Dokumentacija,Poglavje,Specifikacija,Segment,Podrobnost,Slika,Datoteka
 
 class SlikaList(ListView):
     model = Slika
@@ -50,6 +50,7 @@ class SpecifikacijaList(ListView):
             'poglavje__dela__vrsta_del',
             'poglavje__dela',
             'poglavje',
+            'stevilka',
             #'tekst'
         )
         return queryset
@@ -59,12 +60,12 @@ class SpecifikacijaDetail(DetailView):
     model = Specifikacija
 
 
-class PodskupinaList(ListView):
-    model = Podskupina
+class SegmentList(ListView):
+    model = Segment
 
 
-class PodskupinaDetail(DetailView):
-    model = Podskupina
+class SegmentDetail(DetailView):
+    model = Segment
 
 
 class PodrobnostList(ListView):

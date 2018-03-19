@@ -15,8 +15,8 @@ urlpatterns = [
     url(r'^poglavje/(?P<pk>\d+)$', views.PoglavjeDetail.as_view(), name='poglavje-detail'),
     url(r'^specifikacije/$', views.SpecifikacijaList.as_view(), name='specifikacija-list'),
     url(r'^specifikacija/(?P<pk>\d+)$', views.SpecifikacijaDetail.as_view(), name='specifikacija-detail'),
-    url(r'^podskupine/$', views.PodskupinaList.as_view(), name='podskupina-list'),
-    url(r'^podskupina/(?P<pk>\d+)$', views.PodskupinaDetail.as_view(), name='podskupina-detail'),
+    url(r'^segmenti/$', views.SegmentList.as_view(), name='segment-list'),
+    url(r'^segment/(?P<pk>\d+)$', views.SegmentDetail.as_view(), name='segment-detail'),
     url(r'^podrobnosti/$', views.PodrobnostList.as_view(), name='podrobnost-list'),
     url(r'^podrobnost/(?P<pk>\d+)$', views.PodrobnostDetail.as_view(), name='podrobnost-detail'),
 
