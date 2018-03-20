@@ -3,7 +3,7 @@ BCS
 ***
 
 
-Sssstandardizirani popisi del(Building Construction Specifications - Tehnične specifikacije del za gradnje )
+Standardizirani popisi del(Building Construction Specifications - Tehnične specifikacije del za gradnje )
 ##################################################################################################################
 
 Uvod
