@@ -3,7 +3,7 @@ BCS
 ***
 
 
-Sssstandardizirani popisi del(Building Construction Specifications - Tehnične specifikacije del za gradnje )
+Standardizirani popisi del(Building Construction Specifications - Tehnične specifikacije del za gradnje )
 ##################################################################################################################
 
 Uvod
@@ -15,7 +15,11 @@ Uvod
 **stroškov izgradnje, pri čemer je za njegovo izdelavo zadolžen koordinator ....**
 
 
-Vsebina Popisa materiala in opreme po zahtevah iz navedenega pravilnika  se le deloma prekriva z vsebino POPISOV DEL, ki v praksi pomenijo nepogrešljiv dokument pri gradnjah. V POPISIH DEL ni samo popisa materiala in opreme. V popisu del so opisane sestave gradbenih konstrukcij in njihovih delov , tehnologije izvedbe, uporabljeni materiali in na njih vezane zahteve iz zakona o gradbenih proizvodih, pravila za zagotavljanje kvaliete, pravila pri obračunu in merjenju količin, varnostne zahteve, navedbe standardov itd..
+Vsebina Popisa materiala in opreme po zahtevah iz navedenega pravilnika  se le deloma prekriva z vsebino POPISOV DEL,
+ki v praksi pomenijo nepogrešljiv dokument pri gradnjah. V POPISIH DEL ni samo popisa materiala in opreme.
+V popisu del so opisane sestave gradbenih konstrukcij in njihovih delov , tehnologije izvedbe,
+uporabljeni materiali in na njih vezane zahteve iz zakona o gradbenih proizvodih, pravila za zagotavljanje kvaliete,
+pravila pri obračunu in merjenju količin, varnostne zahteve, navedbe standardov itd..
 Popisi del so pri gradnjah po sistemu " na enoto mere " ključni pri definiranju predmeta pogodbe in izračunu končne cene pogodbenih del.
 
 Kljub temu, da so popisi del pomemben del gradbene dokumentacije, Slovenija ne premore enotne metodologije za njihovo izdelavo prav tako ni javno dostopnih zbirk popisov del, ki bi nadomestili zastarele standardizirane popise del (GIPPOS, Fabrizzio, ..). Ostali so le redki in to samo za določene zvrsti del.(Skupnost za ceste).
@@ -48,7 +52,7 @@ Aktivnosti in faznost
 
 **Kaj je knjižnica popisov del ?**
 
-**Knjižnica popisov del so sistematično urejeni seznami tehničnih specifikacij del (opisov del) , ki nastopajo pri gradnjah in z njimi povezanimi pravili oziroma določili.**
+**Knjižnica popisov del so sistematično urejeni seznami tehničnih specifikacij,ki jih sestavljajo  opisi del, ki nastopajo pri gradnjah in zahteve pri izvedbi**
     * Tehnične specifikacije del opredeljujejo načine in postopke izvajanja del , izbiro uporabljenih materialov , strojev , opreme in orodja ter pogoje izvedbe del, ipd.
     * Določila opredeljujejo pravila vezana na merjenje in obračun specificiranih del, zagotavljanje kakovosti, izvajanje varnostnih ukrepov ter spoštovanje zahtev zakonodaje in standardov za specificirana dela, ipd.
 
@@ -60,7 +64,7 @@ Popisi del sprejeti kot standardizirani popisi del, s konsenzom investitorjev gr
 -------------
 
         * Standardizirane opise ločiti glede na vrste gradenj :
-            - visoke gradnej
+            - visoke gradnje
             - nizke gradnje
             - hidrotehnični objekti
         * Struktura in vsebine po zgledu TSC gov
@@ -71,14 +75,14 @@ Popisi del sprejeti kot standardizirani popisi del, s konsenzom investitorjev gr
 .. glossary::
 
     tehnične specifikacije del
-        tehnični opisi del, ki nastopajo pri gradnjah
+        tehnični opisi del , ki nastopajo pri gradnjah in pogoji
     popisna postavke
         tehnična specifikacija posameznega dela
     postavka
         osnovna specifikacija posameznega dela
     specifikacija
         dodatna specifikacija posameznega dela
-    kriterij specifikacije
+    segment
         merilo za opredelitev specifikacije
     področje kriterija
             področje, ki ji kriterij pripada
