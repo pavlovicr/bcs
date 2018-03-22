@@ -6,7 +6,7 @@ from osnova.models import Osnova
 
 
 class Slika(Osnova):
-    image = models.ImageField(blank=True)
+    slika = models.ImageField(blank=True)
 
     def __str__(self):
         return self.tekst
@@ -36,11 +36,11 @@ class Zvrst(ChoiceEnum):
     PRIPOROCILA = 'Priporocila'
 
 
-class Dokumentacija(Osnova):
+class Vir(Osnova):
     naslov = models.TextField(blank=True)
     zvrst = models.CharField(max_length=30, choices=Zvrst.choices(), default=Zvrst.STANDARD)
     komentar = models.TextField(blank=True)
-    image = models.ManyToManyField((Slika), blank=True)
+    slika = models.ManyToManyField((Slika), blank=True)
     datoteka = models.ManyToManyField((Datoteka), blank=True)
 
     def __str__(self):
@@ -91,7 +91,9 @@ class Specifikacija(Osnova):
     podlaga = models.CharField(max_length=10, choices=Podlaga.choices(), default=Podlaga.STROKA)
     poglavje = models.ForeignKey('Poglavje', on_delete=models.SET_NULL, null=True)
     komentar = models.TextField(blank=True)
-    dokumentacija = models.ManyToManyField((Dokumentacija), blank=True)
+    vir = models.ManyToManyField((Vir), blank=True)
+    slika = models.ManyToManyField((Slika), blank=True)
+    datoteka = models.ManyToManyField((Datoteka), blank=True)
 
     def __str__(self):
         return self.tekst

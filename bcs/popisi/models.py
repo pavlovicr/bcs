@@ -3,7 +3,7 @@ from django.urls import reverse
 
 from osnova.utils import ChoiceEnum
 from osnova.models import Osnova
-from podrobnosti.models import  Dokumentacija, Podrobnost
+from podrobnosti.models import  Podrobnost
 
 
 class SkupinaDel(ChoiceEnum):

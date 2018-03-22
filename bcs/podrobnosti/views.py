@@ -5,7 +5,7 @@ from django.views.generic import ListView
 from django.shortcuts import get_object_or_404
 
 #bcs
-from podrobnosti.models import Dokumentacija,Poglavje,Specifikacija,Segment,Podrobnost,Slika,Datoteka
+from podrobnosti.models import Vir,Poglavje,Specifikacija,Segment,Podrobnost,Slika,Datoteka
 
 class SlikaList(ListView):
     model = Slika
@@ -23,12 +23,12 @@ class DatotekaDetail(DetailView):
     model = Datoteka
 
 
-class DokumentacijaList(ListView):
-    model = Dokumentacija
+class VirList(ListView):
+    model = Vir
 
 
-class DokumentacijaDetail(DetailView):
-    model = Dokumentacija
+class VirDetail(DetailView):
+    model = Vir
 
 
 class PoglavjeList(ListView):
