@@ -3,7 +3,7 @@ BCS
 ***
 
 
-Standardizirani popisi del(Building Construction Specifications - Tehnične specifikacije del za gradnje )
+ Standardizirani popisi del  (Tehnične specifikacije del pri gradnjah - Building Construction Specifications) 
 ##################################################################################################################
 
 Uvod
@@ -15,17 +15,18 @@ Uvod
 **stroškov izgradnje, pri čemer je za njegovo izdelavo zadolžen koordinator ....**
 
 
-Vsebina Popisa materiala in opreme po zahtevah iz navedenega pravilnika  se le deloma prekriva z vsebino POPISOV DEL,
-ki v praksi pomenijo nepogrešljiv dokument pri gradnjah. V POPISIH DEL ni samo popisa materiala in opreme.
-V popisu del so opisane sestave gradbenih konstrukcij in njihovih delov , tehnologije izvedbe,
-uporabljeni materiali in na njih vezane zahteve iz zakona o gradbenih proizvodih, pravila za zagotavljanje kvaliete,
-pravila pri obračunu in merjenju količin, varnostne zahteve, navedbe standardov itd..
+Vsebina Popisa materiala in opreme po zahtevah iz pravilnika  se le deloma prekriva z vsebino POPISOV DEL,
+ki v praksi pomenijo nepogrešljiv dokument pri gradnjah. V POPISIH DEL ni samo popisa materiala in opreme z rekapitulacijo stroškov.
+V POPISIH DEL so specificirane sestave gradbenih konstrukcij in njihovih delov , postopki izvajanja del,
+uporabljeni materiali in oprema. V POPISIH DEL so specificirani tehnični pogoji vezani na zagotavljanje planirane kvalitete izvedbe posameznih del, uporabljenih materialov in opreme, ki izhajajo v prvi vrsti iz zahtev veljavne zakonodaje (ZGO, Zakon o gradbenih proizvodih, ...akoni, Pravilniki, Standardi), smernic in priporočil iz neobveznih standardov in tehničnih smernic ter gradbene prakse. 
+
+zahteve pri izvedbi del. Zahteve za zagotavljanje planirane kvalitete in varnostne zahteve izhajajo v prvi vrsti iz zahtev zakonodaje in na zakonodajo vezanih standardov, pravil iz gradbene prakse obveznih  V POPISIH DEL V popisih del so specificirane tudi  kot pravila vezana na merjenje in obračun del.    pogoje za zagotavljanje ustrezne  kakovosti uporabljenih materialov, izbranih postopkov izvajanja del , varnostnih zahtev in pravil za merjenje in obračun del, ki izhajajo iz veljavne zakonodaje, gradbene prakse in dodatnih zahtev investitorja gradnje  pravila za obračun in merjenju količin izvršenih del, varnostne zahteve vezane na izvedbo del, navedbe standardov itd..
 Popisi del so pri gradnjah po sistemu " na enoto mere " ključni pri definiranju predmeta pogodbe in izračunu končne cene pogodbenih del.
 
 Kljub temu, da so popisi del pomemben del gradbene dokumentacije, Slovenija ne premore enotne metodologije za njihovo izdelavo prav tako ni javno dostopnih zbirk popisov del, ki bi nadomestili zastarele standardizirane popise del (GIPPOS, Fabrizzio, ..). Ostali so le redki in to samo za določene zvrsti del.(Skupnost za ceste).
 Zanimivo, da se je zakonodajalec zelo potrudil pri oblikovanju knjige obračunskih izmer v "pravilniku o vsebini in načinu vodenja dnevnika o izvajanju del ter o načinu označitve gradbišča ", o vsebini pa ne duha ne sluha.
 
-Pred več kot štiridesetimi leti smo bili slovenski gradbinci v svetovnem merilu pionirji tudi na področju standardiziranih popisov del, prirejenih celo za računalniško obdelavo. Danes, v obdobju globalizacije, standardizacije in digitalizacije imamo še vedno iste.
+Pred več kot štiridesetimi leti smo bili slovenski gradbinci v svetovnem merilu pionirji tudi na področju standardiziranih popisov del (Fabrizzio), prirejenih celo za računalniško obdelavo. Danes, v obdobju globalizacije, standardizacije in digitalizacije ni javno dostopnih sodimamo še vedno iste.
 
 
 Cilj projekta
