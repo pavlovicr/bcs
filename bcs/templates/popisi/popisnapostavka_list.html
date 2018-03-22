@@ -3,37 +3,29 @@
 {% block content %}
 
     <h1></h1>
-
-    {% if object_list %}
     <ul>
-
-
-
-
-
-
-      {% for popisnapostavka in object_list %}
-      <li><b>{{popisnapostavka.tekst}}</b></li>
-
-      {% for podrobnost in popisnapostavka.podrobnost.all %}<li>{{podrobnost.tekst_za_popis}}</li> {% endfor %}
-
-
-
-      <li>
-        <!-- <a href="{{ podrobnost.get_absolute_url }}">{{ podrobnost.opis }}</a> lahko uporabimo tudi to-->
-        <a href="{% url 'popisnapostavka-detail' popisnapostavka.pk %}">{{ popisnapostavka.postavka }}</a>
-
-        {% for podrobnost in popisnapostavka.podrobnost.all %}{{podrobnost.tekst}} , {% endfor %}
-        <!-- <a href="/podrobnosti/podrobnost/{{ podrobnost.id }}">{{ podrobnost.opis }}</a> tudi to deluje -->
-
-      </li>
-      {% endfor %}
-
-
-
-
+        <!-- seznam popisnih postavk in dolocil -->
+        {% for popisnapostavka in object_list %}
+            <li><b>{{popisnapostavka.postavka.tekst}}</b></li>
+            <!--regrupiramo podrobnosti popisnih postavk po segment.tekst_za_popis
+            , ker zelimo prilagoditi tekst izpisa uveljavljenemu nacinu za "stopnje izpostavljenosti " -->
+            {% regroup popisnapostavka.podrobnost.all by segment.tekst_za_popis as podlage %}
+            {% for podrobnost in podlage %}
+            {{ podrobnost.grouper}}
+                <!-- zlistamo podrobnosti znotraj regroupa -->
+                {% for podrobnost in podrobnost.list %}
+                    <!-- zlistamo pa tako, da izpis locimo za popis od dolocil,
+                     ker imajo dolocila tekst v tekst_za_popis, popisi pa v polju tekst -->
+                    {% if popisnapostavka.postavka.tekst != 'določila'   %}
+                    {{podrobnost.tekst}},
+                    {% else %}
+                    <ul>
+                        <li>{{podrobnost.tekst_za_popis}}</li>
+                    </ul>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
     </ul>
-    {% else %}
-      <p>Tukaj nič novega.</p>
-    {% endif %}
+
 {% endblock %}

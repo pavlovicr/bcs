@@ -27,7 +27,7 @@
             <ul>
                 <!--  listamo specifikacije -->
                 {% for specifikacija in poglavje.list %}
-                <li><b>{{ specifikacija.tekst }},</b></li>
+                <li><b><a href ="{% url 'specifikacija-detail' specifikacija.pk %}">{{ specifikacija.tekst }} </a></b></li>
                 <ul>
                     <!--  znotraj specifikacij grupiramo podskupine -->
                     {% regroup specifikacija.podrobnost_set.all by segment as podlage %}

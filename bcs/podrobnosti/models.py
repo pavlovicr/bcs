@@ -73,7 +73,7 @@ class Poglavje(Osnova):
 
 
 class Podlaga(ChoiceEnum):
-    ZAKON = 'Zahtevano z zakonom'
+    ZAKON = 'Zakonodaja'
     STROKA = 'Pravila stroke'
     PRAKSA = 'Gradbena praksa'
     ZNANOST = 'Znanstvena dognanja'
@@ -101,6 +101,7 @@ class Specifikacija(Osnova):
 
 
 class Segment(Osnova):
+    tekst_za_popis = models.TextField(blank=True)
 
     def __str__(self):
         return self.tekst
@@ -112,6 +113,7 @@ class Segment(Osnova):
 class Podrobnost(Osnova):
     segment =  models.ForeignKey('Segment', on_delete=models.SET_NULL, blank=True, null=True)
     specifikacija = models.ForeignKey('Specifikacija', on_delete=models.SET_NULL, null=True)
+    komentar = models.TextField(blank=True)
     tekst_za_popis = models.TextField(blank=True)
 
     class Meta:

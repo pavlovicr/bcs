@@ -1,26 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
+<h4>Podrobnosti specifikacije:</h4>
+<br>
+<h4>Tip : <b>{{ object.get_tip_display }}</b></h4>
+<br>
+<h4>Naslov : <b>{{ object.tekst }}</b></h4>
+<br>
+<!-- lahko uporabimo object.opis -->
+Komentar : {{ object.komentar }}
+<br>
 
-<h4>Področje specifikacije :</h4>
-  <li>
-    <!-- namesto podrocje sem uporabil get_podrocje_display. To je django funkcija za prikaz choices -->
-    {{ object.poglavje.get_predmet_display }}
-  </li>
+Podrobnosti :
+    <ul>
+        {%for podrobnost in object.podrobnost_set.all %}
+            <li>{{ podrobnost.tekst_za_popis }}</li>
+        {% endfor %}
+    </ul>
+<br>
 
+<h7>Podlaga : <b>{{object.get_podlaga_display}}</b></h7>
+<br>
+Dokumentacija :
+<br>
+Naslov :
+    <ul>
+        {% for dokumentacija in object.dokumentacija.all %}
+            <li><a href ="{% url 'dokumentacija-detail' dokumentacija.pk %}">{{dokumentacija.tekst}}</li>
+        {% endfor %}
+    </ul>
 
-  <h1>SPECIFIKACIJA PODROBNOSTI:</h1>
-    <li>
-      <h2>{{ object.tekst }}</h2>
-   </li>
-  <!-- lahko uporabimo object.opis -->
-
-<h6>Komentar : {{ object.komentar }}</h6>
-
-<h4>Dokumentacija : </h4>
-
-{% for dokument in object.dokumentacija.all %}
-
+{% comment %}
 <p>Tekst :{{dokument.tekst}},</p>
 <p>Naslov :{{dokument.naslov}},</p>
 <p>Zvrst :{{dokument.zvrst}},</p>
@@ -38,9 +48,9 @@
 
 {% endfor %}
 
-{%comment%}
+
     <a href="{{ MEDIA_URL }}{{ dokument.image }}"> {{ slika.image }}</a>
-{%endcomment%}
+
 
 
 <h4>Poglavje Specifikacije :</h4>
@@ -66,6 +76,6 @@
 
     </li>
 {% endfor %}
-
+{%endcomment%}
 
 {% endblock %}
