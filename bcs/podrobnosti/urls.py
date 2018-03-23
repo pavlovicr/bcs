@@ -5,10 +5,10 @@ from . import views
 #bcs
 urlpatterns = [
 
-    url(r'^slike/$', views.SlikaList.as_view(), name='slika-list'),
-    url(r'^slika/(?P<pk>\d+)$', views.SlikaDetail.as_view(), name='slika-detail'),
-    url(r'^datoteke/$', views.DatotekaList.as_view(), name='datoteka-list'),
-    url(r'^datoteka/(?P<pk>\d+)$', views.DatotekaDetail.as_view(), name='datoteka-detail'),
+    url(r'^nameni/$', views.NamenList.as_view(), name='namen-list'),
+    url(r'^namen/(?P<pk>\d+)$', views.NamenDetail.as_view(), name='namen-detail'),
+    url(r'^gradiva/$', views.GradivoList.as_view(), name='gradivo-list'),
+    url(r'^gradivo/(?P<pk>\d+)$', views.GradivoDetail.as_view(), name='gradivo-detail'),
     url(r'^viri/$', views.VirList.as_view(), name='vir-list'),
     url(r'^vir/(?P<pk>\d+)$', views.VirDetail.as_view(), name='vir-detail'),
     url(r'^poglavja/$', views.PoglavjeList.as_view(), name='poglavje-list'),

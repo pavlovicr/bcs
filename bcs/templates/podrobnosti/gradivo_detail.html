@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+<a href="{{ MEDIA_URL }}{{ gradivo.slika }}"> {{ gradivo.slika }}</a>
+<a href="{{ MEDIA_URL }}{{ gradivo.tekst_file }}">{{ gradivo.tekst_file }} </a>
+
+{% endblock %}

@@ -5,22 +5,22 @@ from django.views.generic import ListView
 from django.shortcuts import get_object_or_404
 
 #bcs
-from podrobnosti.models import Vir,Poglavje,Specifikacija,Segment,Podrobnost,Slika,Datoteka
+from podrobnosti.models import Vir,Poglavje,Specifikacija,Segment,Podrobnost,Gradivo,Namen
 
-class SlikaList(ListView):
-    model = Slika
-
-
-class SlikaDetail(DetailView):
-    model = Slika
+class NamenList(ListView):
+    model = Namen
 
 
-class DatotekaList(ListView):
-    model = Datoteka
+class NamenDetail(DetailView):
+    model = Namen
 
 
-class DatotekaDetail(DetailView):
-    model = Datoteka
+class GradivoList(ListView):
+    model = Gradivo
+
+
+class GradivoDetail(DetailView):
+    model = Gradivo
 
 
 class VirList(ListView):
