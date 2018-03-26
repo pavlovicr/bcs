@@ -36,7 +36,11 @@
                     <ul>
                         <!--  znotraj poskupi specifikacij listamo podrobnosti -->
                         {% for podrobnost in segment.list %}
-                        <li>{{ podrobnost.tekst }}, {{podrobnost.tekst_za_popis}}</li>
+                            {% if podrobnost.tekst_za_popis %}
+                            <li>{{podrobnost.tekst_za_popis}}</li>
+                            {% else %}
+                            <li>{{podrobnost.tekst}}</li>
+                            {% endif %}
                         {% endfor %}
                     </ul>
                     {% endfor %}

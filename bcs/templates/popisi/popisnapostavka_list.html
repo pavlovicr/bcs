@@ -14,15 +14,15 @@
             {{ podrobnost.grouper}}
                 <!-- zlistamo podrobnosti znotraj regroupa -->
                 {% for podrobnost in podrobnost.list %}
-                    <!-- zlistamo pa tako, da izpis locimo za popis od dolocil,
-                     ker imajo dolocila tekst v tekst_za_popis, popisi pa v polju tekst -->
-                    {% if popisnapostavka.postavka.tekst != 'določila'   %}
-                    {{podrobnost.tekst}},
-                    {% else %}
-                    <ul>
-                        <li>{{podrobnost.tekst_za_popis}}</li>
-                    </ul>
-                    {% endif %}
+
+                        <!-- zlistamo pa tako, da izpis locimo za popis od dolocil,
+                        ker imajo dolocila tekst v tekst_za_popis, popisi pa v polju tekst -->
+                        {% if podrobnost.tekst_za_popis %}
+                        {{podrobnost.tekst_za_popis}},
+                        {% else %}
+                        <b>{{podrobnost.tekst}},</b>
+                        {% endif %}
+
                 {% endfor %}
             {% endfor %}
         {% endfor %}

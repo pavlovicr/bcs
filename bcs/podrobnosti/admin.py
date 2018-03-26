@@ -5,8 +5,37 @@ from podrobnosti.models import Vir,Specifikacija,Poglavje,Segment,Podrobnost,Gra
 
 
 
-admin.site.register(Vir)
-admin.site.register(Specifikacija)
+class GradivoInline(admin.StackedInline):
+    model = Gradivo
+
+
+
+class PodrobnostInline(admin.StackedInline):
+    model = Podrobnost
+
+
+class SpecifikacijaAdmin(admin.ModelAdmin):
+    list_display = ['stevilka','tekst','podlaga']
+    ordering = ['stevilka']
+
+    inlines = [PodrobnostInline]
+
+
+class VirAdmin(admin.ModelAdmin):
+    list_display = ['stevilka','tekst']
+    ordering = ['stevilka']
+
+    inlines = [GradivoInline]
+
+
+
+
+
+
+
+
+admin.site.register(Vir,VirAdmin)
+admin.site.register(Specifikacija,SpecifikacijaAdmin)
 admin.site.register(Poglavje)
 admin.site.register(Segment)
 admin.site.register(Podrobnost)

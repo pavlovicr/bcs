@@ -14,7 +14,11 @@ Komentar : {{ object.komentar }}
 Podrobnosti :
     <ul>
         {%for podrobnost in object.podrobnost_set.all %}
+            {% if podrobnost.tekst_za_popis%}
             <li>{{ podrobnost.tekst_za_popis }}</li>
+            {% else %}
+            <li>{{ podrobnost.tekst }}</li>
+            {% endif %}
         {% endfor %}
     </ul>
 <br>

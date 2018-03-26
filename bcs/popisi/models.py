@@ -49,9 +49,6 @@ class PopisnaPostavka(Osnova):
     postavka = models.ForeignKey('Postavka', on_delete=models.SET_NULL, null=True)
     podrobnost = models.ManyToManyField('podrobnosti.Podrobnost')
 
-    #@property
-    #def abrakadabra(self):
-    #    return self.abrakadabra.order_by('komentar')
 
     def __str__(self):
         return self.tekst
