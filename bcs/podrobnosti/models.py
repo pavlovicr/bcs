@@ -119,6 +119,13 @@ class Podrobnost(Osnova):
     komentar = models.TextField(blank=True)
     tekst_za_popis = models.TextField(blank=True)
 
+    @property
+
+    def gs(self):
+        return 'to je vaja'
+
+
+
     class Meta:
         ordering = ['specifikacija__stevilka']
 

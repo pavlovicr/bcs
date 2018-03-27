@@ -27,6 +27,10 @@ class VirAdmin(admin.ModelAdmin):
 
     inlines = [GradivoInline]
 
+class PodrobnostAdmin(admin.ModelAdmin):
+    read_only = ['gs']
+    list_display = ['stevilka','tekst','gs']
+    ordering = ['stevilka']
 
 
 
@@ -38,6 +42,6 @@ admin.site.register(Vir,VirAdmin)
 admin.site.register(Specifikacija,SpecifikacijaAdmin)
 admin.site.register(Poglavje)
 admin.site.register(Segment)
-admin.site.register(Podrobnost)
+admin.site.register(Podrobnost,PodrobnostAdmin)
 admin.site.register(Gradivo)
 admin.site.register(Namen)
