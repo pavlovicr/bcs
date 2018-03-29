@@ -9,7 +9,7 @@
             <li><b>{{popisnapostavka.postavka.tekst}}</b></li>
             <!--regrupiramo podrobnosti popisnih postavk po segment.tekst_za_popis
             , ker zelimo prilagoditi tekst izpisa uveljavljenemu nacinu za "stopnje izpostavljenosti " -->
-            {% regroup popisnapostavka.podrobnost.all by segment.tekst_za_popis as podlage %}
+            {% regroup popisnapostavka.podrobnost.all by odsek.tekst_za_popis as podlage %}
             {% for podrobnost in podlage %}
             {{ podrobnost.grouper}}
                 <!-- zlistamo podrobnosti znotraj regroupa -->

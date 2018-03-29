@@ -4,6 +4,7 @@ from . import views
 
 #bcs
 urlpatterns = [
+    url(r'^$', views.stev, name='stev'),
 
     url(r'^nameni/$', views.NamenList.as_view(), name='namen-list'),
     url(r'^namen/(?P<pk>\d+)$', views.NamenDetail.as_view(), name='namen-detail'),
@@ -15,8 +16,8 @@ urlpatterns = [
     url(r'^poglavje/(?P<pk>\d+)$', views.PoglavjeDetail.as_view(), name='poglavje-detail'),
     url(r'^specifikacije/$', views.SpecifikacijaList.as_view(), name='specifikacija-list'),
     url(r'^specifikacija/(?P<pk>\d+)$', views.SpecifikacijaDetail.as_view(), name='specifikacija-detail'),
-    url(r'^segmenti/$', views.SegmentList.as_view(), name='segment-list'),
-    url(r'^segment/(?P<pk>\d+)$', views.SegmentDetail.as_view(), name='segment-detail'),
+    url(r'^odseki/$', views.OdsekList.as_view(), name='odsek-list'),
+    url(r'^odsek/(?P<pk>\d+)$', views.OdsekDetail.as_view(), name='odsek-detail'),
     url(r'^podrobnosti/$', views.PodrobnostList.as_view(), name='podrobnost-list'),
     url(r'^podrobnost/(?P<pk>\d+)$', views.PodrobnostDetail.as_view(), name='podrobnost-detail'),
 

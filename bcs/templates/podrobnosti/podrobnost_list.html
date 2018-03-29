@@ -13,7 +13,7 @@
 
       {% for podrobnost in object_list %}
 
-      <li><a href="{% url 'podrobnost-detail' podrobnost.pk %}">{{podrobnost.tekst}}</a></li>
+      <li><a href="{% url 'podrobnost-detail' podrobnost.pk %}">{{podrobnost.tekst}}</a>, gs: {{podrobnost.gs}}</li>
 
       {% endfor %}
 

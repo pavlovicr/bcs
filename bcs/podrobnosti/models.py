@@ -103,7 +103,7 @@ class Specifikacija(Osnova):
         return reverse('specifikacija-detail', args=[str(self.id)])
 
 
-class Segment(Osnova):
+class Odsek(Osnova):
     tekst_za_popis = models.TextField(blank=True)
 
     def __str__(self):
@@ -114,20 +114,30 @@ class Segment(Osnova):
 
 
 class Podrobnost(Osnova):
-    segment =  models.ForeignKey('Segment', on_delete=models.SET_NULL, blank=True, null=True)
+    ''' Nekaj o podrobnostih '''
+    odsek = models.ForeignKey('Odsek', on_delete=models.SET_NULL, blank=True, null=True)
     specifikacija = models.ForeignKey('Specifikacija', on_delete=models.SET_NULL, null=True)
     komentar = models.TextField(blank=True)
     tekst_za_popis = models.TextField(blank=True)
 
+    def gsx(self):
+        a=str(self.specifikacija.poglavje.dela.vrsta_del.stevilka)
+        return a
+
+    # Pazi !, V kolikor ne bo vseh unosov tujih ključev ne dela
     @property
-
     def gs(self):
-        return 'to je vaja'
-
-
+        a = str(self.stevilka)
+        b = str(self.odsek.stevilka)
+        c = str(self.specifikacija.stevilka)
+        d = str(self.specifikacija.poglavje.stevilka)
+        e = str(self.specifikacija.poglavje.dela.stevilka)
+        f = str(self.specifikacija.poglavje.dela.vrsta_del.stevilka)
+        return [f,e,d,c,b,a]
 
     class Meta:
-        ordering = ['specifikacija__stevilka']
+        ordering = ['specifikacija__stevilka','stevilka']
+
 
     def __str__(self):
         return self.tekst

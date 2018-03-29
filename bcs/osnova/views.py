@@ -8,7 +8,7 @@ from popisi.models import VrstaDel,Dela,Postavka
 from podrobnosti.models import Podrobnost,Specifikacija
 
 def index(request):
-
+    
     stej_specifikacija = Specifikacija.objects.all().count()
     stej_postavka = Postavka.objects.all().count()
     stej_dela = Dela.objects.all().count()

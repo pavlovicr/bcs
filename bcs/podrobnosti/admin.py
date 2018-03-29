@@ -1,13 +1,12 @@
 from django.contrib import admin
 
 #bcs
-from podrobnosti.models import Vir,Specifikacija,Poglavje,Segment,Podrobnost,Gradivo,Namen
+from podrobnosti.models import Vir,Specifikacija,Poglavje,Odsek,Podrobnost,Gradivo,Namen
 
 
 
 class GradivoInline(admin.StackedInline):
     model = Gradivo
-
 
 
 class PodrobnostInline(admin.StackedInline):
@@ -16,7 +15,7 @@ class PodrobnostInline(admin.StackedInline):
 
 class SpecifikacijaAdmin(admin.ModelAdmin):
     list_display = ['stevilka','tekst','podlaga']
-    ordering = ['stevilka']
+    ordering = ['tip','stevilka']
 
     inlines = [PodrobnostInline]
 
@@ -27,21 +26,22 @@ class VirAdmin(admin.ModelAdmin):
 
     inlines = [GradivoInline]
 
+
 class PodrobnostAdmin(admin.ModelAdmin):
     read_only = ['gs']
     list_display = ['stevilka','tekst','gs']
+    ordering = ['specifikacija__stevilka','stevilka']
+
+class OdsekAdmin(admin.ModelAdmin):
+    list_display = ['stevilka','tekst']
     ordering = ['stevilka']
 
-
-
-
-
-
+    inlines = [PodrobnostInline]
 
 admin.site.register(Vir,VirAdmin)
 admin.site.register(Specifikacija,SpecifikacijaAdmin)
 admin.site.register(Poglavje)
-admin.site.register(Segment)
+admin.site.register(Odsek,OdsekAdmin)
 admin.site.register(Podrobnost,PodrobnostAdmin)
 admin.site.register(Gradivo)
 admin.site.register(Namen)

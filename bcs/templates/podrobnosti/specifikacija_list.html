@@ -1,4 +1,4 @@
- {% extends "base.html" %}
+{% extends "base.html" %}
 
 {% block content %}
 
@@ -30,12 +30,12 @@
                 <li><b><a href ="{% url 'specifikacija-detail' specifikacija.pk %}">{{ specifikacija.tekst }} </a></b></li>
                 <ul>
                     <!--  znotraj specifikacij grupiramo podskupine -->
-                    {% regroup specifikacija.podrobnost_set.all by segment as podlage %}
-                    {% for segment in podlage %}
-                            {{ segment.grouper.tekst }}
+                    {% regroup specifikacija.podrobnost_set.all by odsek as podlage %}
+                    {% for odsek in podlage %}
+                            {{ odsek.grouper.tekst }}
                     <ul>
                         <!--  znotraj poskupi specifikacij listamo podrobnosti -->
-                        {% for podrobnost in segment.list %}
+                        {% for podrobnost in odsek.list %}
                             {% if podrobnost.tekst_za_popis %}
                             <li>{{podrobnost.tekst_za_popis}}</li>
                             {% else %}

@@ -5,7 +5,20 @@ from django.views.generic import ListView
 from django.shortcuts import get_object_or_404
 
 #bcs
-from podrobnosti.models import Vir,Poglavje,Specifikacija,Segment,Podrobnost,Gradivo,Namen
+from podrobnosti.models import Vir,Poglavje,Specifikacija,Odsek,Podrobnost,Gradivo,Namen
+
+#def stev(request):
+#    stevilka = Podrobnost.objects.all()
+#    return render(request,'podrobnost.stev.html',
+#            context={'':stevilka}
+#    )
+def stev(request):
+    a=Podrobnost.objects.all()
+    return render(request,'podrobnosti/stev.html',
+     context={'b':a},
+     )
+
+
 
 class NamenList(ListView):
     model = Namen
@@ -60,16 +73,24 @@ class SpecifikacijaDetail(DetailView):
     model = Specifikacija
 
 
-class SegmentList(ListView):
-    model = Segment
+class OdsekList(ListView):
+    model = Odsek
 
 
-class SegmentDetail(DetailView):
-    model = Segment
+class OdsekDetail(DetailView):
+    model = Odsek
 
 
 class PodrobnostList(ListView):
     model = Podrobnost
+
+#    def get_queryset(self, *args, **kwargs):
+#        queryset = super(SpecifikacijaList, self).get_queryset(*args, **kwargs)
+
+#        queryset = queryset.order_by(
+#            'specifikacija__stevilka',
+#        )
+#        return queryset
 
 
 class PodrobnostDetail(DetailView):
