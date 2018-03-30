@@ -3,30 +3,83 @@ BCS
 ***
 
 
- Standardizirani popisi del  (Tehnične specifikacije del pri gradnjah - Building Construction Specifications) 
+Standardizirani popisi del(Building Construction Specifications - Tehnične specifikacije del za gradnje )
 ##################################################################################################################
 
 Uvod
 ****
-28. člen pravilnika o projektni dokumentaciji pravi :
+28. člen osnutka novega pravilnika o projektni dokumentaciji pravi :
 
 **.... se za celovit opis objekta v projektu za izvedbo izdela zbirno tehnično**
 **poročilo, ki vsebuje tudi skupen popis materiala in opreme z rekapitulacijo**
 **stroškov izgradnje, pri čemer je za njegovo izdelavo zadolžen koordinator ....**
 
 
-Vsebina Popisa materiala in opreme po zahtevah iz pravilnika  se le deloma prekriva z vsebino POPISOV DEL,
-ki v praksi pomenijo nepogrešljiv dokument pri gradnjah. V POPISIH DEL ni samo popisa materiala in opreme z rekapitulacijo stroškov.
-V POPISIH DEL so specificirane sestave gradbenih konstrukcij in njihovih delov , postopki izvajanja del,
-uporabljeni materiali in oprema. V POPISIH DEL so specificirani tehnični pogoji vezani na zagotavljanje planirane kvalitete izvedbe posameznih del, uporabljenih materialov in opreme, ki izhajajo v prvi vrsti iz zahtev veljavne zakonodaje (ZGO, Zakon o gradbenih proizvodih, ...akoni, Pravilniki, Standardi), smernic in priporočil iz neobveznih standardov in tehničnih smernic ter gradbene prakse. 
+28. člen pravilnika o projektni dokumentaciji pravi :
 
-zahteve pri izvedbi del. Zahteve za zagotavljanje planirane kvalitete in varnostne zahteve izhajajo v prvi vrsti iz zahtev zakonodaje in na zakonodajo vezanih standardov, pravil iz gradbene prakse obveznih  V POPISIH DEL V popisih del so specificirane tudi  kot pravila vezana na merjenje in obračun del.    pogoje za zagotavljanje ustrezne  kakovosti uporabljenih materialov, izbranih postopkov izvajanja del , varnostnih zahtev in pravil za merjenje in obračun del, ki izhajajo iz veljavne zakonodaje, gradbene prakse in dodatnih zahtev investitorja gradnje  pravila za obračun in merjenju količin izvršenih del, varnostne zahteve vezane na izvedbo del, navedbe standardov itd..
-Popisi del so pri gradnjah po sistemu " na enoto mere " ključni pri definiranju predmeta pogodbe in izračunu končne cene pogodbenih del.
+(3)Tehnično poročilo načrtov mora vsebovati zahteve za lastnosti gradbenih materialov,
+kot so opredeljeni v predpisih o dajanju gradbenih proizvodov v promet ter opis mesta in načina
+njihove vgradnje. Tehnično poročilo vsebuje tudi popis količin materiala in opreme.
 
-Kljub temu, da so popisi del pomemben del gradbene dokumentacije, Slovenija ne premore enotne metodologije za njihovo izdelavo prav tako ni javno dostopnih zbirk popisov del, ki bi nadomestili zastarele standardizirane popise del (GIPPOS, Fabrizzio, ..). Ostali so le redki in to samo za določene zvrsti del.(Skupnost za ceste).
-Zanimivo, da se je zakonodajalec zelo potrudil pri oblikovanju knjige obračunskih izmer v "pravilniku o vsebini in načinu vodenja dnevnika o izvajanju del ter o načinu označitve gradbišča ", o vsebini pa ne duha ne sluha.
 
-Pred več kot štiridesetimi leti smo bili slovenski gradbinci v svetovnem merilu pionirji tudi na področju standardiziranih popisov del (Fabrizzio), prirejenih celo za računalniško obdelavo. Danes, v obdobju globalizacije, standardizacije in digitalizacije ni javno dostopnih sodimamo še vedno iste.
+POPISI DEL so v gradbeni praksi uveljavljeni že desetletja in predstavljajo nepogrešljiv dokument
+pri gradnji objektov, kljub temu, da nikakor ne najdejo ustreznega mesta znotraj dokumentacije po
+pravilniku o projektni dokumentaciji. To je sicer razumljivo, če upoštevamo dejstvo, da zakonodajalec
+skrbi za javni interes in je znotraj pravilnika o projektni dokumentaciji predpisal le vsebine,
+s katerimi se zagotavlja izpolnjevanje bistvenih zahtev objektov. Zakonodajalec se ne ukvarja z
+vsebinami, ki niso v javnem interesu in z dokumentacijo komercialnega značaja.
+POPISI DEL v pregledni obliki povzemajo ter dopolnjujejo projektno dokumentacijo v delu,
+ki ga predpisuje javni interes kot tudi v delu, ki predstavlja pričakovanja investitorja gradnje.
+Popisi del so pri gradnjah po sistemu " na enoto mere " nujni za izračun končne cene pogodbenih del.
+
+
+
+
+
+ zahtevah pravilnika se le deloma prekriva
+z vsebino POPISOV DEL, ki pomenijo v gradbeni praksi nepogrešljiv dokument pri gradnjah.
+V POPISIH DEL ni samo popisa materiala in opreme. V POPISIH DEL so opisana dela,
+ki jih je potrebno izvesti v sklopu nameravane gradnje, predvideni materiali in postopki
+ter pogoji vezani na zagotavljanje planirane kvalitete končnih izdelkov, konstrukcij, ek,
+ vgrajene materiale in izvedene postopke tako z vidika planirane kvalitete končnega končnega
+ izgleda  in varnost.
+V popisih del vključujejo tudi tehnična merila za prevzem, merjenje in obračun del.
+
+
+Zbirke popisnih postavk, ki se lahko pojavljajo pri gradnjah
+
+
+Vsebina Popisa materiala in opreme po zahtevah iz navedenega pravilnika se le deloma prekriva z vsebino POPISOV DEL, ki v praksi pomenijo nepogrešljiv dokument pri gradnjah. V POPISIH DEL ni samo popisa materiala in opreme. V popisu del so opisane sestave gradbenih konstrukcij in njihovih delov , tehnologije izvedbe, uporabljeni materiali in na njih vezane zahteve iz zakona o gradbenih proizvodih, pravila za zagotavljanje kvaliete, pravila pri obračunu in merjenju količin, varnostne zahteve, navedbe standardov itd.. Popisi del so pri gradnjah po sistemu ” na enoto mere ” ključni pri definiranju predmeta pogodbe in izračunu končne cene pogodbenih del.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Pred več kot štiridesetimi leti smo bili slovenski gradbinci v svetovnem merilu pionirji
+tudi na področju standardiziranih popisov del, prirejenih celo za računalniško obdelavo.
+Danes, v obdobju globalizacije, standardizacije in digitalizacije smo še
 
 
 Cilj projekta

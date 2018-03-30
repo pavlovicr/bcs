@@ -7,16 +7,18 @@ from podrobnosti.models import Vir,Specifikacija,Poglavje,Odsek,Podrobnost,Gradi
 
 class GradivoInline(admin.StackedInline):
     model = Gradivo
+    extra=1
 
 
 class PodrobnostInline(admin.StackedInline):
     model = Podrobnost
-
+    extra=1
 
 class SpecifikacijaAdmin(admin.ModelAdmin):
-    list_display = ['stevilka','tekst','podlaga']
-    ordering = ['tip','stevilka']
-
+    list_display = ['tekst','tip','poglavje','podlaga']
+    list_filter = ('tip', 'poglavje')
+    ordering = ['tip','poglavje__stevilka','stevilka']
+    exclude = ('stevilka',)
     inlines = [PodrobnostInline]
 
 
@@ -28,9 +30,11 @@ class VirAdmin(admin.ModelAdmin):
 
 
 class PodrobnostAdmin(admin.ModelAdmin):
-    read_only = ['gs']
-    list_display = ['stevilka','tekst','gs']
-    ordering = ['specifikacija__stevilka','stevilka']
+    #read_only = ['gs']
+    list_display = ['stevilka','tekst','vaja','gs']
+    list_filter = ('specifikacija__tip', 'specifikacija__poglavje')
+    ordering = ['specifikacija__tip','specifikacija__stevilka','stevilka']
+
 
 class OdsekAdmin(admin.ModelAdmin):
     list_display = ['stevilka','tekst']

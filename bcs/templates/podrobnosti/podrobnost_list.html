@@ -13,7 +13,7 @@
 
       {% for podrobnost in object_list %}
 
-      <li><a href="{% url 'podrobnost-detail' podrobnost.pk %}">{{podrobnost.tekst}}</a>, gs: {{podrobnost.gs}}</li>
+      <li><a href="{% url 'podrobnost-detail' podrobnost.pk %}">{{podrobnost.tekst}}</a>, gs: {{podrobnost.gs}}, vaja: {{podrobnost.vaja}}</li>
 
       {% endfor %}
 
@@ -23,15 +23,5 @@
     {% else %}
       <p>Tukaj nič novega.</p>
     {% endif %}
+
 {% endblock %}
-
-
-
-
-
-
-
-
-{% comment %}
-<p class="{% cycle 'odd' 'even' %}">{{ podrobnost.opis}},{{ podrobnost.komentar}}</p>
-{% endcomment %}

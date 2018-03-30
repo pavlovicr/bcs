@@ -3,7 +3,7 @@ from django.urls import reverse
 
 from osnova.utils import ChoiceEnum
 from osnova.models import Osnova
-
+#from django.utils.html import format_html
 
 class Zvrst(ChoiceEnum):
     STANDARD = 'Standard'
@@ -113,6 +113,7 @@ class Odsek(Osnova):
         return reverse('segment-detail', args=[str(self.id)])
 
 
+
 class Podrobnost(Osnova):
     ''' Nekaj o podrobnostih '''
     odsek = models.ForeignKey('Odsek', on_delete=models.SET_NULL, blank=True, null=True)
@@ -120,12 +121,9 @@ class Podrobnost(Osnova):
     komentar = models.TextField(blank=True)
     tekst_za_popis = models.TextField(blank=True)
 
-    def gsx(self):
-        a=str(self.specifikacija.poglavje.dela.vrsta_del.stevilka)
-        return a
 
-    # Pazi !, V kolikor ne bo vseh unosov tujih ključev ne dela
-    @property
+    # Pazi !, V kolikor ne bo vseh vnosov tujih ključev ne dela
+    #@property
     def gs(self):
         a = str(self.stevilka)
         b = str(self.odsek.stevilka)
@@ -134,9 +132,27 @@ class Podrobnost(Osnova):
         e = str(self.specifikacija.poglavje.dela.stevilka)
         f = str(self.specifikacija.poglavje.dela.vrsta_del.stevilka)
         return [f,e,d,c,b,a]
+    gs=property(gs)
+
+    def vaja(self):
+        return self.stevilka+self.specifikacija.stevilka+1000
+    vaja=property(vaja)
+
+#    def barva(self):
+#        return format_html(
+#            '<span style="color: #{};">{} {}</span>',
+#            self.tekst,
+#        )
+
+
+
+
+
+
+
 
     class Meta:
-        ordering = ['specifikacija__stevilka','stevilka']
+        ordering = ['specifikacija__tip','specifikacija__stevilka','stevilka']
 
 
     def __str__(self):
