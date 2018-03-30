@@ -16,14 +16,15 @@ Uvod
 **njihove vgradnje. Tehnično poročilo vsebuje tudi popis količin materiala in opreme.**
 
 
-POPISI DEL so v gradbeni praksi uveljavljeni že desetletja in predstavljajo nepogrešljiv dokument
-pri gradnji objektov, kljub temu, da nikakor ne najdejo ustreznega mesta znotraj dokumentacije po
+Kljub temu, da so POPISI DEL že desetletja uveljavljeni v gradbeni praksi in predstavljajo pri
+gradnji objektov nepogrešljiv del dokumentacije, ne najdejo ustreznega mesta znotraj dokumentacije po
 pravilniku o projektni dokumentaciji. To je sicer razumljivo, če upoštevamo dejstvo, da zakonodajalec
 skrbi za javni interes in je znotraj pravilnika o projektni dokumentaciji predpisal le vsebine,
 s katerimi se zagotavlja izpolnjevanje bistvenih zahtev objektov. Zakonodajalec se ne ukvarja z
 vsebinami, ki niso v javnem interesu in z vsebinami komercialnega značaja. POPISI DEL pokrivajo tudi
 ta del.
-POPISI DEL v bistvu v pregledni obliki povzemajo ter dopolnjujejo projektno dokumentacijo v delu,
+
+POPISI DEL v pregledni obliki povzemajo ter dopolnjujejo projektno dokumentacijo v delu,
 ki ga predpisuje javni interes kot tudi v delu, ki predstavlja pričakovanja in pogoje investitorja
 gradnje..............................
 Popisi del so pri gradnjah po sistemu " na enoto mere " nujni za izračun končne cene pogodbenih del.
@@ -95,9 +96,9 @@ Popisi del sprejeti kot standardizirani popisi del, s konsenzom investitorjev gr
         osnovna specifikacija posameznega dela
     specifikacija
         dodatna specifikacija posameznega dela
-    segment
+    odsek
         merilo za opredelitev specifikacije
-    področje kriterija
+    poglavje
             področje, ki ji kriterij pripada
     skupina področja kriterija
             skupina, ki ji področje pripada

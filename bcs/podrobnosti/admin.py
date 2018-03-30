@@ -15,7 +15,7 @@ class PodrobnostInline(admin.StackedInline):
     extra=1
 
 class SpecifikacijaAdmin(admin.ModelAdmin):
-    list_display = ['tekst','tip','poglavje','podlaga']
+    list_display = ['tekst','tip','poglavje','podlaga','dela']
     list_filter = ('tip', 'poglavje')
     ordering = ['tip','poglavje__stevilka','stevilka']
     exclude = ('stevilka',)

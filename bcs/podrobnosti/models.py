@@ -61,8 +61,6 @@ class Predmet(ChoiceEnum):
 
 
 class Poglavje(Osnova):
-    dela = models.ForeignKey('popisi.Dela',on_delete=models.SET_NULL, null=True)
-    predmet = models.CharField(max_length=10, choices=Predmet.choices(), default=Predmet.MATERIAL)
 
     class Meta:
         ordering = ['stevilka']
@@ -89,6 +87,8 @@ class Tip(ChoiceEnum):
 
 
 class Specifikacija(Osnova):
+    dela = models.ForeignKey('popisi.Dela',on_delete=models.SET_NULL, null=True)
+    predmet = models.CharField(max_length=10, choices=Predmet.choices(), default=Predmet.MATERIAL)
     tip = models.CharField(max_length=10, choices=Tip.choices(), default=Tip.POPIS)
     podlaga = models.CharField(max_length=10, choices=Podlaga.choices(), default=Podlaga.STROKA)
     poglavje = models.ForeignKey('Poglavje', on_delete=models.SET_NULL, null=True)
@@ -128,10 +128,10 @@ class Podrobnost(Osnova):
         a = str(self.stevilka)
         b = str(self.odsek.stevilka)
         c = str(self.specifikacija.stevilka)
-        d = str(self.specifikacija.poglavje.stevilka)
-        e = str(self.specifikacija.poglavje.dela.stevilka)
-        f = str(self.specifikacija.poglavje.dela.vrsta_del.stevilka)
-        return [f,e,d,c,b,a]
+        #d = str(self.specifikacija.poglavje.stevilka)
+        #e = str(self.specifikacija.poglavje.dela.stevilka)
+        #f = str(self.specifikacija.poglavje.dela.vrsta_del.stevilka)
+        return [c,b,a]
     gs=property(gs)
 
     def vaja(self):

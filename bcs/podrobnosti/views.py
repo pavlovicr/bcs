@@ -60,8 +60,8 @@ class SpecifikacijaList(ListView):
 
         queryset = queryset.order_by(
             'tip',
-            'poglavje__dela__vrsta_del',
-            'poglavje__dela',
+            'dela__vrsta_del',
+            'dela',
             'poglavje',
             'stevilka',
             #'tekst'

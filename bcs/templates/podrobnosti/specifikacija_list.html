@@ -8,15 +8,14 @@
 {% regroup object_list by tip as podlage %}
 {% for tip in podlage %}
 <b>{{ tip.grouper }}</b>
-
 <ul>
     <!--  grupiramo list po  vrsta del -->
-    {% regroup tip.list by poglavje.dela.vrsta_del as podlage %}
+    {% regroup tip.list by dela.vrsta_del as podlage %}
     {% for vrsta_del in podlage %}
     <li><h6>{{ vrsta_del.grouper }}</h6></li>
     <ul>
         <!--  grupiramo list po  dela -->
-        {% regroup vrsta_del.list by poglavje.dela as podlage %}
+        {% regroup vrsta_del.list by dela as podlage %}
         {% for dela in podlage %}
         <li><h6>{{ dela.grouper }}</h6></li>
         <ul>
@@ -54,5 +53,4 @@
     {% endfor %}
 </ul>
 {% endfor %}
-
 {% endblock %}
