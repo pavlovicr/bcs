@@ -34,39 +34,16 @@ pravila za zagotavljanje kvaliete, pravila pri obračunu in merjenju količin,
 varnostne zahteve, navedbe standardov itd.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Pred več kot štiridesetimi leti smo bili slovenski gradbinci v svetovnem merilu pionirji
-tudi na področju standardiziranih popisov del, prirejenih celo za računalniško obdelavo.
-Danes, v obdobju globalizacije, standardizacije in digitalizacije smo še
+Danes se lahko, v obdobju globalizacije, standardizacije in digitalizacije, še vedno zgledujemo po
+standardiziranih popisih del pripravljenih za računalniško obdelavo, ki so jih izdelali nekateri
+slovenskih gradbincih izpred pol stoletja.
 
 
 Cilj projekta
 *************
-Izdelati sistem priprave, urejanja in vzdrževanja knjižnice standardiziranih popisov del , ki bo sodoben, digitaliziran, dostopen prek spleta in javen po principih "open source" ???
+Izdelati sistem priprave, urejanja in vzdrževanja knjižnice standardiziranih popisov del , ki bo
+sodoben, digitaliziran, dostopen prek spleta in javen po principih "open source" ???
+
 
 Aktivnosti in faznost
 *********************
