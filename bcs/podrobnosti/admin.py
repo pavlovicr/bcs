@@ -13,6 +13,11 @@ class Podrobnost1Inline(admin.StackedInline):
     model = Podrobnost1
     extra=1
 
+class Podrobnost2Inline(admin.StackedInline):
+    model = Podrobnost2
+    extra=1
+
+
 class SpecifikacijaAdmin(admin.ModelAdmin):
     list_display = ['tekst','tip','poglavje','podlaga','dela']
     list_filter = ('tip', 'poglavje')
@@ -34,12 +39,13 @@ class Podrobnost1Admin(admin.ModelAdmin):
     list_filter = ('specifikacija__tip', 'specifikacija__poglavje')
     ordering = ['specifikacija__tip','specifikacija__stevilka','stevilka']
 
+    inlines = [Podrobnost2Inline]
+
 
 class Podrobnost2Admin(admin.ModelAdmin):
     list_display = ['stevilka','tekst']
-    ordering = ['stevilka']
+    ordering = ['podrobnost1__specifikacija__stevilka','podrobnost1__stevilka','stevilka']
 
-#    inlines = [Podrobnost1Inline]
 
 admin.site.register(Vir,VirAdmin)
 admin.site.register(Specifikacija,SpecifikacijaAdmin)
