@@ -3,7 +3,7 @@ from django.urls import reverse
 
 from osnova.utils import ChoiceEnum
 from osnova.models import Osnova
-from podrobnosti.models import  Podrobnost
+from podrobnosti.models import  Podrobnost1
 
 
 class SkupinaDel(ChoiceEnum):
@@ -47,7 +47,7 @@ class Postavka(Osnova):
 
 class PopisnaPostavka(Osnova):
     postavka = models.ForeignKey('Postavka', on_delete=models.SET_NULL, null=True)
-    podrobnost = models.ManyToManyField('podrobnosti.Podrobnost')
+    podrobnost1 = models.ManyToManyField('podrobnosti.Podrobnost1')
 
 
     def __str__(self):

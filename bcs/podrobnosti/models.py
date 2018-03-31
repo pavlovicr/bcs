@@ -103,20 +103,9 @@ class Specifikacija(Osnova):
         return reverse('specifikacija-detail', args=[str(self.id)])
 
 
-class Odsek(Osnova):
-    tekst_za_popis = models.TextField(blank=True)
-
-    def __str__(self):
-        return self.tekst
-
-    def get_absolute_url(self):
-        return reverse('segment-detail', args=[str(self.id)])
-
-
-
-class Podrobnost(Osnova):
+class Podrobnost1(Osnova):
     ''' Nekaj o podrobnostih '''
-    odsek = models.ForeignKey('Odsek', on_delete=models.SET_NULL, blank=True, null=True)
+
     specifikacija = models.ForeignKey('Specifikacija', on_delete=models.SET_NULL, null=True)
     komentar = models.TextField(blank=True)
     tekst_za_popis = models.TextField(blank=True)
@@ -125,13 +114,13 @@ class Podrobnost(Osnova):
     # Pazi !, V kolikor ne bo vseh vnosov tujih ključev ne dela
     #@property
     def gs(self):
-        a = str(self.stevilka)
-        b = str(self.odsek.stevilka)
-        c = str(self.specifikacija.stevilka)
+        #a = str(self.stevilka)
+        #b = str(self.specifikacija.stevilka)
+        #c = str(self.specifikacija.stevilka)
         #d = str(self.specifikacija.poglavje.stevilka)
         #e = str(self.specifikacija.poglavje.dela.stevilka)
         #f = str(self.specifikacija.poglavje.dela.vrsta_del.stevilka)
-        return [c,b,a]
+        return []
     gs=property(gs)
 
     def vaja(self):
@@ -144,13 +133,6 @@ class Podrobnost(Osnova):
 #            self.tekst,
 #        )
 
-
-
-
-
-
-
-
     class Meta:
         ordering = ['specifikacija__tip','specifikacija__stevilka','stevilka']
 
@@ -159,4 +141,15 @@ class Podrobnost(Osnova):
         return self.tekst
 
     def get_absolute_url(self):
-        return reverse('podrobnost-detail', args=[str(self.id)])
+        return reverse('podrobnost1-detail', args=[str(self.id)])
+
+
+class Podrobnost2(Osnova):
+    podrobnost1 = models.ForeignKey('Podrobnost1', on_delete=models.SET_NULL, blank=True, null=True)
+    tekst_za_popis = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.tekst
+
+    def get_absolute_url(self):
+        return reverse('podrobnost2-detail', args=[str(self.id)])

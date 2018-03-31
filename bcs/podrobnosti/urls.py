@@ -16,10 +16,10 @@ urlpatterns = [
     url(r'^poglavje/(?P<pk>\d+)$', views.PoglavjeDetail.as_view(), name='poglavje-detail'),
     url(r'^specifikacije/$', views.SpecifikacijaList.as_view(), name='specifikacija-list'),
     url(r'^specifikacija/(?P<pk>\d+)$', views.SpecifikacijaDetail.as_view(), name='specifikacija-detail'),
-    url(r'^odseki/$', views.OdsekList.as_view(), name='odsek-list'),
-    url(r'^odsek/(?P<pk>\d+)$', views.OdsekDetail.as_view(), name='odsek-detail'),
-    url(r'^podrobnosti/$', views.PodrobnostList.as_view(), name='podrobnost-list'),
-    url(r'^podrobnost/(?P<pk>\d+)$', views.PodrobnostDetail.as_view(), name='podrobnost-detail'),
+    url(r'^podrobnosti1/$', views.Podrobnost1List.as_view(), name='podrobnost1-list'),
+    url(r'^podrobnost1/(?P<pk>\d+)$', views.Podrobnost1Detail.as_view(), name='podrobnost1-detail'),
+    url(r'^podrobnosti2/$', views.Podrobnost2List.as_view(), name='podrobnost2-list'),
+    url(r'^podrobnost2/(?P<pk>\d+)$', views.Podrobnost2Detail.as_view(), name='podrobnost2-detail'),
 
 
 ]

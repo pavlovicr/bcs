@@ -5,7 +5,7 @@ from django.views.generic import ListView
 from django.shortcuts import get_object_or_404
 
 #bcs
-from podrobnosti.models import Vir,Poglavje,Specifikacija,Odsek,Podrobnost,Gradivo,Namen
+from podrobnosti.models import Vir,Poglavje,Specifikacija,Podrobnost2,Podrobnost1,Gradivo,Namen
 
 #def stev(request):
 #    stevilka = Podrobnost.objects.all()
@@ -73,16 +73,8 @@ class SpecifikacijaDetail(DetailView):
     model = Specifikacija
 
 
-class OdsekList(ListView):
-    model = Odsek
-
-
-class OdsekDetail(DetailView):
-    model = Odsek
-
-
-class PodrobnostList(ListView):
-    model = Podrobnost
+class Podrobnost1List(ListView):
+    model = Podrobnost1
 
 #    def get_queryset(self, *args, **kwargs):
 #        queryset = super(SpecifikacijaList, self).get_queryset(*args, **kwargs)
@@ -93,5 +85,13 @@ class PodrobnostList(ListView):
 #        return queryset
 
 
-class PodrobnostDetail(DetailView):
-    model = Podrobnost
+class Podrobnost1Detail(DetailView):
+    model = Podrobnost1
+
+
+class Podrobnost2List(ListView):
+    model = Podrobnost2
+
+
+class Podrobnost2Detail(DetailView):
+    model = Podrobnost2

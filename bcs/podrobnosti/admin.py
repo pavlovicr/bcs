@@ -1,8 +1,7 @@
 from django.contrib import admin
 
 #bcs
-from podrobnosti.models import Vir,Specifikacija,Poglavje,Odsek,Podrobnost,Gradivo,Namen
-
+from podrobnosti.models import Vir,Specifikacija,Poglavje,Podrobnost2,Podrobnost1,Gradivo,Namen
 
 
 class GradivoInline(admin.StackedInline):
@@ -10,8 +9,8 @@ class GradivoInline(admin.StackedInline):
     extra=1
 
 
-class PodrobnostInline(admin.StackedInline):
-    model = Podrobnost
+class Podrobnost1Inline(admin.StackedInline):
+    model = Podrobnost1
     extra=1
 
 class SpecifikacijaAdmin(admin.ModelAdmin):
@@ -19,7 +18,7 @@ class SpecifikacijaAdmin(admin.ModelAdmin):
     list_filter = ('tip', 'poglavje')
     ordering = ['tip','poglavje__stevilka','stevilka']
     exclude = ('stevilka',)
-    inlines = [PodrobnostInline]
+    inlines = [Podrobnost1Inline]
 
 
 class VirAdmin(admin.ModelAdmin):
@@ -29,23 +28,23 @@ class VirAdmin(admin.ModelAdmin):
     inlines = [GradivoInline]
 
 
-class PodrobnostAdmin(admin.ModelAdmin):
+class Podrobnost1Admin(admin.ModelAdmin):
     #read_only = ['gs']
     list_display = ['stevilka','tekst','vaja','gs']
     list_filter = ('specifikacija__tip', 'specifikacija__poglavje')
     ordering = ['specifikacija__tip','specifikacija__stevilka','stevilka']
 
 
-class OdsekAdmin(admin.ModelAdmin):
+class Podrobnost2Admin(admin.ModelAdmin):
     list_display = ['stevilka','tekst']
     ordering = ['stevilka']
 
-    inlines = [PodrobnostInline]
+#    inlines = [Podrobnost1Inline]
 
 admin.site.register(Vir,VirAdmin)
 admin.site.register(Specifikacija,SpecifikacijaAdmin)
 admin.site.register(Poglavje)
-admin.site.register(Odsek,OdsekAdmin)
-admin.site.register(Podrobnost,PodrobnostAdmin)
+admin.site.register(Podrobnost2,Podrobnost2Admin)
+admin.site.register(Podrobnost1,Podrobnost1Admin)
 admin.site.register(Gradivo)
 admin.site.register(Namen)
