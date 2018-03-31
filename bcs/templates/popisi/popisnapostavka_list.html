@@ -7,7 +7,26 @@
         <!-- seznam popisnih postavk in dolocil -->
         {% for popisnapostavka in object_list %}
             <li><b>{{popisnapostavka.postavka.tekst}}</b></li>
-            <!--regrupiramo podrobnosti popisnih postavk po segment.tekst_za_popis
+
+            {% regroup popisnapostavka.hec by podrobnost2.specifikacija.stevilka as podlage %}
+            {% for tone in podlage %}
+            {{ tone.grouper}}
+
+            {% for a in tone.list %}
+            {% for miha in a %}
+            {{miha.tekst}},
+            {% endfor %}{% endfor %}{% endfor %}
+
+
+
+
+
+
+
+
+
+{% comment %}
+            <!--regrupiramo podrobnost2 popisnih postavk po podrobnost1.tekst_za_popis
             , ker zelimo prilagoditi tekst izpisa uveljavljenemu nacinu za "stopnje izpostavljenosti " -->
             {% regroup popisnapostavka.podrobnost.all by odsek.tekst_za_popis as podlage %}
             {% for podrobnost in podlage %}
@@ -25,6 +44,7 @@
 
                 {% endfor %}
             {% endfor %}
+{% endcomment %}
         {% endfor %}
     </ul>
 

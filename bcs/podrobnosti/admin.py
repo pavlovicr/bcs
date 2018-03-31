@@ -12,6 +12,7 @@ class GradivoInline(admin.StackedInline):
 class Podrobnost1Inline(admin.StackedInline):
     model = Podrobnost1
     extra=1
+    2
 
 class Podrobnost2Inline(admin.StackedInline):
     model = Podrobnost2
@@ -19,7 +20,7 @@ class Podrobnost2Inline(admin.StackedInline):
 
 
 class SpecifikacijaAdmin(admin.ModelAdmin):
-    list_display = ['tekst','tip','poglavje','podlaga','dela']
+    list_display = ['stevilka','tekst','tip','poglavje','podlaga','dela']
     list_filter = ('tip', 'poglavje')
     ordering = ['tip','poglavje__stevilka','stevilka']
     exclude = ('stevilka',)
@@ -35,7 +36,7 @@ class VirAdmin(admin.ModelAdmin):
 
 class Podrobnost1Admin(admin.ModelAdmin):
     #read_only = ['gs']
-    list_display = ['stevilka','tekst','vaja','gs']
+    list_display = ['stevilka','tekst','tekst_za_popis','vaja','gs']
     list_filter = ('specifikacija__tip', 'specifikacija__poglavje')
     ordering = ['specifikacija__tip','specifikacija__stevilka','stevilka']
 
@@ -43,7 +44,7 @@ class Podrobnost1Admin(admin.ModelAdmin):
 
 
 class Podrobnost2Admin(admin.ModelAdmin):
-    list_display = ['stevilka','tekst']
+    list_display = ['stevilka','tekst','tekst_za_popis']
     ordering = ['podrobnost1__specifikacija__stevilka','podrobnost1__stevilka','stevilka']
 
 

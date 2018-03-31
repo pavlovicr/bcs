@@ -48,6 +48,13 @@ class Postavka(Osnova):
 class PopisnaPostavka(Osnova):
     postavka = models.ForeignKey('Postavka', on_delete=models.SET_NULL, null=True)
     podrobnost1 = models.ManyToManyField('podrobnosti.Podrobnost1')
+    podrobnost2 = models.ManyToManyField('podrobnosti.Podrobnost2')
+
+    def hec(self):
+        return self.podrobnost1.all(),self.podrobnost2.all()
+    hec = property(hec)
+
+
 
 
     def __str__(self):

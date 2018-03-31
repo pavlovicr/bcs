@@ -26,12 +26,29 @@
             <ul>
                 <!--  listamo specifikacije -->
                 {% for specifikacija in poglavje.list %}
-                <li><b><a href ="{% url 'specifikacija-detail' specifikacija.pk %}">{{ specifikacija.tekst }} </a></b></li>
+                <li><b><a href ="{% url 'specifikacija-detail' specifikacija.pk %}">{{ specifikacija.tekst }}</a></b></li>
+                    <!-- listamo snotraj specifikacij po podrobnosti 1 -->
+
+                    {% for podrobnost1 in specifikacija.podrobnost1_set.all %}
+                    <li>{{podrobnost1.tekst}}</li>
+                    {% for podrobnost2 in podrobnost1.podrobnost2_set.all%}
+                    <li>{{podrobnost2.tekst}}</li>
+
+                    {% endfor %}{% endfor %}
+
+
+
+
+
+
+
+
+{% comment %}
                 <ul>
                     <!--  znotraj specifikacij grupiramo podskupine -->
-                    {% regroup specifikacija.podrobnost_set.all by odsek as podlage %}
-                    {% for odsek in podlage %}
-                            {{ odsek.grouper.tekst }}
+                    {% regroup specifikacija.podrobnost1_set.all by tekst as podlage %}
+                    {% for tekst in podlage %}
+                            {{ tekst.grouper.tekst }}
                     <ul>
                         <!--  znotraj poskupi specifikacij listamo podrobnosti -->
                         {% for podrobnost in odsek.list %}
@@ -44,6 +61,7 @@
                     </ul>
                     {% endfor %}
                 </ul>
+{% endcomment %}
                 {% endfor %}
             </ul>
             {% endfor %}
