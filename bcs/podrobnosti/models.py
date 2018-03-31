@@ -134,7 +134,8 @@ class Podrobnost1(Osnova):
 #        )
 
     class Meta:
-        ordering = ['specifikacija__tip','specifikacija__stevilka','stevilka']
+        ordering = ['specifikacija__tip','specifikacija__stevilka']
+
 
 
     def __str__(self):
@@ -153,3 +154,6 @@ class Podrobnost2(Osnova):
 
     def get_absolute_url(self):
         return reverse('podrobnost2-detail', args=[str(self.id)])
+
+    class Meta:
+        ordering = ['podrobnost1__specifikacija__tip','podrobnost1__specifikacija__stevilka']

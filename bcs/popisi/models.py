@@ -48,7 +48,7 @@ class Postavka(Osnova):
 class PopisnaPostavka(Osnova):
     postavka = models.ForeignKey('Postavka', on_delete=models.SET_NULL, null=True)
     podrobnost1 = models.ManyToManyField('podrobnosti.Podrobnost1')
-
+    podrobnost2 = models.ManyToManyField('podrobnosti.Podrobnost2')
 
     def __str__(self):
         return self.tekst

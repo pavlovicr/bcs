@@ -19,10 +19,9 @@ class Podrobnost2Inline(admin.StackedInline):
 
 
 class SpecifikacijaAdmin(admin.ModelAdmin):
-    list_display = ['tekst','tip','poglavje','podlaga','dela']
+    list_display = ['stevilka','tekst','tip','poglavje','podlaga','dela']
     list_filter = ('tip', 'poglavje')
     ordering = ['tip','poglavje__stevilka','stevilka']
-    exclude = ('stevilka',)
     inlines = [Podrobnost1Inline]
 
 
@@ -37,14 +36,14 @@ class Podrobnost1Admin(admin.ModelAdmin):
     #read_only = ['gs']
     list_display = ['stevilka','tekst','vaja','gs']
     list_filter = ('specifikacija__tip', 'specifikacija__poglavje')
-    ordering = ['specifikacija__tip','specifikacija__stevilka','stevilka']
+    ordering = ['specifikacija__tip','specifikacija__stevilka']
 
     inlines = [Podrobnost2Inline]
 
 
 class Podrobnost2Admin(admin.ModelAdmin):
     list_display = ['stevilka','tekst']
-    ordering = ['podrobnost1__specifikacija__stevilka','podrobnost1__stevilka','stevilka']
+    ordering = ['podrobnost1__specifikacija__tip','podrobnost1__specifikacija__stevilka']
 
 
 admin.site.register(Vir,VirAdmin)

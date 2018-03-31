@@ -7,6 +7,16 @@
         <!-- seznam popisnih postavk in dolocil -->
         {% for popisnapostavka in object_list %}
             <li><b>{{popisnapostavka.postavka.tekst}}</b></li>
+            {% for a in popisnapostavka.podrobnost1.all %}{{a.tekst}},{% endfor %}
+            {% for b in popisnapostavka.podrobnost2.all %}{{b.tekst}},{% endfor %} 
+
+
+
+
+
+
+
+
             <!--regrupiramo podrobnosti popisnih postavk po segment.tekst_za_popis
             , ker zelimo prilagoditi tekst izpisa uveljavljenemu nacinu za "stopnje izpostavljenosti " -->
             {% regroup popisnapostavka.podrobnost.all by odsek.tekst_za_popis as podlage %}
