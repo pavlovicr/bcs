@@ -87,6 +87,7 @@ class Tip(ChoiceEnum):
 
 
 class Specifikacija(Osnova):
+    tekst_za_popis = models.TextField(blank=True)
     dela = models.ForeignKey('popisi.Dela',on_delete=models.SET_NULL, null=True)
     predmet = models.CharField(max_length=10, choices=Predmet.choices(), default=Predmet.MATERIAL)
     tip = models.CharField(max_length=10, choices=Tip.choices(), default=Tip.POPIS)
