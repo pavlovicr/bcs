@@ -1,29 +1,55 @@
 {% extends "base.html" %}
 
 {% block content %}
+<!--Naloga :
+Izpisujejo se podatki iz polj "postavka, podrobnost, odsek, specifikacija".
+V klasu postavka se izpisuje polje 'postavka'. V klasu Specifikacija se izpisuje polje 'tekst_za_popis'.
+V klasu Odsek polje 'tekst_za_popis', vendar samo če je polje 'tekst_za_popis' iz Specifikacija prazno.
+Tak način nam nudi več variant izpisa teksta skupine podrobnosti.
+V klasu podrobnosti se izpiše polje 'tekst_za_popis', v kolikor je to prazno pa polje 'teks'.
+To pa s tem namenom , da ne po nepotrebnem podvajamo podatkov iz polja 'tekst', če so ti že primerni
+za izpis. Vrstni red izpisa je postavka, specifikacija, odsek, podrobnost. Odsek se izpisuje redko,
+ker gre za podskupine , ki pa so bolj izjema kot pravilo.
+Včasih želimo pri izpisu večih podrobnosti, ki so del podskupin iz klasa Odsek  in del neke glavne
+skupine iz klasa Specifikacija, združiti in pred njimi izpisati samo tekst glavne skupine iz klasa
+Specifikacija.Tak primer so stopnje izpostavljenosti. Ne želimo predstaviti vsake podrobnosti
+posebej s tekstom iz klasa Odsek, ki pripada tisti podrobnosti , pr.'odpornost na karbonatizacijo XC2
+, odpornost na zmrzal XF2'...Naš izpis je sestavljen iz glavnega naslova in združenih podrobnosti.
+Primer : ' stopnja izpostavljenosti XC2,XF2,XM1 '.
+To nam omogoča regrupiranje podrobnosti po 'tekst_za_popis' iz klasa Splecifikacija.-->
 
     <h1></h1>
     <ul>
-        <!-- seznam popisnih postavk in dolocil -->
+        <!-- seznam popisnih postavk  -->
         {% for popisnapostavka in object_list %}
             <li><b>{{popisnapostavka.postavka.tekst}}</b></li>
-            <!--regrupiramo podrobnosti popisnih postavk po segment.tekst_za_popis
-            , ker zelimo prilagoditi tekst izpisa uveljavljenemu nacinu za "stopnje izpostavljenosti " -->
-            {% regroup popisnapostavka.podrobnost.all by odsek.tekst_za_popis as podlage %}
-            {% for podrobnost in podlage %}
-            {{ podrobnost.grouper}}
-                <!-- zlistamo podrobnosti znotraj regroupa -->
-                {% for podrobnost in podrobnost.list %}
-
-                        <!-- zlistamo pa tako, da izpis locimo za popis od dolocil,
-                        ker imajo dolocila tekst v tekst_za_popis, popisi pa v polju tekst -->
+            <!--Regrupiranje podrobnosti po tekst_za_popis iz Specifikacija-->
+            {% regroup popisnapostavka.podrobnost.all by specifikacija.tekst_za_popis as podlage %}
+            {% for podrobnosti in podlage %}
+                {{ podrobnosti.grouper}}
+                <!-- Če je polje v Specifikacija teks_za_popis polno izpiši samo podrobnosti-->
+                {% if podrobnosti.grouper %}
+                    {% for podrobnost in podrobnosti.list %}
+                        <!--če je tekst_za_popis ga izpiši sicer pa tekst -->
                         {% if podrobnost.tekst_za_popis %}
-                        {{podrobnost.tekst_za_popis}},
+                            {{podrobnost.tekst_za_popis}},
                         {% else %}
-                        <b>{{podrobnost.tekst}},</b>
+                            <b>{{podrobnost.tekst}},</b>
                         {% endif %}
-
-                {% endfor %}
+                    {% endfor %}
+                <!-- Če je polje v Specifikacija teks_za_popis prazno dodaj pred podrobnosti
+                še tekst Odseka-->
+                {% else %}
+                    {% for podrobnost in podrobnosti.list %}
+                        {{podrobnost.odsek.tekst_za_popis}}
+                        <!--če je tekst_za_popis ga izpiši sicer pa tekst -->
+                        {% if podrobnost.tekst_za_popis %}
+                            {{podrobnost.tekst_za_popis}},
+                        {% else %}
+                            <b>{{podrobnost.tekst}},</b>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
             {% endfor %}
         {% endfor %}
     </ul>
