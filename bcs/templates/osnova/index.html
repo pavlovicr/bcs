@@ -15,10 +15,11 @@
   <p>Vstop : </p>
   <ul>
     <li><strong><a href="{% url 'postavka-list' %}"> Postavke: </a></strong> {{ stej_postavka }}</li>
+    <li><strong><a href="{% url 'specifikacija-list' %}"> Specifikacija: </a></strong> {{ stej_specifikacija }}</li>
     <li><strong><a href="/popisi/dela/"> Dela: </a></strong> {{ stej_dela }}</li>
 
     <li><strong><a href="/popisi/vrsta_del/"> Vrsta Del: </a></strong> {% autoescape on %}{{ stej_vrstadel }}{% endautoescape %}</li>
-    
+
 
   </ul>
 

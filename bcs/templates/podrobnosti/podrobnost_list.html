@@ -2,36 +2,59 @@
 
 {% block content %}
 
-
-
-    <h1>Podrobnosti seznam</h1>
-
-    {% if object_list %}
+<h1>Podrobnosti seznam</h1>
+    <!--  grupiramo podrobnosti po  specifikacija-dela-vrsta_del (betonska dela, .....) -->
+    {% regroup object_list by specifikacija.dela.vrsta_del as podlage %}
+    {% for vrsta_del in podlage %}
+    <h4>{{ vrsta_del.grouper }}</h4>
     <ul>
-
-
-
-      {% for podrobnost in object_list %}
-
-      <li><a href="{% url 'podrobnost-detail' podrobnost.pk %}">{{podrobnost.tekst}}</a></li>
-
-      {% endfor %}
-
-
+        <!--  grupiramo podrobnosti po specifikacija-dela (betoniranje, ....)  -->
+        {% regroup vrsta_del.list by specifikacija.dela as podlage %}
+        {% for dela in podlage %}
+        <h4><li><b>{{ dela.grouper }}</b></li></h4>
+        <ul>
+            <!--  grupiramo podrobnosti po  specifikacija-tip (dolocilo, popis) -->
+            {% regroup dela.list by specifikacija.tip as podlage %}
+            {% for tip in podlage %}
+            <li><b>{{ tip.grouper }}</b></li>
+            <ul>
+                <!--  grupiramo podrobnosti po  specifikacija-poglavje -->
+                {% regroup tip.list by specifikacija.poglavje as podlage %}
+                {% for poglavje in podlage %}
+                <li><b>{{ poglavje.grouper }}</b></li>
+                <ul>
+                    <!-- grupiramo  podrobnosti po specifikacija -->
+                    {% regroup poglavje.list by specifikacija as podlage %}
+                    {% for specifikacija in podlage %}
+                    <li><b><a href ="{% url 'specifikacija-list' %}">{{ specifikacija.grouper }}</a></b></li>
+                    <ul>
+                        <!--  grupiramo podrobnosti po odsek. Imamo dve možnosti.V specifikacija_list
+                        ali pa object_list  -->
+                        {% regroup specifikacija.list by odsek as podlage %}
+                        {% for odsek in podlage %}
+                        <li>{{ odsek.grouper }}</li>
+                        <ul>
+                            <!--  zlistamo podrobnosti -->
+                            {% for podrobnost in odsek.list %}
+                                {% if podrobnost.tekst_za_popis %}
+                                <li>{{podrobnost.tekst_za_popis}}</li>
+                                {% else %}
+                                <li>{{podrobnost.tekst}}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}
+                </ul>
+                {% endfor %}
+            </ul>
+            {% endfor %}
+        </ul>
+        {% endfor %}
     </ul>
+    {% endfor %}
 
-    {% else %}
-      <p>Tukaj nič novega.</p>
-    {% endif %}
+
+
 {% endblock %}
-
-
-
-
-
-
-
-
-{% comment %}
-<p class="{% cycle 'odd' 'even' %}">{{ podrobnost.opis}},{{ podrobnost.komentar}}</p>
-{% endcomment %}

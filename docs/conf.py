@@ -40,7 +40,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'bcs'
-copyright = """2018, Daniel Roy Greenfeld"""
+copyright = """2018, Radoš Pavlovič"""
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -185,7 +185,7 @@ latex_documents = [
     ('index',
      'bcs.tex',
      'bcs Documentation',
-     """Daniel Roy Greenfeld""", 'manual'),
+     """Radoš Pavlovič""", 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -215,7 +215,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'bcs', 'bcs Documentation',
-     ["""Daniel Roy Greenfeld"""], 1)
+     ["""Radoš Pavlovič"""], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -229,7 +229,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     ('index', 'bcs', 'bcs Documentation',
-     """Daniel Roy Greenfeld""", 'bcs',
+     """Radoš Pavlovič""", 'bcs',
      """A short description of the project.""", 'Miscellaneous'),
 ]
 

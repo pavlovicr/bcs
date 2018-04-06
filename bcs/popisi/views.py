@@ -35,6 +35,16 @@ class PostavkaDetail(DetailView):
 class PopisnaPostavkaList(ListView):
     model = PopisnaPostavka
 
+    def get_queryset(self, *args, **kwargs):
+        queryset = super(PopisnaPostavkaList, self).get_queryset(*args, **kwargs)
+
+        queryset = queryset.order_by(
+            'postavka',
+        )
+        return queryset
+
+
+
 
 class PopisnaPostavkaDetail(DetailView):
     model = PopisnaPostavka

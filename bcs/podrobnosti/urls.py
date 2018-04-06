@@ -5,18 +5,20 @@ from . import views
 #bcs
 urlpatterns = [
 
-    url(r'^slike/$', views.SlikaList.as_view(), name='slika-list'),
-    url(r'^slika/(?P<pk>\d+)$', views.SlikaDetail.as_view(), name='slika-detail'),
-    url(r'^datoteke/$', views.DatotekaList.as_view(), name='datoteka-list'),
-    url(r'^datoteka/(?P<pk>\d+)$', views.DatotekaDetail.as_view(), name='datoteka-detail'),
-    url(r'^dokumentacije/$', views.DokumentacijaList.as_view(), name='dokumentacija-list'),
-    url(r'^dokumentacija/(?P<pk>\d+)$', views.DokumentacijaDetail.as_view(), name='dokumentacija-detail'),
-    url(r'^predmet_meril/$', views.PredmetMerilaList.as_view(), name='predmetmerila-list'),
-    url(r'^predmet_merila/(?P<pk>\d+)$', views.PredmetMerilaDetail.as_view(), name='predmetmerila-detail'),
-    url(r'^podlage_meril/$', views.PodlagaMerilaList.as_view(), name='podlagamerila-list'),
-    url(r'^podlaga_merila/(?P<pk>\d+)$', views.PodlagaMerilaDetail.as_view(), name='podlagamerila-detail'),
-    url(r'^merila/$', views.MeriloList.as_view(), name='merilo-list'),
-    url(r'^merilo/(?P<pk>\d+)$', views.MeriloDetail.as_view(), name='merilo-detail'),
+    url(r'^(?P<tone>\d+)$', views.specifikacija, name='miha'),
+
+    url(r'^nameni/$', views.NamenList.as_view(), name='namen-list'),
+    url(r'^namen/(?P<pk>\d+)$', views.NamenDetail.as_view(), name='namen-detail'),
+    url(r'^gradiva/$', views.GradivoList.as_view(), name='gradivo-list'),
+    url(r'^gradivo/(?P<pk>\d+)$', views.GradivoDetail.as_view(), name='gradivo-detail'),
+    url(r'^viri/$', views.VirList.as_view(), name='vir-list'),
+    url(r'^vir/(?P<pk>\d+)$', views.VirDetail.as_view(), name='vir-detail'),
+    url(r'^poglavja/$', views.PoglavjeList.as_view(), name='poglavje-list'),
+    url(r'^poglavje/(?P<pk>\d+)$', views.PoglavjeDetail.as_view(), name='poglavje-detail'),
+    url(r'^specifikacije/$', views.SpecifikacijaList.as_view(), name='specifikacija-list'),
+    url(r'^specifikacija/(?P<pk>\d+)$', views.SpecifikacijaDetail.as_view(), name='specifikacija-detail'),
+    url(r'^odseki/$', views.OdsekList.as_view(), name='odsek-list'),
+    url(r'^odsek/(?P<pk>\d+)$', views.OdsekDetail.as_view(), name='odsek-detail'),
     url(r'^podrobnosti/$', views.PodrobnostList.as_view(), name='podrobnost-list'),
     url(r'^podrobnost/(?P<pk>\d+)$', views.PodrobnostDetail.as_view(), name='podrobnost-detail'),
 

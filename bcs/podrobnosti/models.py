@@ -1,31 +1,9 @@
 from django.db import models
 from django.urls import reverse
 
-
-
 from osnova.utils import ChoiceEnum
 from osnova.models import Osnova
-#vaa
-
-class Slika(Osnova):
-    image = models.ImageField(blank=True)
-
-    def __str__(self):
-        return self.tekst
-
-    def get_absolute_url(self):
-        return reverse('slika-detail', args=[str(self.id)])
-
-
-class Datoteka(Osnova):
-    datoteka = models.FileField(blank=True)
-
-    def __str__(self):
-        return self.tekst
-
-    def get_absolute_url(self):
-        return reverse('datoteka-detail', args=[str(self.id)])
-
+#from django.utils.html import format_html
 
 class Zvrst(ChoiceEnum):
     STANDARD = 'Standard'
@@ -38,41 +16,64 @@ class Zvrst(ChoiceEnum):
     PRIPOROCILA = 'Priporocila'
 
 
-class Dokumentacija(Osnova):
+class Vir(Osnova):
     naslov = models.TextField(blank=True)
     zvrst = models.CharField(max_length=30, choices=Zvrst.choices(), default=Zvrst.STANDARD)
-    komentar = models.TextField()
-    image = models.ManyToManyField((Slika), blank=True)
-    datoteka = models.ManyToManyField((Datoteka), blank=True)
+    komentar = models.TextField(blank=True)
+    tekst_file = models.FileField(blank=True)
 
     def __str__(self):
         return self.tekst
 
     def get_absolute_url(self):
-        return reverse('dokumentacija-detail', args=[str(self.id)])
+        return reverse('vir-detail', args=[str(self.id)])
 
 
-class Podrocje(ChoiceEnum):
+class Namen(Osnova):
+
+    def __str__(self):
+        return self.tekst
+
+    def get_absolute_url(self):
+        return reverse('namen-detail', args=[str(self.id)])
+
+
+class Gradivo(Osnova):
+    slika = models.ImageField(blank=True)
+    tekst_file = models.FileField(blank=True)
+    namen = models.ForeignKey('Namen',on_delete=models.SET_NULL, null=True)
+    vir = models.ForeignKey('Vir',on_delete=models.SET_NULL, null=True)
+
+
+    def __str__(self):
+        return self.tekst
+
+    def get_absolute_url(self):
+        return reverse('gradivo-detail', args=[str(self.id)])
+
+
+class Predmet(ChoiceEnum):
     MATERIAL = 'Lastnosti materiala'
     IZDELEK = 'Lastnosti izdelka'
-    PROCES = 'Delovni postopki'
+    PROCES = 'Opis delovnih postopkov'
     VARNOST = 'Varnostne zahteve'
     SPLOSNO = 'Splošno'
 
 
-class PredmetMerila(Osnova):
-        dela = models.ForeignKey('popisi.Dela',on_delete=models.SET_NULL, null=True)
-        podrocje = models.CharField(max_length=10, choices=Podrocje.choices(), default=Podrocje.MATERIAL)
+class Poglavje(Osnova):
 
-        def __str__(self):
-            return self.tekst
+    class Meta:
+        ordering = ['stevilka']
 
-        def get_absolute_url(self):
-            return reverse('predmetmerila-detail', args=[str(self.id)])
+    def __str__(self):
+        return self.tekst
+
+    def get_absolute_url(self):
+        return reverse('poglavje-detail', args=[str(self.id)])
 
 
-class Izhodisce(ChoiceEnum):
-    ZAKON = 'Zahtevano z zakonom'
+class Podlaga(ChoiceEnum):
+    ZAKON = 'Zakonodaja'
     STROKA = 'Pravila stroke'
     PRAKSA = 'Gradbena praksa'
     ZNANOST = 'Znanstvena dognanja'
@@ -80,39 +81,80 @@ class Izhodisce(ChoiceEnum):
     IZVAJALCI = 'Priporočila izvajalcev'
 
 
-class PodlagaMerila(Osnova):
-    predmet_merila = models.ForeignKey('PredmetMerila', on_delete=models.SET_NULL, null=True)
-    izhodisce = models.CharField(max_length=10, choices=Izhodisce.choices(), default=Izhodisce.STROKA)
-    komentar = models.TextField()
-    dokumentacija = models.ManyToManyField((Dokumentacija), blank=True)
+class Tip(ChoiceEnum):
+    POPIS = 'Popis'
+    DOLOCILO = 'Dolocilo'
+
+
+class Specifikacija(Osnova):
+    tekst_za_popis = models.TextField(blank=True)
+    dela = models.ForeignKey('popisi.Dela',on_delete=models.SET_NULL, null=True)
+    predmet = models.CharField(max_length=10, choices=Predmet.choices(), default=Predmet.MATERIAL)
+    tip = models.CharField(max_length=10, choices=Tip.choices(), default=Tip.POPIS)
+    podlaga = models.CharField(max_length=10, choices=Podlaga.choices(), default=Podlaga.STROKA)
+    poglavje = models.ForeignKey('Poglavje', on_delete=models.SET_NULL, null=True)
+    komentar = models.TextField(blank=True)
+    gradivo = models.ManyToManyField((Gradivo), blank=True)
 
 
     def __str__(self):
         return self.tekst
 
     def get_absolute_url(self):
-        return reverse('podlagamerila-detail', args=[str(self.id)])
+        return reverse('specifikacija-detail', args=[str(self.id)])
 
 
-class Merilo(Osnova):
-    podlaga_merila = models.ForeignKey('PodlagaMerila', on_delete=models.SET_NULL, blank=True, null=True)
-
-    class Meta:
-        ordering = ['podlaga_merila__stevilka']
-
-    def __str__(self):
-        return self.tekst
-
-    def get_absolute_url(self):
-        return reverse('merilo-detail', args=[str(self.id)])
-
-#vaja
-class Podrobnost(Osnova):
-    merilo =  models.ForeignKey('Merilo', on_delete=models.SET_NULL, null=True)
+class Odsek(Osnova):
     tekst_za_popis = models.TextField(blank=True)
 
+    def __str__(self):
+        return self.tekst
+
+    def get_absolute_url(self):
+        return reverse('segment-detail', args=[str(self.id)])
+
+
+
+class Podrobnost(Osnova):
+    ''' Nekaj o podrobnostih '''
+    odsek = models.ForeignKey('Odsek', on_delete=models.SET_NULL, blank=True, null=True)
+    specifikacija = models.ForeignKey('Specifikacija', on_delete=models.SET_NULL, null=True)
+    komentar = models.TextField(blank=True)
+    tekst_za_popis = models.TextField(blank=True)
+
+
+    # Pazi !, V kolikor ne bo vseh vnosov tujih ključev ne dela
+    #@property
+    def gs(self):
+        a = str(self.stevilka)
+        b = str(self.odsek.stevilka)
+        c = str(self.specifikacija.stevilka)
+        #d = str(self.specifikacija.poglavje.stevilka)
+        #e = str(self.specifikacija.poglavje.dela.stevilka)
+        #f = str(self.specifikacija.poglavje.dela.vrsta_del.stevilka)
+        return [c,b,a]
+    gs=property(gs)
+
+    def vaja(self):
+        return self.stevilka+self.specifikacija.stevilka+1000
+    vaja=property(vaja)
+
+#    def barva(self):
+#        return format_html(
+#            '<span style="color: #{};">{} {}</span>',
+#            self.tekst,
+#        )
+
+
+
+
+
+
+
+
     class Meta:
-        ordering = ['merilo__podlaga_merila__stevilka']
+        ordering = ['specifikacija__tip','specifikacija__stevilka','stevilka']
+
 
     def __str__(self):
         return self.tekst

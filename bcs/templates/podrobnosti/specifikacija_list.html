@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h4>Specifikacije ????? list ni uredu zaradi grupiranja</h4>
+
+<!--  grupiramo list po  tip specifikacije (popis,dolocilo) -->
+{% regroup object_list by tip as podlage %}
+{% for tip in podlage %}
+<b>{{ tip.grouper }}</b>
+<ul>
+    <!--  grupiramo list po  vrsta del -->
+    {% regroup tip.list by dela.vrsta_del as podlage %}
+    {% for vrsta_del in podlage %}
+    <li><h6>{{ vrsta_del.grouper }}</h6></li>
+    <ul>
+        <!--  grupiramo list po  dela -->
+        {% regroup vrsta_del.list by dela as podlage %}
+        {% for dela in podlage %}
+        <li><h6>{{ dela.grouper }}</h6></li>
+        <ul>
+            <!--  grupiramo list po  poglavje -->
+            {% regroup dela.list by poglavje as podlage %}
+            {% for poglavje in podlage %}
+            <li><b>{{ poglavje.grouper }}</b></li>
+            <ul>
+                <!--  listamo specifikacije -->
+                {% for a in poglavje.list %}
+                <li><b><a href ="{% url 'specifikacija-detail' a.pk %}">{{ a.tekst }} </a></b></li>
+                <ul>
+                    <!--  znotraj specifikacij grupiramo podskupine -->
+                    {% regroup a.podrobnost_set.all by odsek as podlage %}
+                    {% for odsek in podlage %}
+                            {{ odsek.grouper }}
+                    <ul>
+                        <!--  znotraj poskupi specifikacij listamo podrobnosti -->
+                        {% for podrobnost in odsek.list %}
+                            {% if podrobnost.tekst_za_popis %}
+                            <li>{{podrobnost.tekst_za_popis}}</li>
+                            {% else %}
+                            <li>{{podrobnost.tekst}}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}
+                </ul>
+                {% endfor %}
+            </ul>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+</ul>
+{% endfor %}
+{% endblock %}

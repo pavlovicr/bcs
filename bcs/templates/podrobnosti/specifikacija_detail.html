@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h4>Podrobnosti specifikacije:</h4>
+<br>
+<h4>Tip : <b>{{ object.get_tip_display }}</b></h4>
+<br>
+<h4>Naslov : <b>{{ object.tekst }}</b></h4>
+<br>
+<!-- lahko uporabimo object.opis -->
+Komentar : {{ object.komentar }}
+<br>
+
+Podrobnosti :
+    <ul>
+        {%for podrobnost in object.podrobnost_set.all %}
+            {% if podrobnost.tekst_za_popis%}
+            <li>{{ podrobnost.tekst_za_popis }}</li>
+            {% else %}
+            <li>{{ podrobnost.tekst }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+<br>
+
+<h7>Podlaga : <b>{{object.get_podlaga_display}}</b></h7>
+<br>
+Gradivo :
+    <ul>
+        {% for gradivo in object.gradivo.all %}
+        <li>
+            <a href="{{ MEDIA_URL }}{{ gradivo.tekst_file}}{{ gradivo.slika  }}"> {{ gradivo.tekst }}</a>
+            <p>Vir : {{gradivo.vir}}</p>
+        </li>
+    {% endfor %}
+    </ul>
+
+
+{% endblock %}

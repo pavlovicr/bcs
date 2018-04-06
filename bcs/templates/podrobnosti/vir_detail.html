@@ -8,5 +8,7 @@
 <h4>: {{ object.get_zvrst_display }}</h4>
 <h6>: {{ object.komentar }}</h6>
 
+<h6>: File : {% for datoteka in object.datoteka.all %}{{ datoteka.datoteka }}{% endfor %}</h6>
+
 
 {% endblock %}
