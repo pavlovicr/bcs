@@ -6,7 +6,7 @@ Izpisujejo se podatki iz polj "postavka, podrobnost, odsek, specifikacija".
 V klasu postavka se izpisuje polje 'postavka'. V klasu Specifikacija se izpisuje polje 'tekst_za_popis'.
 V klasu Odsek polje 'tekst_za_popis', vendar samo če je polje 'tekst_za_popis' iz Specifikacija prazno.
 Tak način nam nudi več variant izpisa teksta skupine podrobnosti.
-V klasu podrobnosti se izpiše polje 'tekst_za_popis', v kolikor je to prazno pa polje 'teks'.
+V klasu podrobnosti se izpiše polje 'tekst_za_popis', v kolikor je to prazno pa polje 'tekst'.
 To pa s tem namenom , da ne po nepotrebnem podvajamo podatkov iz polja 'tekst', če so ti že primerni
 za izpis. Vrstni red izpisa je postavka, specifikacija, odsek, podrobnost. Odsek se izpisuje redko,
 ker gre za podskupine , ki pa so bolj izjema kot pravilo.
@@ -24,11 +24,11 @@ To nam omogoča regrupiranje podrobnosti po 'tekst_za_popis' iz klasa Splecifika
         {% for popisnapostavka in object_list %}
             <li><b>{{popisnapostavka.postavka.tekst}}</b></li>
             <!--Regrupiranje podrobnosti po tekst_za_popis iz Specifikacija-->
-            {% regroup popisnapostavka.podrobnost.all by specifikacija.tekst_za_popis as podlage %}
+            {% regroup popisnapostavka.podrobnost.all by specifikacija as podlage %}
             {% for podrobnosti in podlage %}
-                {{ podrobnosti.grouper}}
+                {{ podrobnosti.grouper.tekst_za_popis}}
                 <!-- Če je polje v Specifikacija teks_za_popis polno izpiši samo podrobnosti-->
-                {% if podrobnosti.grouper %}
+                {% if podrobnosti.grouper.tekst_za_popis %}
                     {% for podrobnost in podrobnosti.list %}
                         <!--če je tekst_za_popis ga izpiši sicer pa tekst -->
                         {% if podrobnost.tekst_za_popis %}

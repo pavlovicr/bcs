@@ -4,7 +4,8 @@ from . import views
 
 #bcs
 urlpatterns = [
-    url(r'^$', views.stev, name='stev'),
+
+    url(r'^(?P<tone>\d+)$', views.specifikacija, name='miha'),
 
     url(r'^nameni/$', views.NamenList.as_view(), name='namen-list'),
     url(r'^namen/(?P<pk>\d+)$', views.NamenDetail.as_view(), name='namen-detail'),

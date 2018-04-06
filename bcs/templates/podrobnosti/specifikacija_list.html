@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h4>Specifikacije</h4>
+<h4>Specifikacije ????? list ni uredu zaradi grupiranja</h4>
 
 <!--  grupiramo list po  tip specifikacije (popis,dolocilo) -->
 {% regroup object_list by tip as podlage %}
@@ -25,13 +25,13 @@
             <li><b>{{ poglavje.grouper }}</b></li>
             <ul>
                 <!--  listamo specifikacije -->
-                {% for specifikacija in poglavje.list %}
-                <li><b><a href ="{% url 'specifikacija-detail' specifikacija.pk %}">{{ specifikacija.tekst }} </a></b></li>
+                {% for a in poglavje.list %}
+                <li><b><a href ="{% url 'specifikacija-detail' a.pk %}">{{ a.tekst }} </a></b></li>
                 <ul>
                     <!--  znotraj specifikacij grupiramo podskupine -->
-                    {% regroup specifikacija.podrobnost_set.all by odsek as podlage %}
+                    {% regroup a.podrobnost_set.all by odsek as podlage %}
                     {% for odsek in podlage %}
-                            {{ odsek.grouper.tekst }}
+                            {{ odsek.grouper }}
                     <ul>
                         <!--  znotraj poskupi specifikacij listamo podrobnosti -->
                         {% for podrobnost in odsek.list %}
