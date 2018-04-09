@@ -9,8 +9,8 @@ from podrobnosti.models import Vir,Poglavje,Specifikacija,Odsek,Podrobnost,Gradi
 
 
 from django.http import HttpResponse
-import datetime
-def specifikacija(request,tone):
+
+def specifikacija(request,tone='1'):
     a=Specifikacija.objects.get(pk=tone)
     return render(request, 'podrobnosti/specifikacija_detail.html',{'object':a})
 

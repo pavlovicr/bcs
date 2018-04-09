@@ -2,10 +2,10 @@ from django.conf.urls import url
 from django.views.generic import TemplateView
 from . import views
 
-#bcs
+
 urlpatterns = [
 
-    url(r'^(?P<tone>\d+)$', views.specifikacija, name='miha'),
+    url(r'^vaja/specifikacija(?P<tone>[0-9]\d+)/$', views.specifikacija, name='miha'),
 
     url(r'^nameni/$', views.NamenList.as_view(), name='namen-list'),
     url(r'^namen/(?P<pk>\d+)$', views.NamenDetail.as_view(), name='namen-detail'),
