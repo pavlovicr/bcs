@@ -1,6 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-Podrobnost opis: {{podrobnost.tekst}}
+Podrobnost opis: <h3>{{object.tekst}}</h3>
+<p>Datum: {{object.datum}}</p>
+<p>Tekst za popis :{{object.tekst_za_popis}}</p>
+<p>Specifikacija :{{object.specifikacija.tekst}}</p>
+<ul>
+    <li>
+        {%for gradivo in object.specifikacija.gradivo.all %}
+            <a href="{{ MEDIA_URL }}{{ gradivo.tekst_file}}{{ gradivo.slika  }}">{{gradivo.tekst}}</a>
+        {% endfor %}
+    </li>
+</ul>
+<p>Komentar : {{object.komentar}}</p>
+
+
 
 {% endblock %}

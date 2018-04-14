@@ -5,8 +5,11 @@ from . import views
 
 urlpatterns = [
 
+    #vaje
     url(r'^vaja/specifikacija(?P<tone>[0-9]\d+)/$', views.specifikacija, name='miha'),
+    url(r'^ime/$', views.get_ime, name='ime'),
 
+    #zares
     url(r'^nameni/$', views.NamenList.as_view(), name='namen-list'),
     url(r'^namen/(?P<pk>\d+)$', views.NamenDetail.as_view(), name='namen-detail'),
     url(r'^gradiva/$', views.GradivoList.as_view(), name='gradivo-list'),

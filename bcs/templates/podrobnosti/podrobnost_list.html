@@ -37,9 +37,9 @@
                             <!--  zlistamo podrobnosti -->
                             {% for podrobnost in odsek.list %}
                                 {% if podrobnost.tekst_za_popis %}
-                                <li>{{podrobnost.tekst_za_popis}}</li>
+                                <li><a href ="{% url 'podrobnost-detail' podrobnost.pk %}">{{podrobnost.tekst_za_popis}}</a></li>
                                 {% else %}
-                                <li>{{podrobnost.tekst}}</li>
+                                <li><a href ="{% url 'podrobnost-detail' podrobnost.pk %}">{{podrobnost.tekst}}</a></li>
                                 {% endif %}
                             {% endfor %}
                         </ul>

@@ -9,10 +9,36 @@ from podrobnosti.models import Vir,Poglavje,Specifikacija,Odsek,Podrobnost,Gradi
 
 
 from django.http import HttpResponse
-
 def specifikacija(request,tone='1'):
     a=Specifikacija.objects.get(pk=tone)
     return render(request, 'podrobnosti/specifikacija_detail.html',{'object':a})
+
+from django.http import HttpResponseRedirect
+
+from .forms import ImeForm
+
+def get_ime(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = ImeForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect('/podrobnosti/podrobnosti/')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = ImeForm()
+
+    return render(request, 'podrobnosti/vaja.html', {'form': form})
+
+
+
+
+
 
 
 class NamenList(ListView):

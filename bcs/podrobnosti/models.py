@@ -3,7 +3,8 @@ from django.urls import reverse
 
 from osnova.utils import ChoiceEnum
 from osnova.models import Osnova
-#from django.utils.html import format_html
+
+import datetime
 
 class Zvrst(ChoiceEnum):
     STANDARD = 'Standard'
@@ -114,13 +115,13 @@ class Odsek(Osnova):
         return reverse('segment-detail', args=[str(self.id)])
 
 
-
 class Podrobnost(Osnova):
     ''' Nekaj o podrobnostih '''
     odsek = models.ForeignKey('Odsek', on_delete=models.SET_NULL, blank=True, null=True)
     specifikacija = models.ForeignKey('Specifikacija', on_delete=models.SET_NULL, null=True)
     komentar = models.TextField(blank=True)
     tekst_za_popis = models.TextField(blank=True)
+    datum = models.DateField(blank=True)
 
 
     # Pazi !, V kolikor ne bo vseh vnosov tujih ključev ne dela
@@ -144,14 +145,6 @@ class Podrobnost(Osnova):
 #            '<span style="color: #{};">{} {}</span>',
 #            self.tekst,
 #        )
-
-
-
-
-
-
-
-
     class Meta:
         ordering = ['specifikacija__tip','specifikacija__stevilka','stevilka']
 
