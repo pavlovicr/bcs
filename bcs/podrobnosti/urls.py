@@ -6,7 +6,7 @@ from . import views
 urlpatterns = [
 
     #vaje
-    url(r'^vaja/specifikacija(?P<tone>[0-9]\d+)/$', views.specifikacija, name='miha'),
+    url(r'^vaja/specifikacija/$', views.specifikacija, name='miha'),
     url(r'^ime/$', views.get_ime, name='ime'),
 
     #zares

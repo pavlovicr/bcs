@@ -9,9 +9,9 @@ from podrobnosti.models import Vir,Poglavje,Specifikacija,Odsek,Podrobnost,Gradi
 
 
 from django.http import HttpResponse
-def specifikacija(request,tone='1'):
-    a=Specifikacija.objects.get(pk=tone)
-    return render(request, 'podrobnosti/specifikacija_detail.html',{'object':a})
+def specifikacija(request):
+        tekoce_ime='abrakadabra'
+        return render(request, 'podrobnosti/vaja0.html',{'tekoce_ime': tekoce_ime})
 
 from django.http import HttpResponseRedirect
 
